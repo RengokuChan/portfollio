@@ -1,0 +1,1508 @@
+<!DOCTYPE html>
+<!-- saved from url=(0068)file:///C:/Users/robin/Downloads/Robina_Ijaz_Portfolio_V5_FINAL.html -->
+<html lang="fr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Robina Ijaz — Portfolio BTS SIO SISR</title>
+<link href="./Robina Ijaz — Portfolio BTS SIO SISR_files/css2" rel="stylesheet">
+<style>
+/* ════════════════════════════════════════
+   ROOT & RESET
+════════════════════════════════════════ */
+:root {
+  --bg:        #030508;
+  --bg2:       #060a0f;
+  --bg3:       #0a0e15;
+  --red:       #e0001a;
+  --red2:      #ff1533;
+  --red-dim:   #6b0012;
+  --red-glow:  rgba(224,0,26,0.4);
+  --red-soft:  rgba(224,0,26,0.12);
+  --cyan:      #00f0d8;
+  --cyan-dim:  #004840;
+  --cyan-glow: rgba(0,240,216,0.18);
+  --mag:       #c500ff;
+  --mag-glow:  rgba(197,0,255,0.15);
+  --white:     #eef0f8;
+  --grey:      #586878;
+  --grey-l:    #8fa0b8;
+  --mono: 'Share Tech Mono', monospace;
+  --disp: 'Orbitron', monospace;
+  --body: 'Rajdhani', sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  cursor: crosshair;
+}
+
+/* ════════════════════════════════════════
+   BACKGROUND LAYERS
+════════════════════════════════════════ */
+#bg-grid {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(0,240,216,0.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,240,216,0.022) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+#bg-scan {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg, transparent, transparent 3px,
+    rgba(0,0,0,0.07) 3px, rgba(0,0,0,0.07) 4px
+  );
+  animation: bgScan 12s linear infinite;
+}
+@keyframes bgScan { to { background-position: 0 200px; } }
+#bg-vignette {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background: radial-gradient(ellipse at 50% 40%, transparent 35%, rgba(0,0,0,0.75) 100%);
+}
+#bg-corner-tl, #bg-corner-br {
+  position: fixed; z-index: 0; pointer-events: none;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(224,0,26,0.06) 0%, transparent 70%);
+}
+#bg-corner-tl { top: -100px; left: -100px; }
+#bg-corner-br { bottom: -100px; right: -100px; background: radial-gradient(circle, rgba(0,240,216,0.05) 0%, transparent 70%); }
+
+/* ════════════════════════════════════════
+   BOOT SCREEN
+════════════════════════════════════════ */
+#boot {
+  position: fixed; inset: 0; z-index: 10000;
+  background: #000;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: flex-start;
+  padding: 5rem 7rem;
+  font-family: var(--mono); font-size: 0.8rem; color: #fff;
+  overflow: hidden;
+}
+#boot::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,0,0,0.02) 2px, rgba(255,0,0,0.02) 4px);
+  pointer-events: none;
+}
+#boot::after {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--red), var(--cyan), var(--mag));
+  animation: bootLine 2.8s ease forwards;
+}
+@keyframes bootLine { from { width: 0; } to { width: 100%; } }
+.b-logo {
+  font-family: var(--disp); font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 900; letter-spacing: 6px; line-height: 1;
+  background: linear-gradient(135deg, var(--red) 0%, var(--mag) 60%, var(--cyan) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  margin-bottom: 0.4rem;
+}
+.b-sub { font-family: var(--mono); font-size: 0.65rem; color: var(--cyan); letter-spacing: 5px; margin-bottom: 2rem; }
+.b-bar { width: min(500px, 80vw); height: 2px; background: rgba(255,255,255,0.07); margin: 1rem 0; position: relative; overflow: hidden; }
+.b-fill {
+  position: absolute; height: 100%;
+  background: linear-gradient(90deg, var(--red), var(--cyan), var(--mag));
+  width: 0; animation: bFill 2.4s cubic-bezier(.4,0,.2,1) .3s forwards;
+}
+@keyframes bFill { to { width: 100%; } }
+.b-line { margin: 3px 0; opacity: 0; font-size: 0.75rem; color: rgba(255,255,255,0.65); }
+.b-line.ok  { color: #22ff88; }
+.b-line.err { color: var(--red); }
+.b-line.inf { color: var(--cyan); }
+.b-line:nth-child(4)  { animation: bShow .08s .40s forwards; }
+.b-line:nth-child(5)  { animation: bShow .08s .65s forwards; }
+.b-line:nth-child(6)  { animation: bShow .08s .90s forwards; }
+.b-line:nth-child(7)  { animation: bShow .08s 1.15s forwards; }
+.b-line:nth-child(8)  { animation: bShow .08s 1.40s forwards; }
+.b-line:nth-child(9)  { animation: bShow .08s 1.65s forwards; }
+.b-line:nth-child(10) { animation: bShow .08s 1.90s forwards; }
+.b-line:nth-child(11) { animation: bShow .08s 2.15s forwards; }
+@keyframes bShow { to { opacity: 1; } }
+#boot.out { animation: bootOut .5s ease forwards; pointer-events: none; }
+@keyframes bootOut { to { opacity: 0; transform: scale(1.015); } }
+
+/* ════════════════════════════════════════
+   CURSOR TRAIL CANVAS
+════════════════════════════════════════ */
+#trail { position: fixed; top: 0; left: 0; z-index: 9990; pointer-events: none; opacity: 0.28; }
+
+/* ════════════════════════════════════════
+   NAV
+════════════════════════════════════════ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  height: 54px; background: rgba(3,5,8,0.97); backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(224,0,26,0.3);
+  display: flex; align-items: center; padding: 0 1.5rem; gap: 1rem;
+}
+.nav-id { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; flex-shrink: 0; }
+.nav-id .u { color: var(--cyan); } .nav-id .h { color: var(--red); } .nav-id .s { color: var(--grey-l); }
+.nav-links { display: flex; list-style: none; gap: 0; flex: 1; justify-content: center; }
+.nav-links a {
+  font-family: var(--mono); font-size: 0.62rem; color: var(--grey-l);
+  text-decoration: none; padding: 5px 9px; white-space: nowrap;
+  transition: all .2s; letter-spacing: .5px;
+}
+.nav-links a:hover, .nav-links a.act { background: var(--red); color: #fff; }
+.nav-right { display: flex; gap: 5px; flex-shrink: 0; }
+.lb {
+  font-family: var(--mono); font-size: 0.58rem; cursor: pointer;
+  padding: 3px 8px; border: 1px solid #333; background: transparent;
+  color: var(--grey-l); transition: all .2s;
+}
+.lb.act, .lb:hover { border-color: var(--red); background: var(--red); color: #fff; }
+
+/* STATUS BAR */
+.statusbar {
+  position: fixed; top: 54px; left: 0; right: 0; z-index: 999;
+  background: rgba(3,5,8,0.96); border-bottom: 1px solid rgba(224,0,26,0.18);
+  padding: 4px 1.5rem; display: flex; gap: 2rem; flex-wrap: nowrap;
+  font-family: var(--mono); font-size: 0.6rem; overflow: hidden;
+}
+.sb-k { color: var(--red); margin-right: 4px; }
+.sb-v { color: var(--grey-l); }
+.blink { animation: blnk 1s step-end infinite; color: var(--cyan); }
+@keyframes blnk { 50% { opacity: 0; } }
+
+/* ════════════════════════════════════════
+   SECTIONS SHARED
+════════════════════════════════════════ */
+section { position: relative; z-index: 2; padding: 100px 5.5rem 70px; }
+.s-num { font-family: var(--mono); font-size: 0.58rem; color: var(--red); letter-spacing: 4px; margin-bottom: .4rem; }
+.s-title {
+  font-family: var(--disp); font-size: clamp(1.4rem, 2.5vw, 2rem);
+  font-weight: 900; color: var(--white); margin-bottom: 2.5rem;
+  position: relative; display: inline-block; padding-left: 1.2rem;
+}
+.s-title::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+  width: 3px; background: linear-gradient(180deg, var(--red), var(--mag));
+}
+.s-title::after {
+  content: ''; position: absolute; bottom: -8px; left: 0;
+  width: 50px; height: 1px; background: var(--red);
+}
+hr.div { border: none; border-top: 1px solid rgba(224,0,26,0.14); margin: 0 5.5rem; }
+
+/* ════════════════════════════════════════
+   HERO
+════════════════════════════════════════ */
+#accueil {
+  min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: center;
+  padding-top: 130px;
+}
+.hero-wrap { display: grid; grid-template-columns: 1fr auto; gap: 4rem; align-items: center; max-width: 1200px; }
+
+/* giant bg text */
+.hero-bg-word {
+  position: absolute; left: 0; right: 0; top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--disp); font-size: clamp(8rem, 18vw, 18rem);
+  font-weight: 900; color: transparent; -webkit-text-stroke: 1px rgba(224,0,26,0.055);
+  line-height: 1; pointer-events: none; white-space: nowrap;
+  overflow: hidden; user-select: none; letter-spacing: -4px;
+}
+
+.hero-eyebrow {
+  display: flex; align-items: center; gap: 12px;
+  font-family: var(--mono); font-size: 0.68rem; color: var(--cyan);
+  letter-spacing: 4px; margin-bottom: 1.5rem;
+}
+.hero-eyebrow::before { content: ''; display: block; width: 28px; height: 1px; background: var(--cyan); }
+
+h1.hero-name {
+  font-family: var(--disp); font-size: clamp(2.8rem, 6vw, 4.8rem);
+  font-weight: 900; letter-spacing: 2px; line-height: 1; color: var(--white);
+  margin-bottom: .4rem; position: relative;
+}
+h1.hero-name::before, h1.hero-name::after {
+  content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%;
+  font-family: var(--disp); font-size: inherit; font-weight: 900;
+}
+h1.hero-name::before { color: var(--cyan); clip-path: inset(0 0 65% 0); transform: translateX(-2px); animation: gA 7s infinite; }
+h1.hero-name::after  { color: var(--red);  clip-path: inset(60% 0 0 0);  transform: translateX(2px);  animation: gB 7s infinite; }
+@keyframes gA { 0%,87%,100%{opacity:0} 88%,92%{opacity:.75} }
+@keyframes gB { 0%,87%,100%{opacity:0} 90%,93%{opacity:.75} }
+
+.hero-role { font-family: var(--mono); font-size: .9rem; color: var(--red); letter-spacing: 3px; text-transform: uppercase; margin-bottom: .8rem; }
+.hero-desc {
+  font-family: var(--mono); font-size: .78rem; color: var(--grey-l);
+  max-width: 520px; line-height: 1.9; margin-bottom: 2rem;
+  padding-left: 1rem; border-left: 2px solid var(--red-dim);
+}
+
+/* HERO STATS */
+.hero-stats { display: flex; gap: 2.5rem; margin-bottom: 2rem; flex-wrap: wrap; }
+.hstat-num { font-family: var(--disp); font-size: 1.6rem; font-weight: 900; color: var(--red); line-height: 1; }
+.hstat-lbl { font-family: var(--mono); font-size: .55rem; color: var(--grey); letter-spacing: 2px; margin-top: 2px; }
+
+/* HERO BUTTONS */
+.hero-btns { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 1.5rem; }
+.hbtn {
+  font-family: var(--mono); font-size: .66rem; letter-spacing: 2px;
+  text-transform: uppercase; padding: 10px 20px; text-decoration: none;
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: all .25s; cursor: pointer; border: none; line-height: 1;
+}
+.hbtn-red    { background: var(--red); color: #fff; border: 2px solid var(--red); }
+.hbtn-red:hover { background: transparent; color: var(--red); box-shadow: 0 0 22px var(--red-glow); }
+.hbtn-cyan   { background: transparent; color: var(--cyan); border: 1px solid var(--cyan); }
+.hbtn-cyan:hover { background: var(--cyan-glow); box-shadow: 0 0 18px var(--cyan-glow); }
+.hbtn-ghost  { background: rgba(15,18,28,0.8); color: var(--grey-l); border: 1px solid rgba(255,255,255,0.1); }
+.hbtn-ghost:hover { border-color: #8b949e; color: #fff; }
+.hbtn-rootme { background: transparent; color: var(--red); border: 1px solid var(--red); }
+.hbtn-rootme:hover { background: var(--red-soft); box-shadow: 0 0 18px var(--red-glow); }
+svg.ico { width: 14px; height: 14px; fill: currentColor; flex-shrink: 0; }
+
+/* AVATAR */
+.hero-avatar { width: 290px; height: 340px; position: relative; flex-shrink: 0; }
+.av-frame {
+  width: 100%; height: 100%;
+  border: 1px solid rgba(224,0,26,0.6);
+  position: relative; overflow: hidden;
+  box-shadow: 0 0 60px var(--red-glow), 0 0 120px rgba(224,0,26,0.07), inset 0 0 30px rgba(224,0,26,0.06);
+}
+.av-frame::before {
+  content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  background: linear-gradient(180deg, rgba(0,240,216,.12) 0%, transparent 35%, transparent 65%, rgba(224,0,26,.15) 100%);
+}
+.av-frame img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.75) contrast(1.2) brightness(.88); display: block; }
+.av-scan {
+  position: absolute; left: 0; right: 0; height: 2px; z-index: 5;
+  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+  animation: avScan 3s linear infinite; opacity: .55;
+}
+@keyframes avScan { 0%{top:-2px;opacity:0} 8%{opacity:.55} 92%{opacity:.55} 100%{top:100%;opacity:0} }
+.av-c { position: absolute; width: 16px; height: 16px; z-index: 4; }
+.av-c.tl { top:6px;left:6px; border-top:2px solid var(--cyan);border-left:2px solid var(--cyan); }
+.av-c.tr { top:6px;right:6px; border-top:2px solid var(--cyan);border-right:2px solid var(--cyan); }
+.av-c.bl { bottom:6px;left:6px; border-bottom:2px solid var(--cyan);border-left:2px solid var(--cyan); }
+.av-c.br { bottom:6px;right:6px; border-bottom:2px solid var(--cyan);border-right:2px solid var(--cyan); }
+.av-label {
+  position: absolute; bottom: 0; left: 0; right: 0; z-index: 4;
+  background: rgba(0,0,0,.82); font-family: var(--mono); font-size: .48rem;
+  color: var(--cyan); padding: 5px 10px; border-top: 1px solid rgba(0,240,216,.22);
+  letter-spacing: 1px; line-height: 1.6;
+}
+.av-deco {
+  position: absolute; right: -26px; top: 20px;
+  font-family: var(--mono); font-size: .5rem; color: rgba(224,0,26,.4);
+  letter-spacing: 2px; writing-mode: vertical-rl; text-orientation: mixed;
+  user-select: none;
+}
+
+/* ════════════════════════════════════════
+   ABOUT
+════════════════════════════════════════ */
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+.term-box {
+  background: rgba(5,9,16,0.97); border: 1px solid rgba(0,240,216,.2);
+  padding: 2rem; position: relative;
+}
+.term-box::before { content:''; position:absolute; top:0;left:0;right:0; height:1px; background:linear-gradient(90deg,transparent,var(--cyan),transparent); }
+.term-box::after  { content:''; position:absolute; bottom:0;left:0;right:0; height:1px; background:linear-gradient(90deg,transparent,var(--red),transparent); }
+.term-prompt { font-family:var(--mono); font-size:.7rem; color:var(--cyan); margin-bottom:1.5rem; }
+.st-row { display:flex; gap:1rem; margin-bottom:.75rem; font-family:var(--mono); font-size:.72rem; align-items:flex-start; }
+.st-k { color:var(--red); min-width:130px; flex-shrink:0; }
+.st-v { color:var(--grey-l); }
+.tags { display:flex; flex-wrap:wrap; gap:6px; margin-top:1.5rem; }
+.tag {
+  font-family:var(--mono); font-size:.56rem; padding:3px 10px;
+  border:1px solid rgba(0,240,216,.25); color:var(--cyan);
+  transition:all .2s; cursor:default;
+}
+.tag:hover { background:var(--cyan-glow); border-color:var(--cyan); }
+.about-text { font-family:var(--mono); font-size:.76rem; color:var(--grey-l); line-height:1.95; margin-bottom:1.2rem; padding-left:1rem; border-left:1px solid var(--red-dim); }
+.about-text.cyan-accent { border-left-color:var(--cyan-dim); }
+.about-cmd { font-family:var(--mono); font-size:.62rem; color:var(--red); letter-spacing:3px; margin-bottom:1rem; }
+.hex-badge {
+  display:inline-flex; align-items:center; gap:8px;
+  font-family:var(--mono); font-size:.62rem;
+  padding:5px 14px; background:rgba(224,0,26,.07);
+  border:1px solid rgba(224,0,26,.3); color:var(--red); letter-spacing:2px; margin-top:1.5rem;
+}
+.hex-badge::before { content:'◆'; font-size:.45rem; }
+
+/* ════════════════════════════════════════
+   TIMELINE
+════════════════════════════════════════ */
+.tl { position:relative; padding-left:2.5rem; }
+.tl::before { content:''; position:absolute; left:8px; top:0; bottom:0; width:1px; background:linear-gradient(180deg,var(--red),rgba(224,0,26,.05)); }
+.tl-item {
+  position:relative; padding:1.2rem 1.5rem; margin-bottom:1rem;
+  background:rgba(6,10,15,0.92); border:1px solid rgba(224,0,26,.16);
+  transition:all .3s;
+}
+.tl-item:hover { border-color:var(--red); box-shadow:5px 0 20px var(--red-glow); transform:translateX(5px); }
+.tl-item.sp { border-color:rgba(0,240,216,.3); }
+.tl-item.sp:hover { border-color:var(--cyan); box-shadow:5px 0 20px var(--cyan-glow); }
+.tl-dot { position:absolute; left:-2.1rem; top:1.45rem; width:12px; height:12px; background:var(--red); border:2px solid var(--bg); box-shadow:0 0 10px var(--red-glow); }
+.tl-item.sp .tl-dot { background:var(--cyan); box-shadow:0 0 10px var(--cyan-glow); }
+.tl-yr { font-family:var(--mono); font-size:.57rem; color:var(--red); letter-spacing:3px; margin-bottom:.3rem; }
+.tl-item.sp .tl-yr { color:var(--cyan); }
+.tl-school { font-family:var(--disp); font-size:.84rem; color:var(--white); font-weight:700; }
+.tl-det { font-family:var(--mono); font-size:.68rem; color:var(--grey-l); margin-top:.3rem; }
+
+/* ════════════════════════════════════════
+   CERT TABLE
+════════════════════════════════════════ */
+.cert-tbl { width:100%; border-collapse:collapse; font-family:var(--mono); font-size:.74rem; }
+.cert-tbl th { background:rgba(224,0,26,.1); color:var(--red); text-align:left; padding:10px 16px; letter-spacing:2px; font-size:.6rem; text-transform:uppercase; border-bottom:1px solid var(--red-dim); }
+.cert-tbl td { padding:10px 16px; border-bottom:1px solid rgba(255,255,255,.04); color:var(--grey-l); }
+.cert-tbl tr:hover td { background:rgba(224,0,26,.04); color:var(--white); }
+.bdone { font-size:.56rem; padding:2px 8px; border:1px solid #00ff88; color:#00ff88; }
+.bwip  { font-size:.56rem; padding:2px 8px; border:1px solid #f0a500; color:#f0a500; }
+
+/* ════════════════════════════════════════
+   SKILLS
+════════════════════════════════════════ */
+.skills-g { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:1.5rem; }
+.sk-grp {
+  background:rgba(6,10,15,.95); border:1px solid rgba(224,0,26,.2);
+  padding:1.5rem; position:relative; transition:all .3s;
+}
+.sk-grp:hover { border-color:var(--red); box-shadow:0 0 22px rgba(224,0,26,.07); }
+.sk-grp::after { content:''; position:absolute; bottom:0;left:0; width:0; height:1px; background:var(--red); transition:width .4s; }
+.sk-grp:hover::after { width:100%; }
+.sk-title { font-family:var(--disp); font-size:.68rem; color:var(--red); letter-spacing:2px; margin-bottom:1rem; font-weight:900; text-transform:uppercase; }
+.sk-item { font-family:var(--mono); font-size:.68rem; color:var(--grey-l); padding:4px 0; border-bottom:1px solid rgba(255,255,255,.04); display:flex; align-items:center; gap:8px; }
+.sk-item::before { content:''; width:5px; height:5px; background:var(--cyan); flex-shrink:0; }
+
+/* ════════════════════════════════════════
+   PROJECT CARDS
+════════════════════════════════════════ */
+.proj-g { display:grid; grid-template-columns:repeat(auto-fit, minmax(300px,1fr)); gap:2rem; }
+.proj-card {
+  background:rgba(6,10,15,.97); border:1px solid rgba(0,240,216,.15);
+  padding:2rem; position:relative; overflow:hidden; transition:all .3s;
+}
+.proj-card::before { content:''; position:absolute; top:0;left:0;right:0; height:2px; background:linear-gradient(90deg,transparent,var(--cyan),transparent); opacity:0; transition:opacity .3s; }
+.proj-card:hover { border-color:var(--cyan); box-shadow:0 0 35px rgba(0,240,216,.08); transform:translateY(-5px); }
+.proj-card:hover::before { opacity:1; }
+.proj-tag { font-family:var(--mono); font-size:.54rem; color:var(--cyan); letter-spacing:3px; text-transform:uppercase; border:1px solid rgba(0,240,216,.25); display:inline-block; padding:2px 10px; margin-bottom:.8rem; }
+.proj-title { font-family:var(--disp); font-size:.95rem; color:var(--white); font-weight:700; margin-bottom:.35rem; line-height:1.3; }
+.proj-sub { font-family:var(--mono); font-size:.68rem; color:var(--red); margin-bottom:.9rem; }
+.proj-desc { font-size:.83rem; color:var(--grey-l); line-height:1.7; margin-bottom:1.1rem; }
+.proj-techs { display:flex; flex-wrap:wrap; gap:5px; margin-bottom:1.1rem; }
+.tech { font-family:var(--mono); font-size:.54rem; padding:2px 7px; border:1px solid rgba(0,240,216,.2); color:var(--cyan); }
+.proj-links { display:flex; gap:8px; }
+.plink { font-family:var(--mono); font-size:.6rem; letter-spacing:2px; text-transform:uppercase; padding:6px 12px; text-decoration:none; transition:all .2s; }
+.plink.gh { border:1px solid #333; color:var(--grey-l); } .plink.gh:hover { border-color:#8b949e; color:#fff; }
+.plink.lv { border:1px solid var(--cyan); color:var(--cyan); } .plink.lv:hover { background:var(--cyan-glow); }
+
+/* ════════════════════════════════════════
+   STAGES
+════════════════════════════════════════ */
+.stage-intro {
+  background:rgba(6,10,15,.92); border:1px solid rgba(224,0,26,.22);
+  padding:2rem; margin-bottom:2.5rem; max-width:840px; position:relative;
+}
+.stage-intro::before { content:''; position:absolute; left:0;top:0;bottom:0; width:2px; background:linear-gradient(180deg,var(--red),var(--mag),var(--cyan)); }
+.stage-i-title { font-family:var(--disp); font-size:1.1rem; color:var(--white); font-weight:700; margin-bottom:.3rem; }
+.stage-i-sub { font-family:var(--mono); font-size:.68rem; color:var(--cyan); margin-bottom:.9rem; letter-spacing:1px; }
+.stage-i-desc { font-size:.86rem; color:var(--grey-l); line-height:1.7; margin-bottom:1.5rem; }
+.stage-btn {
+  font-family:var(--mono); font-size:.64rem; letter-spacing:2px; text-transform:uppercase;
+  padding:10px 20px; background:transparent; border:1px solid var(--red);
+  color:var(--red); cursor:pointer; transition:all .2s; display:inline-flex; align-items:center; gap:8px;
+}
+.stage-btn:hover { background:var(--red); color:#fff; }
+.mission-g { display:grid; grid-template-columns:repeat(auto-fit, minmax(250px,1fr)); gap:1.2rem; }
+.mission-card {
+  background:rgba(6,10,15,.88); border:1px solid rgba(224,0,26,.2);
+  padding:1.3rem; transition:all .3s; position:relative;
+}
+.mission-card:hover { border-color:var(--red); box-shadow:0 0 15px var(--red-glow); transform:translateY(-3px); }
+.mission-card::after { content:''; position:absolute; bottom:0;left:0; width:0; height:1px; background:var(--cyan); transition:width .4s; }
+.mission-card:hover::after { width:100%; }
+.m-tag { font-family:var(--mono); font-size:.54rem; color:var(--red); letter-spacing:2px; text-transform:uppercase; margin-bottom:.45rem; }
+.m-title { font-family:var(--disp); font-size:.82rem; color:var(--white); margin-bottom:.55rem; font-weight:700; line-height:1.3; }
+.m-ul { list-style:none; }
+.m-ul li { font-family:var(--mono); font-size:.66rem; color:var(--grey-l); padding:2px 0; border-bottom:1px solid rgba(255,255,255,.03); }
+.m-ul li::before { content:'▸ '; color:var(--cyan); }
+
+/* ════════════════════════════════════════
+   E5 TABLE
+════════════════════════════════════════ */
+.synth-wrap { overflow-x:auto; }
+.synth-tbl { width:100%; border-collapse:collapse; font-size:.68rem; font-family:var(--mono); }
+.synth-tbl th {
+  background:rgba(224,0,26,.1); color:var(--red); text-align:center;
+  padding:9px 12px; letter-spacing:1px; font-size:.56rem; text-transform:uppercase;
+  border:1px solid rgba(224,0,26,.25); white-space:nowrap;
+}
+.synth-tbl th.th-l { text-align:left; min-width:260px; }
+.synth-tbl td { padding:8px 12px; border:1px solid rgba(255,255,255,.05); color:var(--grey-l); text-align:center; vertical-align:middle; }
+.synth-tbl td.td-l { text-align:left; color:var(--white); font-size:.7rem; }
+.synth-tbl tr:hover td { background:rgba(0,240,216,.025); }
+.row-sep td { background:rgba(224,0,26,.08)!important; color:var(--red)!important; font-family:var(--disp); font-size:.58rem; letter-spacing:2px; text-transform:uppercase; text-align:left!important; border-color:rgba(224,0,26,.25)!important; padding:7px 12px!important; }
+.cy  { color:#22ff88; font-size:1rem; font-weight:bold; }
+.cn  { color:rgba(255,255,255,.1); }
+
+/* ════════════════════════════════════════
+   VEILLE
+════════════════════════════════════════ */
+.vterm {
+  background:rgba(4,8,14,.98); border:1px solid rgba(0,240,216,.22);
+  position:relative; margin-bottom:2.5rem; max-width:800px; margin-left:auto; margin-right:auto;
+}
+.vterm::before { content:''; position:absolute; top:0;left:0;right:0; height:1px; background:linear-gradient(90deg,transparent,var(--cyan),transparent); }
+.vterm-bar { display:flex; align-items:center; gap:8px; padding:10px 16px; border-bottom:1px solid rgba(0,240,216,.14); background:rgba(0,240,216,.03); }
+.dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
+.dot.r{background:var(--red);box-shadow:0 0 5px var(--red);}
+.dot.y{background:#febc2e;} .dot.g{background:#28c840;}
+.vterm-ttl { font-family:var(--mono); font-size:.6rem; color:var(--grey); letter-spacing:2px; margin-left:6px; flex:1; }
+.vterm-body { padding:1.5rem 2rem; }
+.vcmd { font-family:var(--mono); font-size:.78rem; margin-bottom:.5rem; }
+.vcmd span { color:var(--cyan); }
+.vout { font-family:var(--mono); font-size:.74rem; color:var(--grey-l); line-height:1.8; }
+.v-status { font-family:var(--mono); font-size:.7rem; color:#f0a500; margin-top:1rem; padding:8px 12px; border:1px solid rgba(240,165,0,.3); background:rgba(240,165,0,.05); }
+.notes-g { display:grid; grid-template-columns:repeat(auto-fit, minmax(270px,1fr)); gap:1.5rem; margin-bottom:2.5rem; }
+.note-card { background:rgba(6,10,15,.92); border:1px solid rgba(224,0,26,.16); padding:1.5rem; transition:all .3s; }
+.note-card:hover { border-color:var(--red); box-shadow:0 0 16px rgba(224,0,26,.08); }
+.note-tag { font-family:var(--mono); font-size:.54rem; color:var(--red); letter-spacing:2px; text-transform:uppercase; margin-bottom:.5rem; }
+.note-title { font-family:var(--disp); font-size:.8rem; color:var(--white); margin-bottom:.75rem; line-height:1.4; font-weight:700; }
+.note-body { font-size:.8rem; color:var(--grey-l); line-height:1.65; }
+.rss-head { font-family:var(--mono); font-size:.62rem; color:var(--red); letter-spacing:4px; text-transform:uppercase; margin:2.5rem 0 1rem; }
+.rss-g { display:grid; grid-template-columns:repeat(auto-fill, minmax(150px,1fr)); gap:8px; margin-bottom:1.2rem; }
+.rss-a { font-family:var(--mono); font-size:.66rem; padding:9px 12px; border:1px solid rgba(224,0,26,.2); color:var(--grey-l); text-decoration:none; transition:all .2s; display:block; }
+.rss-a:hover { border-color:var(--red); color:var(--red); }
+.rss-lbl { display:block; font-size:.54rem; color:var(--red); letter-spacing:2px; margin-bottom:3px; }
+
+/* ════════════════════════════════════════
+   CONTACT
+════════════════════════════════════════ */
+.contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:3.5rem; align-items:start; }
+.ci-item {
+  display:flex; align-items:center; gap:16px; padding:1.2rem 1.5rem;
+  background:rgba(6,10,15,.92); border:1px solid rgba(224,0,26,.2);
+  transition:all .3s; text-decoration:none; color:inherit; margin-bottom:1.2rem;
+}
+.ci-item:hover { border-color:var(--red); transform:translateX(8px); box-shadow:0 0 20px var(--red-glow); }
+.ci-icon { width:36px; height:36px; background:rgba(224,0,26,.08); border:1px solid var(--red-dim); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.ci-icon svg { width:18px; height:18px; fill:var(--red); }
+.ci-lbl { font-family:var(--mono); font-size:.56rem; color:var(--grey); letter-spacing:2px; text-transform:uppercase; }
+.ci-val { font-family:var(--mono); font-size:.78rem; color:var(--cyan); }
+.form-box { background:rgba(6,10,15,.97); border:1px solid rgba(0,240,216,.2); padding:2rem; position:relative; }
+.form-box::before { content:''; position:absolute; top:0;left:0;right:0; height:1px; background:linear-gradient(90deg,transparent,var(--cyan),transparent); }
+.flbl { font-family:var(--mono); font-size:.58rem; color:var(--red); letter-spacing:2px; display:block; margin-bottom:6px; text-transform:uppercase; }
+.finp, .ftxt {
+  width:100%; background:rgba(3,5,8,.85); border:1px solid rgba(0,240,216,.2);
+  color:var(--white); font-family:var(--mono); font-size:.78rem;
+  padding:10px 14px; margin-bottom:1.2rem; outline:none; transition:all .2s; resize:none;
+}
+.finp::placeholder, .ftxt::placeholder { color:var(--grey); opacity:.5; }
+.finp:focus, .ftxt:focus { border-color:var(--cyan); box-shadow:0 0 12px var(--cyan-glow); }
+.ftxt { height:120px; }
+.fsbmt {
+  width:100%; font-family:var(--mono); font-size:.7rem; letter-spacing:3px; text-transform:uppercase;
+  padding:12px; background:var(--red); border:none; color:#fff; cursor:pointer; transition:all .25s;
+}
+.fsbmt:hover { background:transparent; color:var(--red); border:1px solid var(--red); box-shadow:0 0 25px var(--red-glow); }
+#form-ok { display:none; font-family:var(--mono); font-size:.7rem; color:#22ff88; padding:10px; text-align:center; border:1px solid #22ff88; margin-top:.8rem; }
+
+/* ════════════════════════════════════════
+   FOOTER
+════════════════════════════════════════ */
+footer {
+  position:relative; z-index:2; padding:2rem 5.5rem;
+  border-top:1px solid rgba(224,0,26,.15);
+}
+.footer-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:2rem; margin-bottom:2rem; }
+.fc-title { font-family:var(--mono); font-size:.58rem; color:var(--red); letter-spacing:3px; text-transform:uppercase; margin-bottom:.8rem; }
+.footer-links { list-style:none; }
+.footer-links li a { font-family:var(--mono); font-size:.68rem; color:var(--grey-l); text-decoration:none; display:block; padding:2px 0; transition:color .2s; cursor:pointer; }
+.footer-links li a:hover { color:var(--red); }
+.footer-btm { font-family:var(--mono); font-size:.62rem; color:var(--grey); border-top:1px solid rgba(255,255,255,.05); padding-top:1.5rem; text-align:center; }
+.footer-btm span { color:var(--red); }
+
+/* BACK TO TOP */
+#back-btn {
+  position:fixed; bottom:2rem; right:2rem; z-index:500;
+  width:42px; height:42px; background:rgba(224,0,26,.92);
+  border:1px solid var(--red); color:#fff; font-family:var(--mono);
+  font-size:1rem; cursor:pointer; display:none; align-items:center; justify-content:center;
+  transition:all .2s;
+}
+#back-btn:hover { box-shadow:0 0 20px var(--red-glow); }
+#back-btn.vis { display:flex; }
+
+/* ════════════════════════════════════════
+   MODALS
+════════════════════════════════════════ */
+.m-ov { display:none; position:fixed; inset:0; z-index:4000; background:rgba(0,0,0,.88); backdrop-filter:blur(8px); align-items:center; justify-content:center; }
+.m-ov.open { display:flex; }
+.m-box { background:var(--bg2); border:1px solid var(--red); max-width:900px; width:94%; max-height:90vh; overflow-y:auto; position:relative; animation:mOpen .3s ease; }
+@keyframes mOpen { from{opacity:0;transform:scale(.96) translateY(12px)} to{opacity:1;transform:none} }
+.m-bar { display:flex; align-items:center; gap:8px; padding:10px 16px; background:rgba(224,0,26,.07); border-bottom:1px solid var(--red-dim); }
+.m-ttl { font-family:var(--mono); font-size:.6rem; color:var(--red); letter-spacing:3px; margin-left:8px; }
+.m-close { margin-left:auto; font-family:var(--mono); font-size:.66rem; color:var(--red); cursor:pointer; background:none; border:1px solid var(--red-dim); padding:2px 10px; transition:all .2s; }
+.m-close:hover { background:var(--red); color:#fff; }
+.m-body { padding:2rem; }
+.m-body h3 { font-family:var(--disp); font-size:.82rem; color:var(--cyan); letter-spacing:2px; margin-bottom:1rem; padding-bottom:.5rem; border-bottom:1px solid rgba(0,240,216,.2); }
+.m-ul { list-style:none; margin-top:.8rem; }
+.m-ul li { font-family:var(--mono); font-size:.72rem; color:var(--grey-l); padding:5px 0; border-bottom:1px solid rgba(255,255,255,.04); }
+.m-ul li::before { content:'▸ '; color:var(--red); }
+.m-intro { font-family:var(--mono); font-size:.74rem; color:var(--grey-l); line-height:1.8; margin-bottom:1.2rem; }
+
+/* ════════════════════════════════════════
+   RESPONSIVE
+════════════════════════════════════════ */
+@media(max-width:960px){
+  section { padding:90px 2.5rem 55px; }
+  hr.div { margin:0 2.5rem; }
+  .hero-wrap { grid-template-columns:1fr; gap:2.5rem; }
+  .hero-avatar { width:220px; height:260px; margin:0 auto; }
+  .about-grid, .contact-grid { grid-template-columns:1fr; }
+  .statusbar { display:none; }
+  .footer-grid { grid-template-columns:1fr; }
+  footer { padding:2rem 2.5rem; }
+  .hero-bg-word { font-size:clamp(5rem,20vw,10rem); }
+}
+@media(max-width:600px){
+  nav { padding:0 .8rem; }
+  .nav-links { display:none; }
+  section { padding:80px 1.2rem 45px; }
+  .hero-stats { gap:1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- BG LAYERS -->
+<div id="bg-grid"></div>
+<div id="bg-scan"></div>
+<div id="bg-vignette"></div>
+<div id="bg-corner-tl"></div>
+<div id="bg-corner-br"></div>
+
+<!-- CURSOR TRAIL -->
+<canvas id="trail" width="1680" height="887"></canvas>
+
+<!-- ════ BOOT SCREEN ════ -->
+<div id="boot" class="out" style="display: none;">
+  <div class="b-logo">ROBINA IJAZ</div>
+  <div class="b-sub">// PORTFOLIO BTS SIO SISR · CYBERSECURITY TRACK · 2024–2026</div>
+  <div class="b-bar"><div class="b-fill"></div></div>
+  <div class="b-line ok">  [  OK  ] Kernel module loaded — offensive_sec.ko · pentest.ko · sisr.ko</div>
+  <div class="b-line">  [  ..  ] Mounting filesystem: portfolio_robina_v5 → /home/robina/public</div>
+  <div class="b-line ok">  [  OK  ] Language engine initialised — FR / EN-C1 / JA-N5 · 3 locales ready</div>
+  <div class="b-line ok">  [  OK  ] CTF record restored — FSociety · Root-Me PRO inter-édu · 🏆 3ème nationale</div>
+  <div class="b-line err">  [  !!  ] Security clearance required — BTS SIO SISR candidate inbound</div>
+  <div class="b-line">  [  ..  ] Loading cert registry — CompTIA Security+ · ANSSI · Cisco · IBM · LPI</div>
+  <div class="b-line ok">  [  OK  ] Infrastructure stack online — AD · pfSense · Zabbix · GLPI · VMware</div>
+  <div class="b-line ok">  [  OK  ] Thales SAFE dossier flagged — Lambersart · Sept 2026 · alternance</div>
+  <div class="b-line inf">  [  &gt;&gt;  ] Launching interface… <span style="animation:blnk 1s infinite">▮</span> CLICK TO SKIP</div>
+</div>
+
+<!-- ════ NAV ════ -->
+<nav>
+  <div class="nav-id"><span class="u">robina</span><span class="s">@</span><span class="h">portfolio</span><span class="s">:~$</span></div>
+  <ul class="nav-links">
+    <li><a href="file:///C:/Users/robin/Downloads/Robina_Ijaz_Portfolio_V5_FINAL.html#accueil" class="nl-fr act" style="display: block;">~/accueil</a><a href="file:///C:/Users/robin/Downloads/Robina_Ijaz_Portfolio_V5_FINAL.html#accueil" class="nl-en act" style="display:none">~/home</a><a href="file:///C:/Users/robin/Downloads/Robina_Ijaz_Portfolio_V5_FINAL.html#accueil" class="nl-ja act" style="display:none">~/ホーム</a></li>
+    <li><a href="file:///C:/Users/robin/Downloads/Robina_Ijaz_Portfolio_V5_FINAL.html#apropos" class="nl-fr" style="display: block;">~/a-propos</a><a href="file:///C:/Users/robin/Downloads/Robina_Ijaz_Portfolio_V5_FINAL.html#apropos" class="nl-en" style="display:none">~/about</a><a href="file:///C:/Users/robin/Downloads/Robina_Ijaz_Portfolio_V5_FINAL.html#apropos" class="nl-ja" style="display:none">~/自己紹介</a></li>
+    <li><a href="file:///C:/Users/robin/Downloads/Robina_Ijaz_Portfolio_V5_FINAL.html#formation" class="nl-fr" style="display: block;">~/formation</a><a href="file:///C:/Users/robin/Downloads/Robina_Ijaz_Portfolio_V5_FINAL.html#formation" class="nl-en" style="display:none">~/education</a><a href="file:///C:/Users/robin/Downloads/Robina_Ijaz_Portfolio_V5_FINAL.html#formation" class="nl-ja" style="display:none">~/学歴</a></li>
+    <li><a href="file:///C:/Users/robin/Downloads/Robina_Ijaz_Portfolio_V5_FINAL.html#certifications" class="nl-fr" style="display: block;">~/certifications</a><a href="file:///C:/Users/robin/Downloads/Robina_Ijaz_Portfolio_V5_FINAL.html#certifications" class="nl-en" style="display:none">~/certs</a><a href="file:///C:/Users/robin/Downloads/Robina_Ijaz_Portfolio_V5_FINAL.html#certifications" class="nl-ja" style="display:none">~/資格</a></li>
+    <li><a href="file:///C:/Users/robin/Downloads/Robina_Ijaz_Portfolio_V5_FINAL.html#competences" class="nl-fr" style="display: block;">~/compétences</a><a href="file:///C:/Users/robin/Downloads/Robina_Ijaz_Portfolio_V5_FINAL.html#competences" class="nl-en" style="display:none">~/skills</a><a href="file:///C:/Users/robin/Downloads/Robina_Ijaz_Portfolio_V5_FINAL.html#competences" class="nl-ja" style="display:none">~/スキル</a></li>
+    <li><a href="file:///C:/Users/robin/Downloads/Robina_Ijaz_Portfolio_V5_FINAL.html#projets" class="nl-fr" style="display: block;">~/projets</a><a href="file:///C:/Users/robin/Downloads/Robina_Ijaz_Portfolio_V5_FINAL.html#projets" class="nl-en" style="display:none">~/projects</a><a href="file:///C:/Users/robin/Downloads/Robina_Ijaz_Portfolio_V5_FINAL.html#projets" class="nl-ja" style="display:none">~/プロジェクト</a></li>
+    <li><a href="file:///C:/Users/robin/Downloads/Robina_Ijaz_Portfolio_V5_FINAL.html#stages" class="nl-fr" style="display: block;">~/stages</a><a href="file:///C:/Users/robin/Downloads/Robina_Ijaz_Portfolio_V5_FINAL.html#stages" class="nl-en" style="display:none">~/internships</a><a href="file:///C:/Users/robin/Downloads/Robina_Ijaz_Portfolio_V5_FINAL.html#stages" class="nl-ja" style="display:none">~/実習</a></li>
+    <li><a href="file:///C:/Users/robin/Downloads/Robina_Ijaz_Portfolio_V5_FINAL.html#tableau" class="nl-fr" style="display: block;">~/tableau-E5</a><a href="file:///C:/Users/robin/Downloads/Robina_Ijaz_Portfolio_V5_FINAL.html#tableau" class="nl-en" style="display:none">~/E5-table</a><a href="file:///C:/Users/robin/Downloads/Robina_Ijaz_Portfolio_V5_FINAL.html#tableau" class="nl-ja" style="display:none">~/E5</a></li>
+    <li><a href="file:///C:/Users/robin/Downloads/Robina_Ijaz_Portfolio_V5_FINAL.html#veille" class="nl-fr" style="display: block;">~/veille</a><a href="file:///C:/Users/robin/Downloads/Robina_Ijaz_Portfolio_V5_FINAL.html#veille" class="nl-en" style="display:none">~/tech-watch</a><a href="file:///C:/Users/robin/Downloads/Robina_Ijaz_Portfolio_V5_FINAL.html#veille" class="nl-ja" style="display:none">~/技術調査</a></li>
+    <li><a href="file:///C:/Users/robin/Downloads/Robina_Ijaz_Portfolio_V5_FINAL.html#contact" class="nl-fr" style="display: block;">~/contact</a><a href="file:///C:/Users/robin/Downloads/Robina_Ijaz_Portfolio_V5_FINAL.html#contact" class="nl-en" style="display:none">~/contact</a><a href="file:///C:/Users/robin/Downloads/Robina_Ijaz_Portfolio_V5_FINAL.html#contact" class="nl-ja" style="display:none">~/連絡先</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="lb act" onclick="setLang(&#39;fr&#39;)">FR</button>
+    <button class="lb" onclick="setLang(&#39;en&#39;)">EN</button>
+    <button class="lb" onclick="setLang(&#39;ja&#39;)">日</button>
+  </div>
+</nav>
+
+<!-- STATUS BAR -->
+<div class="statusbar">
+  <span><span class="sb-k">STATUS</span><span class="sb-v blink">▮ ONLINE</span></span>
+  <span><span class="sb-k">ROLE</span><span class="sb-v">BTS SIO SISR · SISR TRACK · CYBER OFFENSIVE</span></span>
+  <span><span class="sb-k">CTF</span><span class="sb-v">🏆 3ÈME NATIONALE — ROOT-ME PRO INTER-ÉDU · FSociety</span></span>
+  <span><span class="sb-k">CERTS</span><span class="sb-v">CompTIA Sec+ · ANSSI · Cisco×4 · IBM · LPI · EBIOS</span></span>
+  <span><span class="sb-k">TARGET</span><span class="sb-v">THALES LAMBERSART · ALTERNANCE SEPT. 2026</span></span>
+  <span><span class="sb-k">LANG</span><span class="sb-v">FR / EN-C1 / ES-B1 / JA-N5</span></span>
+</div>
+
+<!-- ════════════════════════════════════════
+     HERO
+════════════════════════════════════════ -->
+<section id="accueil">
+  <div class="hero-bg-word">ROBINA</div>
+
+  <div class="hero-wrap">
+    <!-- LEFT -->
+    <div>
+      <div class="hero-eyebrow">
+        <span data-lang="fr" style="display: inline;">BTS SIO SISR — Lycée André Malraux · Béthune</span>
+        <span data-lang="en" style="display:none">BTS SIO SISR — Lycée André Malraux · Béthune</span>
+        <span data-lang="ja" style="display:none">BTS SIO SISR — リセ・アンドレ・マルロー · ベテューヌ</span>
+        <span style="color:var(--red);font-size:.55rem;letter-spacing:2px">// 2024–2026</span>
+      </div>
+
+      <h1 class="hero-name" data-text="ROBINA IJAZ" style="">ROBINA IJAZ</h1>
+
+      <div class="hero-role">
+        <span data-lang="fr" style="display: inline;">Cybersécurité Offensive · Infrastructure Systèmes &amp; Réseaux</span>
+        <span data-lang="en" style="display:none">Offensive Security · Systems &amp; Network Infrastructure</span>
+        <span data-lang="ja" style="display:none">攻撃的サイバーセキュリティ · システム &amp; ネットワーク基盤</span>
+      </div>
+
+      <p class="hero-desc">
+        <span data-lang="fr" style="display: inline;">Étudiante en BTS SIO SISR passionnée de cybersécurité offensive. CTF nationale 3ème place Root-Me PRO avec FSociety. Candidate alternance pentest/sec offensive chez Thales Lambersart, sept. 2026.</span>
+        <span data-lang="en" style="display:none">BTS SIO SISR student passionate about offensive security. 3rd nationally at Root-Me PRO CTF with team FSociety. Seeking pentest/offensive sec apprenticeship at Thales Lambersart, Sept. 2026.</span>
+        <span data-lang="ja" style="display:none">攻撃的セキュリティに情熱を持つBTS SIO SISR学生。FSocietyチームでRoot-Me PRO CTF全国3位。2026年9月Thales Lambersartでのペンテスト/攻撃的セキュリティの見習いを希望。</span>
+      </p>
+
+
+
+      <div class="hero-btns">
+        <button class="hbtn hbtn-red" onclick="openM(&#39;cv&#39;)">
+          <svg class="ico" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><path d="M14 2v6h6" style="fill:none;stroke:currentColor;stroke-width:2"></path></svg>
+          <span data-lang="fr" style="display: inline;">Voir mon CV</span><span data-lang="en" style="display:none">View my CV</span><span data-lang="ja" style="display:none">CVを見る</span>
+        </button>
+        <a href="https://www.linkedin.com/in/robina-ijaz" target="_blank" class="hbtn hbtn-ghost">
+          <svg class="ico" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path></svg>
+          LinkedIn
+        </a>
+        <a href="https://github.com/RengokuChan" target="_blank" class="hbtn hbtn-ghost">
+          <svg class="ico" viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"></path></svg>
+          GitHub
+        </a>
+        <a href="https://www.root-me.org/Robibi0809?lang=fr" target="_blank" class="hbtn hbtn-rootme">
+          ◉ Root-Me
+        </a>
+      </div>
+    </div>
+
+    <!-- AVATAR -->
+    <div class="hero-avatar">
+      <div class="av-frame">
+        <!-- Replace src with your actual photo. Example: src="photo.jpg" -->
+        <img src="data:image/jpeg;base64,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" alt="Robina Ijaz" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
+        <div class="av-scan"></div>
+        <div class="av-c tl"></div><div class="av-c tr"></div>
+        <div class="av-c bl"></div><div class="av-c br"></div>
+        <div class="av-label">
+          ID: ROBINA_IJAZ.exe<br>
+          NETRUNNER // SISR · CLEARANCE LVL-3<br>
+          TARGET: THALES_LAMBERSART_2026
+        </div>
+      </div>
+      <div class="av-deco">OFFENSIVE SEC · 2026</div>
+    </div>
+  </div>
+</section>
+<hr class="div">
+
+<!-- ════════════════════════════════════════
+     01 — À PROPOS
+════════════════════════════════════════ -->
+<section id="apropos">
+  <div class="s-num">// 01</div>
+  <h2 class="s-title"><span data-lang="fr" style="display: inline;">À Propos</span><span data-lang="en" style="display:none">About</span><span data-lang="ja" style="display:none">自己紹介</span></h2>
+  <div class="about-grid">
+    <div>
+      <div class="term-box">
+        <div class="term-prompt">$ whoami --verbose --full-profile</div>
+        <div class="st-row"><span class="st-k">NOM</span><span class="st-v">Robina Ijaz</span></div>
+        <div class="st-row"><span class="st-k">LOCALISATION</span><span class="st-v">Bruay-la-Buissière, Pas-de-Calais (62)</span></div>
+        <div class="st-row"><span class="st-k">FORMATION</span><span class="st-v">BTS SIO SISR — Lycée André Malraux, Béthune</span></div>
+        <div class="st-row"><span class="st-k">OBJECTIF</span><span class="st-v">L3 Info → Master Cybersécurité offensive</span></div>
+        <div class="st-row"><span class="st-k">CTF_RANK</span><span class="st-v">🏆 3ème nationale — Root-Me PRO inter-édu</span></div>
+        <div class="st-row"><span class="st-k">TEAM</span><span class="st-v">FSociety</span></div>
+        <div class="st-row"><span class="st-k">LANGUES</span><span class="st-v">FR natif · EN C1 · ES B1 · JA N5</span></div>
+        <div class="st-row"><span class="st-k">INTÉRÊTS</span><span class="st-v">Pentesting · Japon · Illustration numérique</span></div>
+        <div class="tags">
+          <span class="tag">Pentesting</span><span class="tag">Linux</span><span class="tag">Active Directory</span>
+          <span class="tag">Réseau</span><span class="tag">CTF</span><span class="tag">OSINT</span>
+          <span class="tag">Illustration</span><span class="tag">Japon 🇯🇵</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="about-cmd">$ cat about.md</div>
+      <p class="about-text">
+        <span data-lang="fr" style="display: inline;">Étudiante en BTS SIO SISR, je me suis orientée vers l'informatique après une année en licence d'anglais — un choix courageux qui m'a conduit à découvrir ma vraie passion : la cybersécurité.</span>
+        <span data-lang="en" style="display:none">BTS SIO SISR student, I turned to IT after a year studying English literature — a bold choice that led me to discover my true passion: cybersecurity.</span>
+        <span data-lang="ja" style="display:none">英語文学を学んだ後に情報技術の道を選び、サイバーセキュリティへの情熱を見出しました。</span>
+      </p>
+      <p class="about-text">
+        <span data-lang="fr" style="display: inline;">En 2 ans, j'ai obtenu plusieurs certifications, participé à des CTF nationaux avec l'équipe FSociety (3ème place Root-Me PRO inter-édu), réalisé deux stages chez EnerSys à Arras, et développé des projets personnels autour de la cyber-veille et de l'IA.</span>
+        <span data-lang="en" style="display:none">In 2 years, I've earned multiple certifications, competed in national CTFs with team FSociety (3rd place Root-Me PRO inter-edu), completed two internships at EnerSys in Arras, and built personal projects around cyber-monitoring and AI.</span>
+        <span data-lang="ja" style="display:none">2年間で複数の資格取得、FSocietyチームで全国CTF3位、EnerSysでのインターン2回、サイバー監視とAIに関するプロジェクトを開発。</span>
+      </p>
+      <p class="about-text cyan-accent">
+        <span data-lang="fr" style="display: inline;">Mon objectif : intégrer une Licence 3 informatique à l'Ensemble Baudimont d'Arras en septembre 2026, puis un Master spécialisé en cybersécurité. À terme, travailler dans la sécurité offensive — et peut-être au Japon.</span>
+        <span data-lang="en" style="display:none">My goal: join L3 Computer Science at Ensemble Baudimont in Arras in September 2026, then a Master's in cybersecurity. Ultimately, work in offensive security — possibly in Japan.</span>
+        <span data-lang="ja" style="display:none">目標：2026年9月にEnsemble BaudimontでL3進学、その後サイバーセキュリティ修士号。最終的には攻撃的セキュリティの分野で、日本で活躍したい。</span>
+      </p>
+      <div class="hex-badge">
+        <span data-lang="fr" style="display: inline;">Connexion Thales — Elles Bougent · #GOM2018 · Thales Lille</span>
+        <span data-lang="en" style="display:none">Thales link — Elles Bougent · #GOM2018 · Thales Lille</span>
+        <span data-lang="ja" style="display:none">Thalesとの縁 — Elles Bougent · #GOM2018 · Thalesリール</span>
+      </div>
+    </div>
+  </div>
+</section>
+<hr class="div">
+
+<!-- ════════════════════════════════════════
+     02 — FORMATION
+════════════════════════════════════════ -->
+<section id="formation">
+  <div class="s-num">// 02</div>
+  <h2 class="s-title"><span data-lang="fr" style="display: inline;">Formation</span><span data-lang="en" style="display:none">Education</span><span data-lang="ja" style="display:none">学歴</span></h2>
+  <div class="tl">
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-yr">2018</div>
+      <div class="tl-school">Thalès — #GOM2018</div>
+      <div class="tl-det"><span data-lang="fr" style="display: inline;">Girls on the Move · Découverte des métiers STEM · Thales Lille</span><span data-lang="en" style="display:none">Girls on the Move · STEM careers discovery · Thales Lille</span><span data-lang="ja" style="display:none">Girls on the Move · STEMキャリア · Thalesリール</span></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-yr">2020 — 2023</div>
+      <div class="tl-school">Lycée Sadi Carnot</div>
+      <div class="tl-det"><span data-lang="fr" style="display: inline;">Baccalauréat Général · Mention Européenne</span><span data-lang="en" style="display:none">Baccalauréat Général · European Mention</span><span data-lang="ja" style="display:none">バカロレア一般 · ヨーロッパ区分</span></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-yr">2023 — 2024</div>
+      <div class="tl-school">Université d'Artois</div>
+      <div class="tl-det"><span data-lang="fr" style="display: inline;">Licence LLCER Anglais · Niveau C1</span><span data-lang="en" style="display:none">English Literature Degree · C1 Level</span><span data-lang="ja" style="display:none">英語文学 · C1レベル</span></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-yr">2024 — 2026</div>
+      <div class="tl-school">Lycée André Malraux — Béthune</div>
+      <div class="tl-det"><span data-lang="fr" style="display: inline;">BTS SIO option SISR · Lycée André Malraux · Alternance recherchée sept. 2026</span><span data-lang="en" style="display:none">BTS SIO SISR · Lycée André Malraux · Seeking apprenticeship Sept. 2026</span><span data-lang="ja" style="display:none">BTS SIO SISR · リセ・アンドレ・マルロー · 2026年9月アルタナンス希望</span></div>
+    </div>
+    <div class="tl-item sp">
+      <div class="tl-dot"></div>
+      <div class="tl-yr">2024 — Root-Me PRO inter-édu</div>
+      <div class="tl-school">🏆 3ème place nationale — Équipe FSociety</div>
+      <div class="tl-det"><span data-lang="fr" style="display: inline;">Challenges système, reverse engineering, cybersécurité · Format une journée</span><span data-lang="en" style="display:none">System, reverse engineering, cybersecurity challenges · One-day format</span><span data-lang="ja" style="display:none">システム、リバースエンジニアリング、サイバーセキュリティ · 1日形式</span></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-yr">Sept. 2026 →</div>
+      <div class="tl-school">Ensemble Baudimont — Arras</div>
+      <div class="tl-det"><span data-lang="fr" style="display: inline;">Licence 3 Informatique · Spécialisation Cybersécurité en Master</span><span data-lang="en" style="display:none">L3 Computer Science · Cybersecurity specialization in Master's</span><span data-lang="ja" style="display:none">情報工学L3 · マスターでサイバーセキュリティ専攻</span></div>
+    </div>
+  </div>
+</section>
+<hr class="div">
+
+<!-- ════════════════════════════════════════
+     03 — CERTIFICATIONS
+════════════════════════════════════════ -->
+<section id="certifications">
+  <div class="s-num">// 03</div>
+  <h2 class="s-title"><span data-lang="fr" style="display: inline;">Certifications</span><span data-lang="en" style="display:none">Certifications</span><span data-lang="ja" style="display:none">資格</span></h2>
+  <table class="cert-tbl">
+    <thead><tr>
+      <th>Certification</th>
+      <th>Organisme</th>
+      <th><span data-lang="fr" style="display: inline;">Année</span><span data-lang="en" style="display:none">Year</span><span data-lang="ja" style="display:none">年</span></th>
+      <th><span data-lang="fr" style="display: inline;">Statut</span><span data-lang="en" style="display:none">Status</span><span data-lang="ja" style="display:none">状態</span></th>
+    </tr></thead>
+    <tbody>
+      <tr><td>CCNA ITN</td><td>Cisco Networking Academy</td><td>2024</td><td><span class="bdone">OBTENU</span></td></tr>
+      <tr><td>CCNA SRWE</td><td>Cisco Networking Academy</td><td>2024</td><td><span class="bdone">OBTENU</span></td></tr>
+      <tr><td>Network Security Cert.</td><td>Cisco Networking Academy</td><td>2024</td><td><span class="bdone">OBTENU</span></td></tr>
+      <tr><td>Ethical Hacking Cert.</td><td>Cisco Networking Academy</td><td>2024</td><td><span class="bdone">OBTENU</span></td></tr>
+      <tr><td>MOOC SecNumAcadémie</td><td>ANSSI</td><td>2024</td><td><span class="bdone">OBTENU</span></td></tr>
+      <tr><td>MOOC EBIOS Risk Manager</td><td>Club EBIOS</td><td>2025</td><td><span class="bdone">OBTENU</span></td></tr>
+      <tr><td>Cloud Computing Fundamental</td><td>IBM</td><td>2025</td><td><span class="bdone">OBTENU</span></td></tr>
+      <tr><td>Linux Essentials</td><td>LPI</td><td>2024</td><td><span class="bdone">OBTENU</span></td></tr>
+      <tr><td>CompTIA Security+</td><td>CompTIA</td><td>2026</td><td><span class="bwip">EN COURS</span></td></tr>
+    </tbody>
+  </table>
+</section>
+<hr class="div">
+
+<!-- ════════════════════════════════════════
+     04 — COMPÉTENCES
+════════════════════════════════════════ -->
+<section id="competences">
+  <div class="s-num">// 04</div>
+  <h2 class="s-title"><span data-lang="fr" style="display: inline;">Compétences</span><span data-lang="en" style="display:none">Skills</span><span data-lang="ja" style="display:none">スキル</span></h2>
+  <div class="skills-g">
+    <div class="sk-grp">
+      <div class="sk-title"><span data-lang="fr" style="display: inline;">Admin Système</span><span data-lang="en" style="display:none">System Admin</span><span data-lang="ja" style="display:none">システム管理</span></div>
+      <div class="sk-item">Windows Server / Active Directory</div>
+      <div class="sk-item">Linux — Arch, Debian, Kali, Ubuntu</div>
+      <div class="sk-item">GPO · LAPS · MDT</div>
+      <div class="sk-item">VMware Workstation / VirtualBox</div>
+      <div class="sk-item">VMware vSphere</div>
+      <div class="sk-item">Veeam Backup &amp; Replication</div>
+    </div>
+    <div class="sk-grp">
+      <div class="sk-title"><span data-lang="fr" style="display: inline;">Réseaux</span><span data-lang="en" style="display:none">Networking</span><span data-lang="ja" style="display:none">ネットワーク</span></div>
+      <div class="sk-item">Cisco / Cisco Meraki</div>
+      <div class="sk-item">VLANs 802.1q · Trunk</div>
+      <div class="sk-item">pfSense · Routage · NAT</div>
+      <div class="sk-item">Wireshark · SNMP</div>
+      <div class="sk-item">DNS / DHCP</div>
+      <div class="sk-item">PRTG Network Monitor</div>
+    </div>
+    <div class="sk-grp">
+      <div class="sk-title">Scripting</div>
+      <div class="sk-item">Bash</div>
+      <div class="sk-item">PowerShell</div>
+      <div class="sk-item">Python</div>
+      <div class="sk-item"><span data-lang="fr" style="display: inline;">Automatisation AD</span><span data-lang="en" style="display:none">AD Automation</span><span data-lang="ja" style="display:none">AD自動化</span></div>
+    </div>
+    <div class="sk-grp">
+      <div class="sk-title"><span data-lang="fr" style="display: inline;">Cybersécurité</span><span data-lang="en" style="display:none">Cybersecurity</span><span data-lang="ja" style="display:none">サイバーセキュリティ</span></div>
+      <div class="sk-item">Privilege Escalation</div>
+      <div class="sk-item">EBIOS Risk Manager</div>
+      <div class="sk-item">Metasploit / Nmap</div>
+      <div class="sk-item">Burp Suite</div>
+      <div class="sk-item">SOC · Kibana</div>
+      <div class="sk-item">RGPD · CIA Triad</div>
+    </div>
+    <div class="sk-grp">
+      <div class="sk-title"><span data-lang="fr" style="display: inline;">Supervision / ITSM</span><span data-lang="en" style="display:none">Monitoring / ITSM</span><span data-lang="ja" style="display:none">監視 / ITSM</span></div>
+      <div class="sk-item">Zabbix</div>
+      <div class="sk-item">GLPI (ITSM)</div>
+      <div class="sk-item">LDAP / LDAPS</div>
+      <div class="sk-item">PRTG Network Monitor</div>
+      <div class="sk-item">ManageEngine</div>
+    </div>
+    <div class="sk-grp">
+      <div class="sk-title"><span data-lang="fr" style="display: inline;">Langues</span><span data-lang="en" style="display:none">Languages</span><span data-lang="ja" style="display:none">言語</span></div>
+      <div class="sk-item">Français — Natif</div>
+      <div class="sk-item">Anglais — C1</div>
+      <div class="sk-item">Espagnol — B1</div>
+      <div class="sk-item">日本語 — N5</div>
+    </div>
+  </div>
+</section>
+<hr class="div">
+
+<!-- ════════════════════════════════════════
+     05 — PROJETS
+════════════════════════════════════════ -->
+<section id="projets">
+  <div class="s-num">// 05</div>
+  <h2 class="s-title"><span data-lang="fr" style="display: inline;">Projets</span><span data-lang="en" style="display:none">Projects</span><span data-lang="ja" style="display:none">プロジェクト</span></h2>
+  <div class="proj-g">
+    <!-- Honeypot -->
+    <div class="proj-card">
+      <div class="proj-tag">Cybersécurité</div>
+      <div class="proj-title">🍯 Honeypot</div>
+      <div class="proj-sub"><span data-lang="fr" style="display: inline;">Piège réseau &amp; analyse d'attaques</span><span data-lang="en" style="display:none">Network trap &amp; attack analysis</span><span data-lang="ja" style="display:none">ネットワークトラップ &amp; 攻撃分析</span></div>
+      <p class="proj-desc"><span data-lang="fr" style="display: inline;">Déploiement d'un pot de miel pour capturer et analyser des tentatives d'intrusion réelles. Capture de trafic malveillant, analyse des logs et documentation des vecteurs d'attaque observés.</span><span data-lang="en" style="display:none">Deployed a honeypot to capture and analyze real intrusion attempts. Malicious traffic capture, log analysis and documentation of observed attack vectors.</span><span data-lang="ja" style="display:none">実際の侵入試みを捕捉・分析するためのハニーポットを展開。悪意あるトラフィックのキャプチャ、ログ分析、観察された攻撃ベクターの文書化。</span></p>
+      <div class="proj-techs"><span class="tech">Linux</span><span class="tech">Wireshark</span><span class="tech">Logs</span><span class="tech">Analyse réseau</span></div>
+      <div class="proj-links"><a href="https://github.com/RengokuChan" target="_blank" class="plink gh">GitHub ↗</a></div>
+    </div>
+    <!-- Hikari -->
+    <div class="proj-card">
+      <div class="proj-tag">IA &amp; Dev</div>
+      <div class="proj-title">🤖 Hikari</div>
+      <div class="proj-sub"><span data-lang="fr" style="display: inline;">IA éducative interactive</span><span data-lang="en" style="display:none">Interactive educational AI</span><span data-lang="ja" style="display:none">インタラクティブ教育AI</span></div>
+      <p class="proj-desc"><span data-lang="fr" style="display: inline;">Conception et développement d'une IA à vocation pédagogique. Interface conversationnelle intuitive permettant à des utilisateurs non techniques d'interagir avec un modèle d'apprentissage automatique.</span><span data-lang="en" style="display:none">Design and development of an AI for educational purposes. Intuitive conversational interface allowing non-technical users to interact with a machine learning model.</span><span data-lang="ja" style="display:none">教育目的のAIを設計・開発。非技術ユーザーが機械学習モデルと対話できる直感的な会話インターフェース。</span></p>
+      <div class="proj-techs"><span class="tech">Python</span><span class="tech">API IA</span><span class="tech">Interface web</span></div>
+      <div class="proj-links"><a href="https://github.com/RengokuChan" target="_blank" class="plink gh">GitHub ↗</a></div>
+    </div>
+    <!-- Bot Discord -->
+    <div class="proj-card">
+      <div class="proj-tag">Automatisation</div>
+      <div class="proj-title">🤖 Bot Discord Veille Cyber</div>
+      <div class="proj-sub"><span data-lang="fr" style="display: inline;">Agrégateur de menaces automatisé</span><span data-lang="en" style="display:none">Automated threat aggregator</span><span data-lang="ja" style="display:none">自動化された脅威アグリゲーター</span></div>
+      <p class="proj-desc"><span data-lang="fr" style="display: inline;">Bot Discord automatisé de veille cybersécurité. Collecte et redistribue en temps réel les alertes CVE, bulletins CERT-FR et flux ANSSI via des webhooks Discord personnalisés. Moteur Python + service systemd + PostgreSQL.</span><span data-lang="en" style="display:none">Automated Discord cybersecurity monitoring bot. Collects and redistributes CVE alerts, CERT-FR bulletins and ANSSI feeds in real-time via custom Discord webhooks. Python engine + systemd service + PostgreSQL.</span><span data-lang="ja" style="display:none">自動化されたDiscordサイバーセキュリティ監視ボット。CVEアラートをリアルタイムで配信。Pythonエンジン + systemdサービス + PostgreSQL。</span></p>
+      <div class="proj-techs"><span class="tech">Python</span><span class="tech">Discord API</span><span class="tech">PostgreSQL</span><span class="tech">systemd</span><span class="tech">CVE</span></div>
+      <div class="proj-links"><a href="https://github.com/RengokuChan" target="_blank" class="plink gh">GitHub ↗</a></div>
+    </div>
+    <!-- Portfolio -->
+    <div class="proj-card">
+      <div class="proj-tag">Web &amp; Design</div>
+      <div class="proj-title">🌐 Portfolio Cyberpunk</div>
+      <div class="proj-sub"><span data-lang="fr" style="display: inline;">Ce site — HTML/CSS/JS trilingue</span><span data-lang="en" style="display:none">This site — trilingual HTML/CSS/JS</span><span data-lang="ja" style="display:none">このサイト — トリリンガルHTML/CSS/JS</span></div>
+      <p class="proj-desc"><span data-lang="fr" style="display: inline;">Portfolio personnel trilingue (FR/EN/JA) au design cyberpunk. Navigation terminal, animations glitch, boot screen, tableau de synthèse E5 interactif. Hébergé sur GitHub Pages.</span><span data-lang="en" style="display:none">Trilingual (FR/EN/JA) personal portfolio with cyberpunk design. Terminal navigation, glitch animations, boot screen, interactive E5 table. Hosted on GitHub Pages.</span><span data-lang="ja" style="display:none">サイバーパンクデザインのトリリンガル個人ポートフォリオ。ターミナルナビゲーション、グリッチアニメーション、GitHub Pagesでホスト。</span></p>
+      <div class="proj-techs"><span class="tech">HTML5</span><span class="tech">CSS3</span><span class="tech">JavaScript</span><span class="tech">GitHub Pages</span></div>
+      <div class="proj-links">
+        <a href="https://github.com/RengokuChan" target="_blank" class="plink gh">GitHub ↗</a>
+        <a href="file:///C:/Users/robin/Downloads/Robina_Ijaz_Portfolio_V5_FINAL.html#accueil" class="plink lv"><span data-lang="fr" style="display: inline;">En ligne ↗</span><span data-lang="en" style="display:none">Live ↗</span><span data-lang="ja" style="display:none">公開 ↗</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+<hr class="div">
+
+<!-- ════════════════════════════════════════
+     06 — STAGES
+════════════════════════════════════════ -->
+<section id="stages">
+  <div class="s-num">// 06</div>
+  <h2 class="s-title"><span data-lang="fr" style="display: inline;">Stages — EnerSys SARL</span><span data-lang="en" style="display:none">Internships — EnerSys SARL</span><span data-lang="ja" style="display:none">実習 — EnerSys SARL</span></h2>
+
+  <div class="stage-intro">
+    <div class="stage-i-title">EnerSys SARL — Arras (62)</div>
+    <div class="stage-i-sub">2 stages · 26 mai–28 juin 2025 · janv.–fév. 2026</div>
+    <p class="stage-i-desc">
+      <span data-lang="fr" style="display: inline;">Durant mes stages chez EnerSys à Arras, j'ai intégré l'équipe IT pour participer à la gestion de l'infrastructure informatique. Environnement industriel exigeant — Windows Server, Cisco Meraki, VMware vSphere, MDT, Veeam, ManageEngine.</span>
+      <span data-lang="en" style="display:none">During my internships at EnerSys in Arras, I joined the IT team to manage IT infrastructure. Demanding industrial environment — Windows Server, Cisco Meraki, VMware vSphere, MDT, Veeam, ManageEngine.</span>
+      <span data-lang="ja" style="display:none">EnerSys（アラス）でのインターンでは、ITチームに参加しインフラ管理に携わりました。Windows Server、Cisco Meraki、VMware、MDT、Veeam環境。</span>
+    </p>
+    <button class="stage-btn" onclick="openM(&#39;stage&#39;)">
+      ▸ <span data-lang="fr" style="display: inline;">Voir le détail des missions</span><span data-lang="en" style="display:none">View mission details</span><span data-lang="ja" style="display:none">ミッション詳細を見る</span>
+    </button>
+  </div>
+
+  <div class="mission-g">
+    <div class="mission-card">
+      <div class="m-tag"><span data-lang="fr" style="display: inline;">Déploiement</span><span data-lang="en" style="display:none">Deployment</span><span data-lang="ja" style="display:none">展開</span></div>
+      <div class="m-title"><span data-lang="fr" style="display: inline;">Vague de renouvellement PC (MDT)</span><span data-lang="en" style="display:none">PC Renewal Wave (MDT)</span><span data-lang="ja" style="display:none">PC更新（MDT）</span></div>
+      <ul class="m-ul">
+        <li><span data-lang="fr" style="display: inline;">Déploiement via serveur MDT — Dell Precision</span><span data-lang="en" style="display:none">Deployment via MDT server — Dell Precision</span><span data-lang="ja" style="display:none">MDTサーバー経由展開 — Dell Precision</span></li>
+        <li><span data-lang="fr" style="display: inline;">Préparation PC via Heydo!</span><span data-lang="en" style="display:none">PC prep via Heydo!</span><span data-lang="ja" style="display:none">Heydo!でPC準備</span></li>
+        <li><span data-lang="fr" style="display: inline;">Transfert données par mappage réseau</span><span data-lang="en" style="display:none">Data transfer via network mapping</span><span data-lang="ja" style="display:none">ネットワークマッピングでデータ転送</span></li>
+      </ul>
+    </div>
+    <div class="mission-card">
+      <div class="m-tag">Support</div>
+      <div class="m-title"><span data-lang="fr" style="display: inline;">Support N1/N2 &amp; RDP</span><span data-lang="en" style="display:none">L1/L2 Support &amp; RDP</span><span data-lang="ja" style="display:none">サポートL1/L2 &amp; RDP</span></div>
+      <ul class="m-ul">
+        <li><span data-lang="fr" style="display: inline;">Assistance via TeamViewer · ManageEngine</span><span data-lang="en" style="display:none">Assistance via TeamViewer · ManageEngine</span><span data-lang="ja" style="display:none">TeamViewer · ManageEngineサポート</span></li>
+        <li><span data-lang="fr" style="display: inline;">Gestion accès serveurs via RDP</span><span data-lang="en" style="display:none">Server access via RDP</span><span data-lang="ja" style="display:none">RDP経由サーバーアクセス管理</span></li>
+        <li><span data-lang="fr" style="display: inline;">Sécurisation avec LAPS</span><span data-lang="en" style="display:none">Security with LAPS</span><span data-lang="ja" style="display:none">LAPSによるセキュリティ</span></li>
+      </ul>
+    </div>
+    <div class="mission-card">
+      <div class="m-tag"><span data-lang="fr" style="display: inline;">Réseau</span><span data-lang="en" style="display:none">Network</span><span data-lang="ja" style="display:none">ネットワーク</span></div>
+      <div class="m-title">Cisco Meraki</div>
+      <ul class="m-ul">
+        <li><span data-lang="fr" style="display: inline;">Administration cloud Cisco Meraki</span><span data-lang="en" style="display:none">Cisco Meraki cloud management</span><span data-lang="ja" style="display:none">Cisco Merakiクラウド管理</span></li>
+        <li><span data-lang="fr" style="display: inline;">Vérification branchements switch</span><span data-lang="en" style="display:none">Switch connections check</span><span data-lang="ja" style="display:none">スイッチ接続確認</span></li>
+        <li><span data-lang="fr" style="display: inline;">Ajout de prises physiques</span><span data-lang="en" style="display:none">Physical port additions</span><span data-lang="ja" style="display:none">物理ポート追加</span></li>
+      </ul>
+    </div>
+    <div class="mission-card">
+      <div class="m-tag"><span data-lang="fr" style="display: inline;">Virtualisation</span><span data-lang="en" style="display:none">Virtualisation</span><span data-lang="ja" style="display:none">仮想化</span></div>
+      <div class="m-title">VMware vSphere &amp; Veeam</div>
+      <ul class="m-ul">
+        <li><span data-lang="fr" style="display: inline;">Découverte VMware vSphere — snapshots</span><span data-lang="en" style="display:none">VMware vSphere discovery — snapshots</span><span data-lang="ja" style="display:none">VMware vSphere — スナップショット</span></li>
+        <li><span data-lang="fr" style="display: inline;">Sauvegardes &amp; restaurations Veeam</span><span data-lang="en" style="display:none">Veeam backups &amp; restores</span><span data-lang="ja" style="display:none">Veeamバックアップと復元</span></li>
+      </ul>
+    </div>
+    <div class="mission-card">
+      <div class="m-tag"><span data-lang="fr" style="display: inline;">Événement</span><span data-lang="en" style="display:none">Event</span><span data-lang="ja" style="display:none">イベント</span></div>
+      <div class="m-title"><span data-lang="fr" style="display: inline;">CEO Town Hall — Vidéoconférence mondiale</span><span data-lang="en" style="display:none">CEO Town Hall — Global video conference</span><span data-lang="ja" style="display:none">CEO Town Hall — グローバルビデオ会議</span></div>
+      <ul class="m-ul">
+        <li><span data-lang="fr" style="display: inline;">Suivi déploiement système vidéo mondial</span><span data-lang="en" style="display:none">Global video system deployment tracking</span><span data-lang="ja" style="display:none">グローバルビデオシステム展開追跡</span></li>
+        <li><span data-lang="fr" style="display: inline;">Coordination technique en live</span><span data-lang="en" style="display:none">Live technical coordination</span><span data-lang="ja" style="display:none">ライブ技術調整</span></li>
+      </ul>
+    </div>
+    <div class="mission-card">
+      <div class="m-tag">Administration</div>
+      <div class="m-title"><span data-lang="fr" style="display: inline;">Active Directory &amp; New Hires</span><span data-lang="en" style="display:none">Active Directory &amp; New Hires</span><span data-lang="ja" style="display:none">AD &amp; 新入社員</span></div>
+      <ul class="m-ul">
+        <li><span data-lang="fr" style="display: inline;">Création comptes AD pour nouveaux arrivants</span><span data-lang="en" style="display:none">AD account creation for new hires</span><span data-lang="ja" style="display:none">新入社員のADアカウント作成</span></li>
+        <li><span data-lang="fr" style="display: inline;">Affectation de GPO</span><span data-lang="en" style="display:none">GPO assignment</span><span data-lang="ja" style="display:none">GPO割り当て</span></li>
+        <li><span data-lang="fr" style="display: inline;">Rédaction documentations utilisateurs</span><span data-lang="en" style="display:none">User documentation writing</span><span data-lang="ja" style="display:none">ユーザー文書作成</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+<hr class="div">
+
+<!-- ════════════════════════════════════════
+     07 — TABLEAU E5
+════════════════════════════════════════ -->
+<section id="tableau">
+  <div class="s-num">// 07</div>
+  <h2 class="s-title"><span data-lang="fr" style="display: inline;">Tableau de Synthèse E5</span><span data-lang="en" style="display:none">E5 Synthesis Table</span><span data-lang="ja" style="display:none">E5テーブル</span></h2>
+  <div class="synth-wrap">
+    <table class="synth-tbl">
+      <thead><tr>
+        <th class="th-l"><span data-lang="fr" style="display: inline;">Réalisation professionnelle</span><span data-lang="en" style="display:none">Achievement</span><span data-lang="ja" style="display:none">実績</span></th>
+        <th>B1<br><span style="font-size:.45rem;color:var(--grey-l);font-weight:normal">Patrimoine</span></th>
+        <th>B2<br><span style="font-size:.45rem;color:var(--grey-l);font-weight:normal">Incidents</span></th>
+        <th>B3<br><span style="font-size:.45rem;color:var(--grey-l);font-weight:normal">Présence</span></th>
+        <th>B4<br><span style="font-size:.45rem;color:var(--grey-l);font-weight:normal">Projet</span></th>
+        <th>B5<br><span style="font-size:.45rem;color:var(--grey-l);font-weight:normal">Service</span></th>
+        <th>B6<br><span style="font-size:.45rem;color:var(--grey-l);font-weight:normal">Dev. Pro</span></th>
+      </tr></thead>
+      <tbody>
+        <tr class="row-sep"><td colspan="7">// MILIEU PROFESSIONNEL — 1ÈRE ANNÉE (ENERSYS)</td></tr>
+        <tr><td class="td-l">Renouvellement laptops Dell Precision (MDT, backup mappage réseau)</td><td class="cy">✓</td><td class="cy">✓</td><td class="cn">—</td><td class="cy">✓</td><td class="cy">✓</td><td class="cn">—</td></tr>
+        <tr><td class="td-l">Support N1/N2 (ManageEngine, TeamViewer, RDP, LAPS)</td><td class="cy">✓</td><td class="cy">✓</td><td class="cn">—</td><td class="cy">✓</td><td class="cy">✓</td><td class="cy">✓</td></tr>
+        <tr><td class="td-l">Cisco Meraki — vérification branchements + ajout prises physiques</td><td class="cy">✓</td><td class="cy">✓</td><td class="cn">—</td><td class="cy">✓</td><td class="cy">✓</td><td class="cn">—</td></tr>
+        <tr><td class="td-l">Ajout branche PRTG avec sensors adéquats</td><td class="cy">✓</td><td class="cn">—</td><td class="cy">✓</td><td class="cn">—</td><td class="cn">—</td><td class="cn">—</td></tr>
+        <tr><td class="td-l">Admin sys — Veeam, Shadow Copy, vSphere</td><td class="cy">✓</td><td class="cn">—</td><td class="cn">—</td><td class="cn">—</td><td class="cn">—</td><td class="cn">—</td></tr>
+        <tr class="row-sep"><td colspan="7">// MILIEU PROFESSIONNEL — 2ÈME ANNÉE (ENERSYS)</td></tr>
+        <tr><td class="td-l">Renouvellement laptops Dell (MDT, backup mappage réseau)</td><td class="cy">✓</td><td class="cy">✓</td><td class="cn">—</td><td class="cy">✓</td><td class="cy">✓</td><td class="cn">—</td></tr>
+        <tr><td class="td-l">Support N1/N2 (ManageEngine, TeamViewer, RDP, LAPS)</td><td class="cy">✓</td><td class="cy">✓</td><td class="cn">—</td><td class="cy">✓</td><td class="cy">✓</td><td class="cy">✓</td></tr>
+        <tr><td class="td-l">Cisco Meraki — branchements + ajout prises</td><td class="cy">✓</td><td class="cy">✓</td><td class="cn">—</td><td class="cy">✓</td><td class="cy">✓</td><td class="cn">—</td></tr>
+        <tr><td class="td-l">Gestion Backup VEEAM</td><td class="cn">—</td><td class="cy">✓</td><td class="cn">—</td><td class="cn">—</td><td class="cn">—</td><td class="cn">—</td></tr>
+        <tr><td class="td-l">Accueil New Hire (PC, AD, GPO, documentation)</td><td class="cy">✓</td><td class="cy">✓</td><td class="cn">—</td><td class="cy">✓</td><td class="cy">✓</td><td class="cy">✓</td></tr>
+        <tr><td class="td-l">Documentation technique salles de réunion</td><td class="cn">—</td><td class="cn">—</td><td class="cn">—</td><td class="cn">—</td><td class="cy">✓</td><td class="cy">✓</td></tr>
+        <tr><td class="td-l">Suivi mise en place vidéoconférence CEO Town Hall</td><td class="cy">✓</td><td class="cy">✓</td><td class="cy">✓</td><td class="cy">✓</td><td class="cy">✓</td><td class="cy">✓</td></tr>
+        <tr><td class="td-l">Migration Trellix → BitLocker (Intune)</td><td class="cy">✓</td><td class="cy">✓</td><td class="cn">—</td><td class="cy">✓</td><td class="cn">—</td><td class="cn">—</td></tr>
+        <tr class="row-sep"><td colspan="7">// RÉALISATIONS EN COURS DE FORMATION (GSB)</td></tr>
+        <tr><td class="td-l">Mission 1 — Active Directory, VLANs 802.1q, GPO sur HP2520</td><td class="cy">✓</td><td class="cy">✓</td><td class="cn">—</td><td class="cy">✓</td><td class="cy">✓</td><td class="cn">—</td></tr>
+        <tr><td class="td-l">Mission 2 — DMZ pfSense, Debian Apache, PHP, MySQL, HTTPS</td><td class="cy">✓</td><td class="cy">✓</td><td class="cn">—</td><td class="cy">✓</td><td class="cy">✓</td><td class="cn">—</td></tr>
+        <tr><td class="td-l">Mission 3 — PowerShell AD, Cluster HA Debian 12</td><td class="cy">✓</td><td class="cy">✓</td><td class="cn">—</td><td class="cy">✓</td><td class="cy">✓</td><td class="cn">—</td></tr>
+        <tr><td class="td-l">Mission 4 — Zabbix, GLPI, SNMP, auth AD <span style="color:var(--cyan);font-size:.56rem">EN COURS</span></td><td class="cy">✓</td><td class="cy">✓</td><td class="cn">—</td><td class="cy">✓</td><td class="cy">✓</td><td class="cn">—</td></tr>
+        <tr><td class="td-l">Portfolio E5 — HTML/CSS/JS, trilingue FR/EN/JA</td><td class="cn">—</td><td class="cn">—</td><td class="cy">✓</td><td class="cn">—</td><td class="cn">—</td><td class="cy">✓</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+<hr class="div">
+
+<!-- ════════════════════════════════════════
+     08 — VEILLE
+════════════════════════════════════════ -->
+<section id="veille">
+  <div class="s-num">// 08</div>
+  <h2 class="s-title"><span data-lang="fr" style="display: inline;">Veille Technologique</span><span data-lang="en" style="display:none">Technology Watch</span><span data-lang="ja" style="display:none">技術動向調査</span></h2>
+
+  <!-- ARTICLE DE VEILLE ANNUELLE -->
+  <style>
+    .article-veille {
+      background: linear-gradient(135deg, rgba(10,14,21,0.95) 0%, rgba(6,10,15,0.98) 100%);
+      border: 1px solid rgba(224,0,26,0.25);
+      border-left: 3px solid var(--red);
+      padding: 2.5rem 3rem;
+      max-width: 900px;
+      margin-bottom: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .article-veille::before {
+      content: '';
+      position: absolute; top: 0; right: 0;
+      width: 200px; height: 200px;
+      background: radial-gradient(circle, rgba(224,0,26,0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .article-meta {
+      display: flex; align-items: center; gap: 1.5rem;
+      font-family: var(--mono); font-size: 0.6rem;
+      color: var(--grey); letter-spacing: 3px;
+      text-transform: uppercase; margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .article-meta .tag-cat {
+      background: rgba(224,0,26,0.15);
+      border: 1px solid rgba(224,0,26,0.35);
+      color: var(--red); padding: 3px 10px; font-size: 0.55rem; letter-spacing: 3px;
+    }
+    .article-meta .tag-date { color: var(--cyan); }
+    .article-h1 {
+      font-family: var(--disp); font-size: clamp(1.1rem, 2vw, 1.5rem);
+      font-weight: 900; color: var(--white);
+      line-height: 1.3; margin-bottom: 0.6rem;
+    }
+    .article-intro {
+      font-family: var(--mono); font-size: 0.72rem;
+      color: var(--cyan); border-left: 2px solid var(--cyan-dim);
+      padding-left: 1rem; margin-bottom: 2rem;
+      line-height: 1.8; font-style: italic;
+    }
+    .article-body {
+      font-family: var(--body); font-size: 0.95rem;
+      color: rgba(238,240,248,0.82); line-height: 1.85;
+    }
+    .article-body h3 {
+      font-family: var(--mono); font-size: 0.65rem;
+      color: var(--red); letter-spacing: 4px; text-transform: uppercase;
+      margin: 2rem 0 0.8rem; display: flex; align-items: center; gap: 0.6rem;
+    }
+    .article-body h3::after {
+      content: ''; flex: 1; height: 1px;
+      background: linear-gradient(90deg, rgba(224,0,26,0.3), transparent);
+    }
+    .article-body p { margin-bottom: 1rem; }
+    .article-body strong { color: var(--white); font-weight: 700; }
+    .article-body code {
+      font-family: var(--mono); font-size: 0.75rem;
+      background: rgba(224,0,26,0.08); border: 1px solid rgba(224,0,26,0.2);
+      padding: 1px 6px; color: var(--cyan);
+    }
+    .article-tags {
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+      margin-top: 2rem; padding-top: 1.5rem;
+      border-top: 1px solid rgba(224,0,26,0.12);
+    }
+    .article-tags span {
+      font-family: var(--mono); font-size: 0.55rem;
+      letter-spacing: 2px; padding: 3px 10px;
+      border: 1px solid rgba(0,240,216,0.2);
+      color: var(--cyan); background: rgba(0,240,216,0.04);
+    }
+    .article-cve-pill {
+      display: inline-block;
+      font-family: var(--mono); font-size: 0.6rem;
+      background: rgba(224,0,26,0.12); border: 1px solid rgba(224,0,26,0.3);
+      color: var(--red); padding: 2px 8px; margin: 2px;
+    }
+    .article-impact {
+      background: rgba(197,0,255,0.05); border-left: 2px solid var(--mag);
+      padding: 0.8rem 1.2rem; margin: 1.2rem 0;
+      font-family: var(--mono); font-size: 0.7rem; color: rgba(238,240,248,0.7);
+    }
+    .article-impact strong { color: var(--mag); }
+  </style>
+
+  <div class="article-veille">
+    <div class="article-meta">
+      <span class="tag-cat">Veille · Analyse annuelle</span>
+      <span class="tag-date">// 2024–2026</span>
+      <span>BTS SIO SISR · Cybersécurité Offensive</span>
+    </div>
+
+    <h2 class="article-h1">
+      <span data-lang="fr" style="display: inline;">La cybersécurité en 2024–2025 : vulnérabilités systèmes, montée en puissance de l'IA offensive et évolution des menaces réseau</span>
+      <span data-lang="en" style="display:none">Cybersecurity in 2024–2025: System vulnerabilities, the rise of offensive AI and evolving network threats</span>
+      <span data-lang="ja" style="display:none">2024–2025年のサイバーセキュリティ：システム脆弱性、攻撃的AIの台頭、ネットワーク脅威の進化</span>
+    </h2>
+
+    <p class="article-intro">
+      <span data-lang="fr" style="display: inline;">Au cours de cette année de BTS SIO SISR, j'ai conduit une veille technologique continue sur la cybersécurité offensive et défensive, en m'appuyant sur des sources institutionnelles (CERT-FR, ANSSI, NVD NIST) et spécialisées (The Hacker News, BleepingComputer, Krebs on Security). Cet article en présente la synthèse analytique.</span>
+      <span data-lang="en" style="display:none">Throughout this BTS SIO SISR year, I conducted continuous technology watch on offensive and defensive cybersecurity, drawing on institutional sources (CERT-FR, ANSSI, NVD NIST) and specialist outlets (The Hacker News, BleepingComputer, Krebs on Security). This article presents the analytical synthesis.</span>
+      <span data-lang="ja" style="display:none">BTS SIO SISR在学中、CERT-FR、ANSSI、NVD NISTなどの機関ソースと専門メディアを基に、攻撃・防御サイバーセキュリティの継続的な技術調査を行った。本稿はその分析的まとめである。</span>
+    </p>
+
+    <div class="article-body">
+
+      <h3><span data-lang="fr" style="display: inline;">01 — Privilèges système & escalade de droits</span><span data-lang="en" style="display:none">01 — System privileges & privilege escalation</span><span data-lang="ja" style="display:none">01 — システム権限とエスカレーション</span></h3>
+
+      <p>
+        <span data-lang="fr" style="display: inline;">La gestion des privilèges sur les systèmes Linux reste l'un des vecteurs d'attaque les plus exploités. La faille <strong>CVE-2021-3156 « Baron Samedit »</strong> dans <code>sudo</code>, restée active en production sur des systèmes non mis à jour, illustre ce phénomène : un utilisateur local peut, par un débordement de tampon (<em>heap overflow</em>), obtenir les droits root sans aucun mot de passe. Cette vulnérabilité, corrigée en version 1.9.5p2, a mis en évidence l'importance critique du patch management et du principe de moindre privilège. Dans mes travaux pratiques GSB (Mission 3), j'ai directement manipulé les politiques de groupe Active Directory et les scripts PowerShell pour enforcer ce principe dans un environnement Windows Server hybride.</span>
+        <span data-lang="en" style="display:none">Linux privilege management remains one of the most exploited attack vectors. The <strong>CVE-2021-3156 "Baron Samedit"</strong> flaw in <code>sudo</code>, still active on unpatched systems, illustrates this: a local user can, via heap overflow, gain root rights without any password. This vulnerability, fixed in version 1.9.5p2, highlighted the critical importance of patch management and the principle of least privilege. In my GSB lab work (Mission 3), I directly manipulated Active Directory group policies and PowerShell scripts to enforce this principle in a hybrid Windows Server environment.</span>
+        <span data-lang="ja" style="display:none">Linuxシステムでの権限管理は最も悪用される攻撃ベクターの一つである。<code>sudo</code>の<strong>CVE-2021-3156 "Baron Samedit"</strong>脆弱性は、未パッチシステムでローカルユーザーがパスワードなしにroot権限を取得可能にする。バージョン1.9.5p2で修正されたこの脆弱性は、パッチ管理と最小権限の原則の重要性を示した。</span>
+      </p>
+
+      <div class="article-impact">
+        <strong><span data-lang="fr" style="display: inline;">Impact terrain observé</span><span data-lang="en" style="display:none">Observed field impact</span><span data-lang="ja" style="display:none">現場で観察された影響</span></strong><br>
+        <span data-lang="fr" style="display: inline;">Lors de mon stage EnerSys (2025–2026), j'ai constaté que plusieurs postes Linux maintenus en production tournaient sur des versions de <code>sudo</code> antérieures aux correctifs. La mise à jour systématique faisait partie des recommandations que j'ai formulées dans mes documentations techniques.</span>
+        <span data-lang="en" style="display:none">During my EnerSys internship (2025–2026), I observed that several Linux production workstations ran pre-patch versions of <code>sudo</code>. Systematic updates were among the recommendations I included in my technical documentation.</span>
+        <span data-lang="ja" style="display:none">EnerSysでのインターン中（2025–2026）、本番環境のLinux端末でパッチ未適用の<code>sudo</code>が動作していた。技術文書の推奨事項としてシステム更新を盛り込んだ。</span>
+      </div>
+
+      <h3><span data-lang="fr" style="display: inline;">02 — Segmentation réseau : VLANs, Zero Trust & menaces internes</span><span data-lang="en" style="display:none">02 — Network segmentation: VLANs, Zero Trust & insider threats</span><span data-lang="ja" style="display:none">02 — ネットワーク分割：VLAN、ゼロトラスト、内部脅威</span></h3>
+
+      <p>
+        <span data-lang="fr" style="display: inline;">La segmentation réseau a profondément évolué ces deux dernières années. Le modèle <strong>VLAN 802.1q</strong> demeure la référence en PME et en environnement industriel — ce que j'ai pu vérifier directement chez EnerSys avec la configuration Cisco Meraki — mais l'émergence du cloud hybride rend ce modèle insuffisant pour un <strong>Zero Trust</strong> réel. Les attaques de type <em>VLAN hopping</em>, qui exploitent les mauvaises configurations des ports trunk (mode <code>DTP auto</code> laissé actif), permettent à un attaquant positionné en interne de traverser les segments réseau sans autorisation. Ces techniques sont documentées dans le framework <strong>MITRE ATT&CK</strong> (T1599). La micro-segmentation, implémentée via des solutions NGFWs ou des SDN, constitue la réponse architecturale adaptée aux environnements hybrides.</span>
+        <span data-lang="en" style="display:none">Network segmentation has evolved significantly over the past two years. The <strong>VLAN 802.1q</strong> model remains the SME and industrial standard — verified directly at EnerSys with Cisco Meraki — but hybrid cloud growth makes this model insufficient for true <strong>Zero Trust</strong>. VLAN hopping attacks, exploiting trunk port misconfigurations (active <code>DTP auto</code> mode), allow internally-positioned attackers to traverse network segments without authorization. These techniques are documented in the <strong>MITRE ATT&CK</strong> framework (T1599). Micro-segmentation via NGFWs or SDN is the appropriate architectural response for hybrid environments.</span>
+        <span data-lang="ja" style="display:none"><strong>VLAN 802.1q</strong>はSMEおよび産業環境の標準であるが、ハイブリッドクラウドでは真の<strong>ゼロトラスト</strong>として不十分である。VLAN hopping攻撃はトランクポートの誤設定を悪用し、内部攻撃者が認可なしにセグメントを越えることを可能にする。NGFWやSDNによるマイクロセグメンテーションが適切な対策である。</span>
+      </p>
+
+      <h3><span data-lang="fr" style="display: inline;">03 — IA en cyberdéfense : SIEM nouvelle génération & détection comportementale</span><span data-lang="en" style="display:none">03 — AI in cyberdefense: next-gen SIEM & behavioral detection</span><span data-lang="ja" style="display:none">03 — サイバー防衛のAI：次世代SIEM & 行動検知</span></h3>
+
+      <p>
+        <span data-lang="fr" style="display: inline;">L'intégration de l'intelligence artificielle dans les outils de détection représente la transformation la plus significative de cette période. Les SIEM de nouvelle génération intègrent désormais des modules <strong>UEBA</strong> (<em>User and Entity Behavior Analytics</em>) basés sur le machine learning, permettant de détecter des anomalies comportementales que les règles statiques ne peuvent pas identifier : un compte administrateur se connectant à 3h du matin depuis une IP étrangère, ou un transfert de données anormalement volumineux vers un stockage cloud externe. Ces systèmes réduisent drastiquement les faux positifs — jusqu'à 60% selon les benchmarks Gartner 2024 — et permettent la corrélation en temps réel de milliers d'événements pour identifier des APT (<em>Advanced Persistent Threats</em>) dont la furtivité repose précisément sur l'étalement de l'attaque dans le temps.</span>
+        <span data-lang="en" style="display:none">AI integration in detection tools represents the most significant transformation of this period. Next-gen SIEMs now include machine learning-based <strong>UEBA</strong> (<em>User and Entity Behavior Analytics</em>) modules, detecting behavioral anomalies that static rules cannot identify: an admin account connecting at 3am from a foreign IP, or abnormally large data transfers to external cloud storage. These systems drastically reduce false positives — up to 60% according to 2024 Gartner benchmarks — and enable real-time correlation of thousands of events to identify APTs whose stealth relies on spreading the attack over time.</span>
+        <span data-lang="ja" style="display:none">AIの検知ツールへの統合はこの期間で最も重要な変革である。次世代SIEMにはMLベースの<strong>UEBA</strong>モジュールが搭載され、静的ルールでは検出不能な行動異常を検知できる。誤検知を最大60%（Gartner 2024比）削減し、時間をかけて潜伏するAPTをリアルタイムで相関検出する。</span>
+      </p>
+
+      <div class="article-impact">
+        <strong><span data-lang="fr" style="display: inline;">Lien avec mon bot de veille</span><span data-lang="en" style="display:none">Link to my monitoring bot</span><span data-lang="ja" style="display:none">監視ボットとの関連</span></strong><br>
+        <span data-lang="fr" style="display: inline;">Mon bot Discord de veille cybersécurité (Python + PostgreSQL + systemd) est une mise en pratique directe de ce principe de corrélation automatisée : il aggrège les flux CVE, CERT-FR et ANSSI pour redistribuer les alertes critiques en temps réel, reproduisant à petite échelle la logique d'un SIEM allégé.</span>
+        <span data-lang="en" style="display:none">My Discord cybersecurity monitoring bot (Python + PostgreSQL + systemd) directly implements this automated correlation principle: it aggregates CVE, CERT-FR and ANSSI feeds to redistribute critical alerts in real-time, reproducing at a smaller scale the logic of a lightweight SIEM.</span>
+        <span data-lang="ja" style="display:none">私のDiscordサイバーセキュリティ監視ボット（Python + PostgreSQL + systemd）はこの自動相関原則を直接実装している：CVE、CERT-FR、ANSSIフィードを集約してリアルタイムで重要アラートを再配信し、軽量SIEMのロジックを小規模で再現する。</span>
+      </div>
+
+      <h3><span data-lang="fr" style="display: inline;">04 — Chiffrement et gestion des endpoints : le cas BitLocker / Intune</span><span data-lang="en" style="display:none">04 — Encryption & endpoint management: the BitLocker / Intune case</span><span data-lang="ja" style="display:none">04 — 暗号化とエンドポイント管理：BitLocker / Intuneの事例</span></h3>
+
+      <p>
+        <span data-lang="fr" style="display: inline;">La migration des solutions de chiffrement full-disk vers des outils natifs Microsoft — illustrée par la migration <strong>Trellix → BitLocker</strong> que j'ai conduite chez EnerSys — reflète une tendance de fond : la consolidation des stacks de sécurité autour des écosystèmes existants (Microsoft 365 / Intune). BitLocker, géré via <strong>Microsoft Intune</strong>, offre une surface d'administration centralisée avec des politiques de rotation de clés automatisées, mais présente des limites sur les environnements non-Microsoft. La dépendance au TPM et l'absence de visibilité sur les clés de récupération mal gérées constituent des risques réels que j'ai documentés dans mes procédures techniques.</span>
+        <span data-lang="en" style="display:none">The migration from full-disk encryption solutions to native Microsoft tools — illustrated by the <strong>Trellix → BitLocker</strong> migration I conducted at EnerSys — reflects a fundamental trend: consolidating security stacks around existing ecosystems (Microsoft 365 / Intune). BitLocker, managed via <strong>Microsoft Intune</strong>, offers centralized administration with automated key rotation policies, but has limitations in non-Microsoft environments. TPM dependency and poor recovery key management visibility represent real risks I documented in my technical procedures.</span>
+        <span data-lang="ja" style="display:none">フルディスク暗号化ソリューションのMicrosoftネイティブツールへの移行——EnerSysで実施した<strong>Trellix → BitLocker</strong>移行が典型例——は、セキュリティスタックをMicrosoft 365 / Intuneに集約するトレンドを反映している。TPM依存性と回復キー管理の可視性欠如は技術文書に記録した実際のリスクである。</span>
+      </p>
+
+      <h3><span data-lang="fr" style="display: inline;">05 — Perspectives 2025–2026 : CTF, pentest & menaces émergentes</span><span data-lang="en" style="display:none">05 — Outlook 2025–2026: CTF, pentest & emerging threats</span><span data-lang="ja" style="display:none">05 — 展望2025–2026：CTF、ペンテスト、新興脅威</span></h3>
+
+      <p>
+        <span data-lang="fr" style="display: inline;">Ma participation au CTF <strong>Root-Me PRO Inter-Éducation</strong> avec l'équipe FSociety (3ème rang national) a constitué un laboratoire vivant de veille offensive. Les challenges abordés — exploitation de binaires, injection SQL avancée, reverse engineering, pivoting réseau — correspondent exactement aux techniques que les acteurs malveillants industrialisent en 2025. L'émergence des <strong>LLM offensifs</strong> (grands modèles de langage utilisés pour automatiser la rédaction de phishing ciblé, la génération de variantes de malwares ou le fuzzing de code) constitue la menace émergente la plus préoccupante pour les prochaines années, documentée dans les derniers rapports ENISA et Mandiant.</span>
+        <span data-lang="en" style="display:none">My participation in the <strong>Root-Me PRO Inter-Education</strong> CTF with team FSociety (3rd nationally) served as a live offensive intelligence laboratory. The challenges tackled — binary exploitation, advanced SQL injection, reverse engineering, network pivoting — match exactly what malicious actors are industrializing in 2025. The emergence of <strong>offensive LLMs</strong> (large language models used to automate targeted phishing, malware variant generation, or code fuzzing) constitutes the most concerning emerging threat for coming years, documented in the latest ENISA and Mandiant reports.</span>
+        <span data-lang="ja" style="display:none">FSocietyチームでの<strong>Root-Me PRO Inter-Education</strong> CTF（全国3位）は、攻撃的インテリジェンスの実践ラボとなった。バイナリ攻撃、高度SQLインジェクション、リバースエンジニアリング、ネットワークピボットは、2025年に悪意あるアクターが産業化している技術と一致する。<strong>攻撃的LLM</strong>の台頭（標的型フィッシング自動化、マルウェア変種生成、コードファジング）が今後最も懸念される新興脅威であり、最新のENISAおよびMandiantレポートに記録されている。</span>
+      </p>
+
+    </div>
+
+    <div class="article-tags">
+      <span>CVE-2021-3156</span>
+      <span>Sudo · Linux</span>
+      <span>VLAN 802.1q</span>
+      <span>Zero Trust</span>
+      <span>UEBA · SIEM</span>
+      <span>APT</span>
+      <span>BitLocker · Intune</span>
+      <span>CTF · Root-Me</span>
+      <span>CERT-FR · ANSSI</span>
+      <span>LLM Offensif</span>
+    </div>
+  </div>
+
+  <!-- Sources RSS -->
+  <div class="rss-head">🇫🇷 <span data-lang="fr" style="display: inline;">Sources françaises</span><span data-lang="en" style="display:none">French sources</span><span data-lang="ja" style="display:none">フランス語ソース</span></div>
+  <div class="rss-g">
+    <a href="https://www.cert.ssi.gouv.fr/" target="_blank" class="rss-a"><span class="rss-lbl">OFFICIEL</span>🛡️ CERT-FR</a>
+    <a href="https://www.anssi.gouv.fr/" target="_blank" class="rss-a"><span class="rss-lbl">OFFICIEL</span>🏛️ ANSSI</a>
+    <a href="https://www.lemondeinformatique.fr/" target="_blank" class="rss-a"><span class="rss-lbl">PRESSE</span>📰 Le Monde Info</a>
+    <a href="https://www.zataz.com/" target="_blank" class="rss-a"><span class="rss-lbl">CYBER</span>🔴 ZATAZ</a>
+    <a href="https://www.lemagit.fr/" target="_blank" class="rss-a"><span class="rss-lbl">TECH</span>📡 LeMagIT</a>
+  </div>
+  <div class="rss-head">🇬🇧 <span data-lang="fr" style="display: inline;">Sources anglaises</span><span data-lang="en" style="display:none">English sources</span><span data-lang="ja" style="display:none">英語ソース</span></div>
+  <div class="rss-g">
+    <a href="https://thehackernews.com/" target="_blank" class="rss-a"><span class="rss-lbl">NEWS</span>💻 The Hacker News</a>
+    <a href="https://www.bleepingcomputer.com/" target="_blank" class="rss-a"><span class="rss-lbl">NEWS</span>🖥️ BleepingComputer</a>
+    <a href="https://krebsonsecurity.com/" target="_blank" class="rss-a"><span class="rss-lbl">BLOG</span>🔍 Krebs on Security</a>
+    <a href="https://attack.mitre.org/" target="_blank" class="rss-a"><span class="rss-lbl">FRAMEWORK</span>⚔️ MITRE ATT&amp;CK</a>
+    <a href="https://www.root-me.org/" target="_blank" class="rss-a"><span class="rss-lbl">CTF</span>🏆 Root-Me</a>
+    <a href="https://nvd.nist.gov/" target="_blank" class="rss-a"><span class="rss-lbl">CVE</span>📋 NVD NIST</a>
+  </div>
+  <div class="rss-head">🇯🇵 <span data-lang="fr" style="display: inline;">Sources japonaises</span><span data-lang="en" style="display:none">Japanese sources</span><span data-lang="ja" style="display:none">日本語ソース</span></div>
+  <div class="rss-g">
+    <a href="https://www.ipa.go.jp/security/" target="_blank" class="rss-a"><span class="rss-lbl">OFFICIEL</span>🏛️ IPA セキュリティ</a>
+    <a href="https://www.jpcert.or.jp/" target="_blank" class="rss-a"><span class="rss-lbl">CERT</span>🛡️ JPCERT/CC</a>
+    <a href="https://forest.watch.impress.co.jp/" target="_blank" class="rss-a"><span class="rss-lbl">TECH</span>🌲 窓の杜</a>
+  </div>
+</section>
+<hr class="div">
+
+<!-- ════════════════════════════════════════
+     09 — CONTACT
+════════════════════════════════════════ -->
+<section id="contact">
+  <div class="s-num">// 09</div>
+  <h2 class="s-title">Contact</h2>
+  <div class="contact-grid">
+    <div>
+      <a href="/cdn-cgi/l/email-protection#c6b4a9a4afa8a7e8afaca7bc86a3bea7abb6aaa3e8a5a9ab" class="ci-item">
+        <div class="ci-icon"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"></path></svg></div>
+        <div><div class="ci-lbl">EMAIL</div><div class="ci-val"><span class="__cf_email__" data-cfemail="2a58454843444b0443404b506a4f524b475a464f04494547">[email&#160;protected]</span></div></div>
+      </a>
+      <a href="https://www.linkedin.com/in/robina-ijaz" target="_blank" class="ci-item">
+        <div class="ci-icon"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path></svg></div>
+        <div><div class="ci-lbl">LINKEDIN</div><div class="ci-val">linkedin.com/in/robina-ijaz</div></div>
+      </a>
+      <a href="https://github.com/RengokuChan" target="_blank" class="ci-item">
+        <div class="ci-icon"><svg viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"></path></svg></div>
+        <div><div class="ci-lbl">GITHUB</div><div class="ci-val">github.com/RengokuChan</div></div>
+      </a>
+      <a href="https://www.root-me.org/Robibi0809?lang=fr" target="_blank" class="ci-item">
+        <div class="ci-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" style="fill:none;stroke:var(--red);stroke-width:2;stroke-linecap:round"></path></svg></div>
+        <div><div class="ci-lbl">ROOT-ME</div><div class="ci-val">root-me.org · Robibi0809</div></div>
+      </a>
+    </div>
+    <div class="form-box">
+      <label class="flbl"><span data-lang="fr" style="display: inline;">Votre nom</span><span data-lang="en" style="display:none">Your name</span><span data-lang="ja" style="display:none">お名前</span></label>
+      <input class="finp" id="fn" type="text">
+      <label class="flbl">Email</label>
+      <input class="finp" id="fe" type="email">
+      <label class="flbl">Message</label>
+      <textarea class="ftxt" id="fm"></textarea>
+      <button class="fsbmt" onclick="sendMsg()">
+        ▸ <span data-lang="fr" style="display: inline;">Envoyer le message</span><span data-lang="en" style="display:none">Send message</span><span data-lang="ja" style="display:none">送信する</span>
+      </button>
+      <div id="form-ok">✓ <span data-lang="fr" style="display: inline;">Message envoyé — je vous réponds rapidement.</span><span data-lang="en" style="display:none">Message sent — I'll reply shortly.</span><span data-lang="ja" style="display:none">送信完了 — できるだけ早く返信します。</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="fc-title"><span data-lang="fr" style="display: inline;">PLAN DU SITE</span><span data-lang="en" style="display:none">SITE MAP</span><span data-lang="ja" style="display:none">サイトマップ</span></div>
+      <ul class="footer-links">
+        <li><a href="file:///C:/Users/robin/Downloads/Robina_Ijaz_Portfolio_V5_FINAL.html#accueil"><span data-lang="fr" style="display: inline;">Accueil</span><span data-lang="en" style="display:none">Home</span><span data-lang="ja" style="display:none">ホーム</span></a></li>
+        <li><a href="file:///C:/Users/robin/Downloads/Robina_Ijaz_Portfolio_V5_FINAL.html#apropos"><span data-lang="fr" style="display: inline;">À propos</span><span data-lang="en" style="display:none">About</span><span data-lang="ja" style="display:none">自己紹介</span></a></li>
+        <li><a href="file:///C:/Users/robin/Downloads/Robina_Ijaz_Portfolio_V5_FINAL.html#certifications"><span data-lang="fr" style="display: inline;">Certifications</span><span data-lang="en" style="display:none">Certifications</span><span data-lang="ja" style="display:none">資格</span></a></li>
+        <li><a href="file:///C:/Users/robin/Downloads/Robina_Ijaz_Portfolio_V5_FINAL.html#projets"><span data-lang="fr" style="display: inline;">Projets</span><span data-lang="en" style="display:none">Projects</span><span data-lang="ja" style="display:none">プロジェクト</span></a></li>
+        <li><a href="file:///C:/Users/robin/Downloads/Robina_Ijaz_Portfolio_V5_FINAL.html#stages"><span data-lang="fr" style="display: inline;">Stages</span><span data-lang="en" style="display:none">Internships</span><span data-lang="ja" style="display:none">実習</span></a></li>
+        <li><a href="file:///C:/Users/robin/Downloads/Robina_Ijaz_Portfolio_V5_FINAL.html#veille"><span data-lang="fr" style="display: inline;">Veille</span><span data-lang="en" style="display:none">Watch</span><span data-lang="ja" style="display:none">技術調査</span></a></li>
+        <li><a href="file:///C:/Users/robin/Downloads/Robina_Ijaz_Portfolio_V5_FINAL.html#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="fc-title">LÉGAL</div>
+      <ul class="footer-links">
+        <li><a onclick="openM(&#39;cgu&#39;)">CGU</a></li>
+        <li><a onclick="openM(&#39;mentions&#39;)"><span data-lang="fr" style="display: inline;">Mentions légales</span><span data-lang="en" style="display:none">Legal Notice</span><span data-lang="ja" style="display:none">法的通知</span></a></li>
+        <li><a onclick="openM(&#39;privacy&#39;)"><span data-lang="fr" style="display: inline;">Confidentialité</span><span data-lang="en" style="display:none">Privacy</span><span data-lang="ja" style="display:none">プライバシー</span></a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="fc-title">ROBINA IJAZ</div>
+      <p style="font-family:var(--mono);font-size:.68rem;color:var(--grey-l);line-height:1.9">
+        BTS SIO SISR<br>
+        Lycée André Malraux · Béthune<br>
+        Bruay-la-Buissière · 62400<br>
+        Hauts-de-France, France
+      </p>
+    </div>
+  </div>
+  <div class="footer-btm">© 2026 Robina Ijaz — BTS SIO SISR — <span>Built with ❤️ &amp; ☕</span></div>
+</footer>
+
+<button id="back-btn" onclick="window.scrollTo({top:0,behavior:&#39;smooth&#39;})" class="">↑</button>
+
+<!-- ════════════════════════════════════════
+     MODALS
+════════════════════════════════════════ -->
+
+<!-- CV MODAL -->
+<div class="m-ov" id="m-cv">
+  <div class="m-box">
+    <div class="m-bar"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+      <div class="m-ttl">CV — ROBINA IJAZ</div>
+      <button class="m-close" onclick="closeM(&#39;cv&#39;)">✕ FERMER</button></div>
+    <div class="m-body">
+      <p class="m-intro"><span data-lang="fr" style="display: inline;">Placez votre fichier CV.pdf dans le même dossier que le portfolio et remplacez ce bloc par un iframe. Exemple : &lt;iframe src="CV.pdf" width="100%" height="600"&gt;&lt;/iframe&gt;</span><span data-lang="en" style="display:none">Place your CV.pdf in the same folder as the portfolio and replace this block with an iframe.</span><span data-lang="ja" style="display:none">CV.pdfを同じフォルダに置き、iframeで埋め込んでください。</span></p>
+      <div style="background:rgba(224,0,26,.05);border:1px dashed var(--red-dim);height:480px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:.68rem;color:var(--grey);">
+        [ CV_EMBED_PLACEHOLDER — remplacer par &lt;iframe src="CV.pdf"&gt; ]
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STAGE MODAL -->
+<div class="m-ov" id="m-stage">
+  <div class="m-box">
+    <div class="m-bar"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+      <div class="m-ttl">ENERSYS_STAGES.LOG — MISSIONS COMPLÈTES</div>
+      <button class="m-close" onclick="closeM(&#39;stage&#39;)">✕ FERMER</button></div>
+    <div class="m-body">
+      <h3>PRÉSENTATION — ENERSYS SARL ARRAS</h3>
+      <p class="m-intro"><span data-lang="fr" style="display: inline;">Durant mes stages chez EnerSys à Arras (26 mai–28 juin 2025 &amp; janv.–fév. 2026), j'ai intégré l'équipe IT pour participer à la gestion de l'infrastructure informatique dans un environnement industriel exigeant.</span><span data-lang="en" style="display:none">During my internships at EnerSys in Arras (May 26–June 28, 2025 &amp; Jan.–Feb. 2026), I joined the IT team in a demanding industrial environment.</span><span data-lang="ja" style="display:none">EnerSys（アラス）でのインターン（2025年5月26日〜6月28日 &amp; 2026年1月〜2月）でITチームに参加。</span></p>
+      <h3><span data-lang="fr" style="display: inline;">MISSIONS RÉALISÉES</span><span data-lang="en" style="display:none">COMPLETED MISSIONS</span><span data-lang="ja" style="display:none">実施した任務</span></h3>
+      <ul class="m-ul">
+        <li><span data-lang="fr" style="display: inline;">Vague de renouvellement de PC (MDT) — Déploiement Dell Precision, config logicielle/matérielle</span><span data-lang="en" style="display:none">PC Renewal Wave (MDT) — Dell Precision deployment, software/hardware config</span><span data-lang="ja" style="display:none">PC更新（MDT） — Dell Precision展開</span></li>
+        <li><span data-lang="fr" style="display: inline;">Préparation PC Heydo! — Configuration postes de travail</span><span data-lang="en" style="display:none">PC prep Heydo! — Workstation configuration</span><span data-lang="ja" style="display:none">Heydo! PC準備</span></li>
+        <li><span data-lang="fr" style="display: inline;">Transfert de données (mappage réseau) — migration données utilisateurs</span><span data-lang="en" style="display:none">Data transfer (network mapping) — user data migration</span><span data-lang="ja" style="display:none">データ転送（ネットワークマッピング）</span></li>
+        <li><span data-lang="fr" style="display: inline;">Support N1/N2 (TeamViewer, ManageEngine) — assistance à distance, gestion tickets</span><span data-lang="en" style="display:none">L1/L2 support (TeamViewer, ManageEngine) — remote assistance, ticket management</span><span data-lang="ja" style="display:none">L1/L2サポート（TeamViewer、ManageEngine）</span></li>
+        <li><span data-lang="fr" style="display: inline;">Cisco Meraki — administration cloud, vérification branchements, ajout prises physiques</span><span data-lang="en" style="display:none">Cisco Meraki — cloud admin, connection checks, adding physical ports</span><span data-lang="ja" style="display:none">Cisco Meraki — クラウド管理、接続確認、物理ポート追加</span></li>
+        <li><span data-lang="fr" style="display: inline;">VMware vSphere — découverte hyperviseur, snapshots, environnement virtualisé</span><span data-lang="en" style="display:none">VMware vSphere — hypervisor discovery, snapshots, virtual environment</span><span data-lang="ja" style="display:none">VMware vSphere — スナップショット、仮想環境</span></li>
+        <li><span data-lang="fr" style="display: inline;">Veeam Backup — gestion jobs backup, restauration fichiers (Backup Browser)</span><span data-lang="en" style="display:none">Veeam Backup — backup job management, file restore (Backup Browser)</span><span data-lang="ja" style="display:none">Veeam Backup — バックアップジョブ管理、ファイル復元</span></li>
+        <li><span data-lang="fr" style="display: inline;">Gestion accès serveurs RDP + sécurisation LAPS</span><span data-lang="en" style="display:none">Server access via RDP + LAPS security</span><span data-lang="ja" style="display:none">RDPサーバーアクセス + LAPSセキュリティ</span></li>
+        <li><span data-lang="fr" style="display: inline;">Rédaction documentations techniques — salles de réunion, procédures utilisateurs</span><span data-lang="en" style="display:none">Technical documentation — meeting rooms, user procedures</span><span data-lang="ja" style="display:none">技術文書作成 — 会議室、ユーザー手順</span></li>
+        <li><span data-lang="fr" style="display: inline;">Création comptes AD, affectation GPO, accueil nouveaux arrivants (New Hire)</span><span data-lang="en" style="display:none">AD account creation, GPO assignment, new hire onboarding</span><span data-lang="ja" style="display:none">ADアカウント作成、GPO割り当て、新入社員オンボーディング</span></li>
+        <li><span data-lang="fr" style="display: inline;">CEO Town Hall — suivi déploiement vidéoconférence mondiale, coordination technique live</span><span data-lang="en" style="display:none">CEO Town Hall — global videoconference deployment tracking, live technical coordination</span><span data-lang="ja" style="display:none">CEO Town Hall — グローバルビデオ会議展開追跡、ライブ技術調整</span></li>
+        <li><span data-lang="fr" style="display: inline;">Migration Trellix → BitLocker — déchiffrement, BitLocker, vérification Microsoft Intune</span><span data-lang="en" style="display:none">Trellix → BitLocker migration — decryption, BitLocker setup, Microsoft Intune verification</span><span data-lang="ja" style="display:none">Trellix → BitLocker移行 — 復号、BitLockerセットアップ、Microsoft Intune確認</span></li>
+        <li><span data-lang="fr" style="display: inline;">Ajout branche PRTG avec sensors réseau adaptés</span><span data-lang="en" style="display:none">Adding PRTG branch with appropriate network sensors</span><span data-lang="ja" style="display:none">適切なネットワークセンサーでPRTGブランチを追加</span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- LEGAL MODALS -->
+<div class="m-ov" id="m-cgu"><div class="m-box"><div class="m-bar"><div class="m-ttl">CGU</div><button class="m-close" onclick="closeM(&#39;cgu&#39;)">✕</button></div><div class="m-body"><p style="font-family:var(--mono);font-size:.74rem;color:var(--grey-l)">Portfolio personnel académique — BTS SIO SISR. Usage libre. Reproduction interdite sans autorisation.</p></div></div></div>
+<div class="m-ov" id="m-mentions"><div class="m-box"><div class="m-bar"><div class="m-ttl">MENTIONS LÉGALES</div><button class="m-close" onclick="closeM(&#39;mentions&#39;)">✕</button></div><div class="m-body"><p style="font-family:var(--mono);font-size:.74rem;color:var(--grey-l)"><span style="color:var(--red)">Responsable :</span> Robina Ijaz<br><br><span style="color:var(--red)">Hébergement :</span> GitHub Pages</p></div></div></div>
+<div class="m-ov" id="m-privacy"><div class="m-box"><div class="m-bar"><div class="m-ttl">CONFIDENTIALITÉ</div><button class="m-close" onclick="closeM(&#39;privacy&#39;)">✕</button></div><div class="m-body"><p style="font-family:var(--mono);font-size:.74rem;color:var(--grey-l)">Aucune donnée collectée. Formulaire de démonstration. Pas de cookies de traçage. Conforme RGPD.</p></div></div></div>
+
+<!-- ════════════════════════════════════════
+     SCRIPTS
+════════════════════════════════════════ -->
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+/* ── BOOT ── */
+(function(){
+  var b=document.getElementById('boot');
+  function dismiss(){ b.classList.add('out'); setTimeout(function(){ b.style.display='none'; },520); }
+  setTimeout(dismiss, 3600);
+  b.addEventListener('click', dismiss);
+})();
+
+/* ── LANG ── */
+var lang='fr';
+function setLang(l){
+  lang=l;
+  // data-lang elements
+  document.querySelectorAll('[data-lang]').forEach(function(el){
+    var show = el.getAttribute('data-lang')===l;
+    var tag  = el.tagName.toLowerCase();
+    el.style.display = show ? ((tag==='span'||tag==='a') ? 'inline' : 'block') : 'none';
+  });
+  // nav links
+  ['fr','en','ja'].forEach(function(lng){
+    document.querySelectorAll('.nl-'+lng).forEach(function(a){
+      a.style.display = (lng===l) ? 'block' : 'none';
+    });
+  });
+  // lang buttons
+  document.querySelectorAll('.lb').forEach(function(btn){
+    var t=btn.textContent.trim();
+    var match=(l==='fr'&&t==='FR')||(l==='en'&&t==='EN')||(l==='ja'&&t==='日');
+    btn.classList.toggle('act', match);
+  });
+  document.documentElement.lang=l;
+}
+setLang('fr');
+
+/* ── ACTIVE NAV ── */
+var backBtn=document.getElementById('back-btn');
+window.addEventListener('scroll', function(){
+  var cur='';
+  document.querySelectorAll('section[id]').forEach(function(s){
+    if(window.scrollY >= s.offsetTop-80) cur=s.id;
+  });
+  document.querySelectorAll('.nav-links a').forEach(function(a){
+    a.classList.toggle('act', a.getAttribute('href')==='#'+cur);
+  });
+  backBtn.classList.toggle('vis', window.scrollY>500);
+});
+
+/* ── MODALS ── */
+function openM(id){ var el=document.getElementById('m-'+id); if(el) el.classList.add('open'); }
+function closeM(id){ var el=document.getElementById('m-'+id); if(el) el.classList.remove('open'); }
+document.querySelectorAll('.m-ov').forEach(function(ov){
+  ov.addEventListener('click', function(e){ if(e.target===this) this.classList.remove('open'); });
+});
+
+/* ── CONTACT FORM ── */
+function sendMsg(){
+  var n=document.getElementById('fn').value;
+  var e=document.getElementById('fe').value;
+  var m=document.getElementById('fm').value;
+  if(n&&e&&m){
+    var ok=document.getElementById('form-ok');
+    ok.style.display='block';
+    setTimeout(function(){ ok.style.display='none'; }, 5000);
+  }
+}
+
+/* ── GLITCH ── */
+var hn=document.querySelector('h1.hero-name');
+if(hn){
+  setInterval(function(){
+    if(Math.random()>.96){
+      hn.style.transform='skew('+(Math.random()-.5)*1.4+'deg)';
+      setTimeout(function(){ hn.style.transform=''; }, 65);
+    }
+  }, 250);
+}
+
+/* ── CURSOR TRAIL ── */
+(function(){
+  var cv=document.getElementById('trail');
+  var cx=cv.getContext('2d');
+  function resize(){ cv.width=window.innerWidth; cv.height=window.innerHeight; }
+  resize(); window.addEventListener('resize', resize);
+  var pts=[];
+  var colors=['224,0,26','0,240,216','197,0,255'];
+  window.addEventListener('mousemove', function(e){
+    pts.push({x:e.clientX, y:e.clientY, a:1, c:colors[Math.floor(Math.random()*colors.length)]});
+    if(pts.length>70) pts.shift();
+  });
+  (function loop(){
+    cx.clearRect(0,0,cv.width,cv.height);
+    pts=pts.
