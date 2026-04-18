@@ -1,610 +1,1466 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robina Ijaz — Portfolio BTS SIO SISR</title>
-<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="./Robina Ijaz — Portfolio BTS SIO SISR_files/css2" rel="stylesheet">
 <style>
-:root{--bg:#030508;--bg2:#070c12;--red:#e0001a;--red-dim:#7a0010;--red-glow:rgba(224,0,26,0.35);--cyan:#00ffe5;--cyan-dim:#005c54;--cyan-glow:rgba(0,255,229,0.2);--white:#e8eaf0;--grey:#4a5568;--mono:'Share Tech Mono',monospace;--display:'Orbitron',monospace;--body:'Rajdhani',sans-serif;}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
-body{background:var(--bg);color:var(--white);font-family:var(--body);font-size:16px;line-height:1.6;overflow-x:hidden;cursor:crosshair;}
+/* ════════════════════════════════════════
+   ROOT & RESET
+════════════════════════════════════════ */
+:root {
+  --bg:        #030508;
+  --bg2:       #060a0f;
+  --bg3:       #0a0e15;
+  --red:       #e0001a;
+  --red2:      #ff1533;
+  --red-dim:   #6b0012;
+  --red-glow:  rgba(224,0,26,0.4);
+  --red-soft:  rgba(224,0,26,0.12);
+  --cyan:      #00f0d8;
+  --cyan-dim:  #004840;
+  --cyan-glow: rgba(0,240,216,0.18);
+  --mag:       #c500ff;
+  --mag-glow:  rgba(197,0,255,0.15);
+  --white:     #eef0f8;
+  --grey:      #586878;
+  --grey-l:    #8fa0b8;
+  --mono: 'Share Tech Mono', monospace;
+  --disp: 'Orbitron', monospace;
+  --body: 'Rajdhani', sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  cursor: crosshair;
+}
 
-/* BOOT */
-#boot-screen{position:fixed;inset:0;background:#000;z-index:10000;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:4rem 6rem;font-family:var(--mono);font-size:0.85rem;color:#fff;overflow:hidden;}
-#boot-screen::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(255,0,0,0.03) 2px,rgba(255,0,0,0.03) 4px);pointer-events:none;}
-.boot-logo{font-family:var(--display);font-size:2.5rem;font-weight:900;color:var(--red);text-shadow:0 0 30px var(--red-glow);letter-spacing:4px;margin-bottom:1rem;}
-.boot-bar-wrap{width:100%;height:3px;background:rgba(255,255,255,0.1);margin:1rem 0;border-radius:2px;overflow:hidden;}
-.boot-bar-inner{height:100%;background:linear-gradient(90deg,var(--red),var(--cyan));width:0;animation:growBar 1.5s ease forwards;}
-@keyframes growBar{to{width:100%;}}
-.boot-line{color:#fff;margin:2px 0;opacity:0;animation:showLine 0.2s forwards;}
-.boot-line.red{color:var(--red);}
-.boot-line.cyan{color:var(--cyan);}
-.boot-line.dim{color:#555;}
-.boot-line.green{color:#00ff88;}
-@keyframes showLine{to{opacity:1;}}
-#boot-screen.fade-out{animation:fadeOut 0.6s forwards;pointer-events:none;}
-@keyframes fadeOut{to{opacity:0;}}
+/* ════════════════════════════════════════
+   BACKGROUND LAYERS
+════════════════════════════════════════ */
+#bg-grid {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(0,240,216,0.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,240,216,0.022) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+#bg-scan {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg, transparent, transparent 3px,
+    rgba(0,0,0,0.07) 3px, rgba(0,0,0,0.07) 4px
+  );
+  animation: bgScan 12s linear infinite;
+}
+@keyframes bgScan { to { background-position: 0 200px; } }
+#bg-vignette {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background: radial-gradient(ellipse at 50% 40%, transparent 35%, rgba(0,0,0,0.75) 100%);
+}
+#bg-corner-tl, #bg-corner-br {
+  position: fixed; z-index: 0; pointer-events: none;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(224,0,26,0.06) 0%, transparent 70%);
+}
+#bg-corner-tl { top: -100px; left: -100px; }
+#bg-corner-br { bottom: -100px; right: -100px; background: radial-gradient(circle, rgba(0,240,216,0.05) 0%, transparent 70%); }
 
-/* BG EFFECTS */
-body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,255,229,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,229,0.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;}
-body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,0.08) 3px,rgba(0,0,0,0.08) 4px);pointer-events:none;z-index:1;animation:scanMove 8s linear infinite;}
-@keyframes scanMove{to{background-position:0 100px;}}
+/* ════════════════════════════════════════
+   BOOT SCREEN
+════════════════════════════════════════ */
+#boot {
+  position: fixed; inset: 0; z-index: 10000;
+  background: #000;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: flex-start;
+  padding: 5rem 7rem;
+  font-family: var(--mono); font-size: 0.8rem; color: #fff;
+  overflow: hidden;
+}
+#boot::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,0,0,0.02) 2px, rgba(255,0,0,0.02) 4px);
+  pointer-events: none;
+}
+#boot::after {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--red), var(--cyan), var(--mag));
+  animation: bootLine 2.8s ease forwards;
+}
+@keyframes bootLine { from { width: 0; } to { width: 100%; } }
+.b-logo {
+  font-family: var(--disp); font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 900; letter-spacing: 6px; line-height: 1;
+  background: linear-gradient(135deg, var(--red) 0%, var(--mag) 60%, var(--cyan) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  margin-bottom: 0.4rem;
+}
+.b-sub { font-family: var(--mono); font-size: 0.65rem; color: var(--cyan); letter-spacing: 5px; margin-bottom: 2rem; }
+.b-bar { width: min(500px, 80vw); height: 2px; background: rgba(255,255,255,0.07); margin: 1rem 0; position: relative; overflow: hidden; }
+.b-fill {
+  position: absolute; height: 100%;
+  background: linear-gradient(90deg, var(--red), var(--cyan), var(--mag));
+  width: 0; animation: bFill 2.4s cubic-bezier(.4,0,.2,1) .3s forwards;
+}
+@keyframes bFill { to { width: 100%; } }
+.b-line { margin: 3px 0; opacity: 0; font-size: 0.75rem; color: rgba(255,255,255,0.65); }
+.b-line.ok  { color: #22ff88; }
+.b-line.err { color: var(--red); }
+.b-line.inf { color: var(--cyan); }
+.b-line:nth-child(4)  { animation: bShow .08s .40s forwards; }
+.b-line:nth-child(5)  { animation: bShow .08s .65s forwards; }
+.b-line:nth-child(6)  { animation: bShow .08s .90s forwards; }
+.b-line:nth-child(7)  { animation: bShow .08s 1.15s forwards; }
+.b-line:nth-child(8)  { animation: bShow .08s 1.40s forwards; }
+.b-line:nth-child(9)  { animation: bShow .08s 1.65s forwards; }
+.b-line:nth-child(10) { animation: bShow .08s 1.90s forwards; }
+.b-line:nth-child(11) { animation: bShow .08s 2.15s forwards; }
+@keyframes bShow { to { opacity: 1; } }
 
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(3,5,8,0.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--red-dim);padding:0 1.5rem;height:52px;display:flex;align-items:center;justify-content:space-between;}
-.nav-prompt{font-family:var(--mono);font-size:0.82rem;color:#fff;white-space:nowrap;flex-shrink:0;}
-.nav-prompt .pu{color:var(--red);font-weight:bold;}
-.nav-links{display:flex;align-items:center;flex:1;justify-content:center;}
-.nav-links a{font-family:var(--mono);font-size:0.74rem;color:#fff;text-decoration:none;padding:5px 10px;transition:all 0.2s;white-space:nowrap;}
-.nav-links a:hover,.nav-links a.nav-active{background:var(--red);color:#fff;}
-.nav-right{display:flex;align-items:center;gap:10px;flex-shrink:0;}
-.nav-status{font-family:var(--mono);font-size:0.62rem;color:#fff;text-align:right;line-height:1.5;}
-.nav-status .sa{color:var(--red);font-weight:bold;}
-.nav-status .ss{color:#555;font-size:0.57rem;}
-.lang-switcher{display:flex;gap:4px;}
-.lang-btn{font-family:var(--mono);font-size:0.64rem;cursor:pointer;padding:3px 9px;border:1px solid #444;background:transparent;color:#fff;transition:all 0.2s;}
-.lang-btn.active,.lang-btn:hover{border-color:var(--red);background:var(--red);color:#fff;}
+/* CORRECTION : AJOUT DES ANIMATIONS DE SORTIE */
+@keyframes bootOut { 
+  from { opacity: 1; transform: scale(1); }
+  to { opacity: 0; transform: scale(1.05); visibility: hidden; }
+}
+#boot.out {
+  animation: bootOut 0.6s cubic-bezier(.4,0,.2,1) forwards;
+  pointer-events: none;
+}
+
+/* ════════════════════════════════════════
+   CURSOR TRAIL CANVAS
+════════════════════════════════════════ */
+#trail { position: fixed; top: 0; left: 0; z-index: 9990; pointer-events: none; opacity: 0.28; }
+
+/* ════════════════════════════════════════
+   NAV
+════════════════════════════════════════ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  height: 54px; background: rgba(3,5,8,0.97); backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(224,0,26,0.3);
+  display: flex; align-items: center; padding: 0 1.5rem; gap: 1rem;
+}
+.nav-id { font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; flex-shrink: 0; }
+.nav-id .u { color: var(--cyan); } .nav-id .h { color: var(--red); } .nav-id .s { color: var(--grey-l); }
+.nav-links { display: flex; list-style: none; gap: 0; flex: 1; justify-content: center; }
+.nav-links a {
+  font-family: var(--mono); font-size: 0.62rem; color: var(--grey-l);
+  text-decoration: none; padding: 5px 9px; white-space: nowrap;
+  transition: all .2s; letter-spacing: .5px;
+}
+.nav-links a:hover, .nav-links a.act { background: var(--red); color: #fff; }
+.nav-right { display: flex; gap: 5px; flex-shrink: 0; }
+.lb {
+  font-family: var(--mono); font-size: 0.58rem; cursor: pointer;
+  padding: 3px 8px; border: 1px solid #333; background: transparent;
+  color: var(--grey-l); transition: all .2s;
+}
+.lb.act, .lb:hover { border-color: var(--red); background: var(--red); color: #fff; }
 
 /* STATUS BAR */
-.nav-statusbar{position:fixed;top:52px;left:0;right:0;z-index:999;background:rgba(3,5,8,0.95);border-bottom:1px solid rgba(224,0,26,0.25);padding:4px 1.5rem;display:flex;gap:2.5rem;font-family:var(--mono);font-size:0.68rem;}
-.sb-key{color:var(--red);margin-right:4px;}
-.sb-val{color:#fff;}
+.statusbar {
+  position: fixed; top: 54px; left: 0; right: 0; z-index: 999;
+  background: rgba(3,5,8,0.96); border-bottom: 1px solid rgba(224,0,26,0.18);
+  padding: 4px 1.5rem; display: flex; gap: 2rem; flex-wrap: nowrap;
+  font-family: var(--mono); font-size: 0.6rem; overflow: hidden;
+}
+.sb-k { color: var(--red); margin-right: 4px; }
+.sb-v { color: var(--grey-l); }
+.blink { animation: blnk 1s step-end infinite; color: var(--cyan); }
+@keyframes blnk { 50% { opacity: 0; } }
 
-/* SECTIONS */
-section{position:relative;z-index:2;padding:100px 6rem 60px;}
-.section-label{font-family:var(--mono);font-size:0.65rem;color:var(--red);letter-spacing:4px;text-transform:uppercase;margin-bottom:0.5rem;}
-.section-title{font-family:var(--display);font-size:1.8rem;font-weight:700;color:var(--white);margin-bottom:2rem;border-left:3px solid var(--red);padding-left:1rem;}
-.section-divider{border:none;border-top:1px solid rgba(224,0,26,0.2);margin:0 6rem;}
+/* ════════════════════════════════════════
+   SECTIONS SHARED
+════════════════════════════════════════ */
+section { position: relative; z-index: 2; padding: 100px 5.5rem 70px; }
+.s-num { font-family: var(--mono); font-size: 0.58rem; color: var(--red); letter-spacing: 4px; margin-bottom: .4rem; }
+.s-title {
+  font-family: var(--disp); font-size: clamp(1.4rem, 2.5vw, 2rem);
+  font-weight: 900; color: var(--white); margin-bottom: 2.5rem;
+  position: relative; display: inline-block; padding-left: 1.2rem;
+}
+.s-title::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+  width: 3px; background: linear-gradient(180deg, var(--red), var(--mag));
+}
+.s-title::after {
+  content: ''; position: absolute; bottom: -8px; left: 0;
+  width: 50px; height: 1px; background: var(--red);
+}
+hr.div { border: none; border-top: 1px solid rgba(224,0,26,0.14); margin: 0 5.5rem; }
 
-/* HERO */
-#accueil{min-height:100vh;display:flex;flex-direction:column;justify-content:center;}
-.hero-inner{display:grid;grid-template-columns:1fr 300px;gap:4rem;align-items:center;max-width:1200px;}
-.hero-badge{font-family:var(--mono);font-size:0.7rem;color:var(--cyan);letter-spacing:3px;margin-bottom:1.5rem;}
-.hero-badge span{color:var(--red);}
-.hero-name{font-family:var(--display);font-size:clamp(2.5rem,5vw,4rem);font-weight:900;line-height:1;letter-spacing:2px;color:var(--white);margin-bottom:0.5rem;position:relative;animation:glitch 5s infinite;}
-.hero-name::before,.hero-name::after{content:attr(data-text);position:absolute;top:0;left:0;width:100%;height:100%;font-family:var(--display);font-size:inherit;font-weight:900;}
-.hero-name::before{color:var(--cyan);clip-path:inset(0 0 60% 0);transform:translateX(-3px);animation:glitch1 5s infinite;}
-.hero-name::after{color:var(--red);clip-path:inset(60% 0 0 0);transform:translateX(3px);animation:glitch2 5s infinite;}
-@keyframes glitch{0%,90%,100%{transform:none}91%{transform:skew(-0.5deg)}95%{transform:none}}
-@keyframes glitch1{0%,90%,100%{opacity:0}91%,93%{opacity:0.7}}
-@keyframes glitch2{0%,90%,100%{opacity:0}92%,94%{opacity:0.7}}
-.hero-tagline{font-family:var(--mono);font-size:0.9rem;color:var(--cyan);margin-bottom:1.5rem;letter-spacing:1px;}
-.hero-subtitle{font-size:1rem;color:#8a9ab5;max-width:560px;border-left:2px solid var(--red-dim);padding-left:1.2rem;font-family:var(--mono);line-height:1.8;margin-bottom:2rem;}
-.social-links{display:flex;gap:12px;margin-bottom:2rem;flex-wrap:wrap;}
-.social-btn{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:0.7rem;font-weight:700;text-decoration:none;padding:8px 18px;letter-spacing:2px;text-transform:uppercase;transition:all 0.25s;border:2px solid;}
-.social-btn:hover{transform:translateY(-2px);}
-.btn-linkedin{color:#fff;border-color:#0077b5;background:#0077b5;}
-.btn-github{color:#fff;border-color:#333;background:#161b22;}
-.btn-github:hover{border-color:#8b949e;}
-.btn-rootme{color:#fff;border-color:var(--red);background:var(--red);}
-.btn-rootme:hover{background:var(--red-dim);}
-.cv-btn{font-family:var(--mono);font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;padding:8px 20px;border:1px solid var(--cyan);color:var(--cyan);background:transparent;cursor:pointer;transition:all 0.2s;display:inline-flex;align-items:center;gap:8px;}
-.cv-btn:hover{background:var(--cyan-glow);box-shadow:0 0 20px var(--cyan-glow);}
-.hero-avatar{width:280px;height:280px;border:2px solid var(--red);position:relative;overflow:hidden;box-shadow:0 0 40px var(--red-glow);}
-.hero-avatar::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(3,5,8,0.8));z-index:1;}
-.hero-avatar img{width:100%;height:100%;object-fit:cover;filter:grayscale(20%) contrast(1.1);}
-.avatar-corner{position:absolute;width:16px;height:16px;z-index:2;}
-.avatar-corner.tl{top:6px;left:6px;border-top:2px solid var(--cyan);border-left:2px solid var(--cyan);}
-.avatar-corner.tr{top:6px;right:6px;border-top:2px solid var(--cyan);border-right:2px solid var(--cyan);}
-.avatar-corner.bl{bottom:6px;left:6px;border-bottom:2px solid var(--cyan);border-left:2px solid var(--cyan);}
-.avatar-corner.br{bottom:6px;right:6px;border-bottom:2px solid var(--cyan);border-right:2px solid var(--cyan);}
+/* ════════════════════════════════════════
+   HERO
+════════════════════════════════════════ */
+#accueil {
+  min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: center;
+  padding-top: 130px;
+}
+.hero-wrap { display: grid; grid-template-columns: 1fr auto; gap: 4rem; align-items: center; max-width: 1200px; }
 
-/* TERMINAL */
-.terminal-card{background:rgba(7,12,18,0.9);border:1px solid var(--red-dim);padding:1.5rem;position:relative;margin-bottom:1.5rem;}
-.terminal-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--red),transparent);}
-.terminal-header{display:flex;gap:6px;margin-bottom:1rem;}
-.t-dot{width:10px;height:10px;border-radius:50%;}
-.t-dot.r{background:var(--red);box-shadow:0 0 6px var(--red);}
-.t-dot.y{background:#f0a500;}
-.t-dot.g{background:#00ff88;}
-.t-title-bar{font-family:var(--mono);font-size:0.65rem;color:var(--grey);margin-left:auto;letter-spacing:2px;}
-.t-prompt{font-family:var(--mono);font-size:0.8rem;color:var(--cyan);}
-.t-prompt span{color:var(--red);}
-.t-line{font-family:var(--mono);font-size:0.8rem;color:#8a9ab5;padding-left:1rem;margin:2px 0;}
-.t-line.green{color:#00ff88;}
-.t-line.red{color:var(--red);}
+.hero-bg-word {
+  position: absolute; left: 0; right: 0; top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--disp); font-size: clamp(8rem, 18vw, 18rem);
+  font-weight: 900; color: transparent; -webkit-text-stroke: 1px rgba(224,0,26,0.055);
+  line-height: 1; pointer-events: none; white-space: nowrap;
+  overflow: hidden; user-select: none; letter-spacing: -4px;
+}
 
-/* MISSION CARDS */
-.stage-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;}
-.mission-card{background:rgba(7,12,18,0.8);border:1px solid rgba(224,0,26,0.2);padding:1.5rem;position:relative;transition:all 0.3s;}
-.mission-card:hover{border-color:var(--red);box-shadow:0 0 20px var(--red-glow);transform:translateY(-3px);}
-.mission-card::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--cyan);transition:width 0.4s;}
-.mission-card:hover::after{width:100%;}
-.mission-tag{font-family:var(--mono);font-size:0.6rem;color:var(--red);letter-spacing:2px;text-transform:uppercase;margin-bottom:0.5rem;}
-.mission-title{font-family:var(--display);font-size:0.9rem;color:var(--white);margin-bottom:0.8rem;font-weight:700;}
-.mission-details{list-style:none;}
-.mission-details li{font-family:var(--mono);font-size:0.72rem;color:#6a7a90;padding:2px 0;}
-.mission-details li::before{content:'▸ ';color:var(--cyan);}
+.hero-eyebrow {
+  display: flex; align-items: center; gap: 12px;
+  font-family: var(--mono); font-size: 0.68rem; color: var(--cyan);
+  letter-spacing: 4px; margin-bottom: 1.5rem;
+}
+.hero-eyebrow::before { content: ''; display: block; width: 28px; height: 1px; background: var(--cyan); }
 
-/* AP */
-.ap-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;}
-.ap-card{background:rgba(7,12,18,0.9);border:1px solid rgba(0,255,229,0.15);padding:2rem;position:relative;overflow:hidden;transition:all 0.3s;}
-.ap-card:hover{border-color:var(--cyan);box-shadow:0 0 30px rgba(0,255,229,0.1);}
-.ap-number{font-family:var(--display);font-size:3rem;font-weight:900;color:rgba(224,0,26,0.1);position:absolute;top:1rem;right:1.5rem;line-height:1;transition:color 0.3s;}
-.ap-card:hover .ap-number{color:rgba(224,0,26,0.25);}
-.ap-tag{font-family:var(--mono);font-size:0.6rem;color:var(--cyan);letter-spacing:3px;margin-bottom:0.5rem;}
-.ap-title{font-family:var(--display);font-size:0.85rem;color:var(--white);font-weight:700;margin-bottom:1rem;line-height:1.3;}
-.ap-tech{display:flex;flex-wrap:wrap;gap:6px;margin-top:1rem;}
-.tech-badge{font-family:var(--mono);font-size:0.6rem;padding:2px 8px;border:1px solid rgba(0,255,229,0.3);color:var(--cyan);}
-.ap-desc{font-size:0.85rem;color:#7a8a9a;line-height:1.6;}
+h1.hero-name {
+  font-family: var(--disp); font-size: clamp(2.8rem, 6vw, 4.8rem);
+  font-weight: 900; letter-spacing: 2px; line-height: 1; color: var(--white);
+  margin-bottom: .4rem; position: relative;
+}
+h1.hero-name::before, h1.hero-name::after {
+  content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%;
+  font-family: var(--disp); font-size: inherit; font-weight: 900;
+}
+h1.hero-name::before { color: var(--cyan); clip-path: inset(0 0 65% 0); transform: translateX(-2px); animation: gA 7s infinite; }
+h1.hero-name::after  { color: var(--red);  clip-path: inset(60% 0 0 0);  transform: translateX(2px);  animation: gB 7s infinite; }
+@keyframes gA { 0%,87%,100%{opacity:0} 88%,92%{opacity:.75} }
+@keyframes gB { 0%,87%,100%{opacity:0} 90%,93%{opacity:.75} }
 
-/* SKILLS */
-.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem;margin-bottom:3rem;}
-.skill-group{background:rgba(7,12,18,0.8);border:1px solid rgba(224,0,26,0.2);padding:1.5rem;}
-.skill-group-title{font-family:var(--display);font-size:0.75rem;color:var(--red);letter-spacing:2px;margin-bottom:1rem;text-transform:uppercase;}
-.skill-item{font-family:var(--mono);font-size:0.72rem;color:#8a9ab5;padding:4px 0;border-bottom:1px solid rgba(255,255,255,0.04);display:flex;align-items:center;gap:8px;}
-.skill-item::before{content:'';width:6px;height:6px;background:var(--cyan);flex-shrink:0;}
-.cert-table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:0.78rem;}
-.cert-table th{background:rgba(224,0,26,0.15);color:var(--red);text-align:left;padding:10px 16px;letter-spacing:2px;font-size:0.65rem;text-transform:uppercase;border-bottom:1px solid var(--red-dim);}
-.cert-table td{padding:10px 16px;border-bottom:1px solid rgba(255,255,255,0.05);color:#8a9ab5;}
-.cert-table tr:hover td{background:rgba(224,0,26,0.05);color:var(--white);}
-.badge-inprogress{font-size:0.6rem;padding:2px 8px;border:1px solid #f0a500;color:#f0a500;}
-.badge-done{font-size:0.6rem;padding:2px 8px;border:1px solid #00ff88;color:#00ff88;}
+.hero-role { font-family: var(--mono); font-size: .9rem; color: var(--red); letter-spacing: 3px; text-transform: uppercase; margin-bottom: .8rem; }
+.hero-desc {
+  font-family: var(--mono); font-size: .78rem; color: var(--grey-l);
+  max-width: 520px; line-height: 1.9; margin-bottom: 2rem;
+  padding-left: 1rem; border-left: 2px solid var(--red-dim);
+}
 
-/* VEILLE */
-.veille-themes{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:2.5rem;}
-.theme-pill{font-family:var(--mono);font-size:0.7rem;padding:6px 16px;border:1px solid rgba(0,255,229,0.3);color:var(--cyan);transition:all 0.3s;cursor:default;}
-.theme-pill:hover{background:var(--cyan-glow);border-color:var(--cyan);}
-.rss-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-bottom:2.5rem;}
-.rss-item{font-family:var(--mono);font-size:0.7rem;padding:10px 14px;border:1px solid rgba(224,0,26,0.2);color:#6a7a90;text-decoration:none;transition:all 0.2s;display:block;}
-.rss-item:hover{border-color:var(--red);color:var(--red);}
-.rss-item::before{content:'RSS ▸ ';color:var(--red);}
-.blog-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;}
-.blog-card{background:rgba(7,12,18,0.9);border:1px solid rgba(224,0,26,0.15);padding:1.5rem;transition:all 0.3s;}
-.blog-card:hover{border-color:var(--red);}
-.blog-date{font-family:var(--mono);font-size:0.6rem;color:var(--grey);margin-bottom:0.5rem;}
-.blog-title{font-family:var(--display);font-size:0.8rem;color:var(--white);margin-bottom:0.8rem;line-height:1.4;}
-.blog-excerpt{font-size:0.82rem;color:#6a7a90;line-height:1.6;}
+.hero-stats { display: flex; gap: 2.5rem; margin-bottom: 2rem; flex-wrap: wrap; }
+.hstat-num { font-family: var(--disp); font-size: 1.6rem; font-weight: 900; color: var(--red); line-height: 1; }
+.hstat-lbl { font-family: var(--mono); font-size: .55rem; color: var(--grey); letter-spacing: 2px; margin-top: 2px; }
 
-/* TIMELINE */
-.timeline{position:relative;padding-left:2rem;}
-.timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:linear-gradient(180deg,var(--red),transparent);}
-.tl-item{position:relative;padding-left:2rem;margin-bottom:2rem;}
-.tl-dot{position:absolute;left:-2.5rem;top:4px;width:8px;height:8px;background:var(--red);box-shadow:0 0 10px var(--red-glow);}
-.tl-year{font-family:var(--mono);font-size:0.65rem;color:var(--red);letter-spacing:2px;margin-bottom:0.3rem;}
-.tl-school{font-family:var(--display);font-size:0.85rem;color:var(--white);font-weight:700;}
-.tl-details{font-family:var(--mono);font-size:0.75rem;color:#6a7a90;margin-top:0.3rem;}
+.hero-btns { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 1.5rem; }
+.hbtn {
+  font-family: var(--mono); font-size: .66rem; letter-spacing: 2px;
+  text-transform: uppercase; padding: 10px 20px; text-decoration: none;
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: all .25s; cursor: pointer; border: none; line-height: 1;
+}
+.hbtn-red    { background: var(--red); color: #fff; border: 2px solid var(--red); }
+.hbtn-red:hover { background: transparent; color: var(--red); box-shadow: 0 0 22px var(--red-glow); }
+.hbtn-cyan   { background: transparent; color: var(--cyan); border: 1px solid var(--cyan); }
+.hbtn-cyan:hover { background: var(--cyan-glow); box-shadow: 0 0 18px var(--cyan-glow); }
+.hbtn-ghost  { background: rgba(15,18,28,0.8); color: var(--grey-l); border: 1px solid rgba(255,255,255,0.1); }
+.hbtn-ghost:hover { border-color: #8b949e; color: #fff; }
+.hbtn-rootme { background: transparent; color: var(--red); border: 1px solid var(--red); }
+.hbtn-rootme:hover { background: var(--red-soft); box-shadow: 0 0 18px var(--red-glow); }
+svg.ico { width: 14px; height: 14px; fill: currentColor; flex-shrink: 0; }
 
-/* SYNTH TABLE */
-.synth-table{width:100%;border-collapse:collapse;font-size:0.78rem;}
-.synth-table th{background:rgba(224,0,26,0.1);color:var(--red);padding:10px;text-align:left;font-family:var(--mono);font-size:0.62rem;border:1px solid rgba(224,0,26,0.2);}
-.synth-table td{padding:10px;border:1px solid rgba(255,255,255,0.05);color:#8a9ab5;font-family:var(--mono);font-size:0.72rem;vertical-align:top;}
-.synth-table tr:hover td{background:rgba(0,255,229,0.03);}
-.comp-tag{display:inline-block;font-size:0.58rem;padding:1px 6px;border:1px solid rgba(0,255,229,0.3);color:var(--cyan);margin:2px;}
+.hero-avatar { width: 290px; height: 340px; position: relative; flex-shrink: 0; }
+.av-frame {
+  width: 100%; height: 100%;
+  border: 1px solid rgba(224,0,26,0.6);
+  position: relative; overflow: hidden;
+  box-shadow: 0 0 60px var(--red-glow), 0 0 120px rgba(224,0,26,0.07), inset 0 0 30px rgba(224,0,26,0.06);
+}
+.av-frame::before {
+  content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  background: linear-gradient(180deg, rgba(0,240,216,.12) 0%, transparent 35%, transparent 65%, rgba(224,0,26,.15) 100%);
+}
+.av-frame img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.75) contrast(1.2) brightness(.88); display: block; }
+.av-scan {
+  position: absolute; left: 0; right: 0; height: 2px; z-index: 5;
+  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+  animation: avScan 3s linear infinite; opacity: .55;
+}
+@keyframes avScan { 0%{top:-2px;opacity:0} 8%{opacity:.55} 92%{opacity:.55} 100%{top:100%;opacity:0} }
+.av-c { position: absolute; width: 16px; height: 16px; z-index: 4; }
+.av-c.tl { top:6px;left:6px; border-top:2px solid var(--cyan);border-left:2px solid var(--cyan); }
+.av-c.tr { top:6px;right:6px; border-top:2px solid var(--cyan);border-right:2px solid var(--cyan); }
+.av-c.bl { bottom:6px;left:6px; border-bottom:2px solid var(--cyan);border-left:2px solid var(--cyan); }
+.av-c.br { bottom:6px;right:6px; border-bottom:2px solid var(--cyan);border-right:2px solid var(--cyan); }
+.av-label {
+  position: absolute; bottom: 0; left: 0; right: 0; z-index: 4;
+  background: rgba(0,0,0,.82); font-family: var(--mono); font-size: .48rem;
+  color: var(--cyan); padding: 5px 10px; border-top: 1px solid rgba(0,240,216,.22);
+  letter-spacing: 1px; line-height: 1.6;
+}
+.av-deco {
+  position: absolute; right: -26px; top: 20px;
+  font-family: var(--mono); font-size: .5rem; color: rgba(224,0,26,.4);
+  letter-spacing: 2px; writing-mode: vertical-rl; text-orientation: mixed;
+  user-select: none;
+}
 
-/* CONTACT */
-.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;}
-.c-item{display:flex;align-items:center;gap:1rem;margin-bottom:1.2rem;font-family:var(--mono);}
-.c-label{font-size:0.6rem;color:var(--red);letter-spacing:2px;text-transform:uppercase;display:block;margin-bottom:2px;}
-.c-value{font-size:0.8rem;color:var(--cyan);text-decoration:none;}
-.c-value:hover{text-decoration:underline;}
-.contact-form{display:flex;flex-direction:column;gap:1rem;}
-.form-group{display:flex;flex-direction:column;gap:6px;}
-.form-label{font-family:var(--mono);font-size:0.65rem;color:var(--grey);letter-spacing:2px;text-transform:uppercase;}
-.form-input,.form-textarea{background:rgba(7,12,18,0.9);border:1px solid rgba(224,0,26,0.3);color:var(--white);font-family:var(--mono);font-size:0.8rem;padding:10px 14px;outline:none;transition:border-color 0.2s;resize:vertical;}
-.form-input:focus,.form-textarea:focus{border-color:var(--red);box-shadow:0 0 10px var(--red-glow);}
-.form-textarea{min-height:120px;}
-.submit-btn{font-family:var(--mono);font-size:0.7rem;letter-spacing:3px;text-transform:uppercase;padding:12px 24px;background:var(--red);color:#fff;border:none;cursor:pointer;transition:all 0.25s;align-self:flex-start;}
-.submit-btn:hover{background:var(--red-dim);box-shadow:0 0 20px var(--red-glow);}
+/* ════════════════════════════════════════
+   ABOUT
+════════════════════════════════════════ */
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+.term-box {
+  background: rgba(5,9,16,0.97); border: 1px solid rgba(0,240,216,.2);
+  padding: 2rem; position: relative;
+}
+.term-box::before { content:''; position:absolute; top:0;left:0;right:0; height:1px; background:linear-gradient(90deg,transparent,var(--cyan),transparent); }
+.term-box::after  { content:''; position:absolute; bottom:0;left:0;right:0; height:1px; background:linear-gradient(90deg,transparent,var(--red),transparent); }
+.term-prompt { font-family:var(--mono); font-size:.7rem; color:var(--cyan); margin-bottom:1.5rem; }
+.st-row { display:flex; gap:1rem; margin-bottom:.75rem; font-family:var(--mono); font-size:.72rem; align-items:flex-start; }
+.st-k { color:var(--red); min-width:130px; flex-shrink:0; }
+.st-v { color:var(--grey-l); }
+.tags { display:flex; flex-wrap:wrap; gap:6px; margin-top:1.5rem; }
+.tag {
+  font-family:var(--mono); font-size:.56rem; padding:3px 10px;
+  border:1px solid rgba(0,240,216,.25); color:var(--cyan);
+  transition:all .2s; cursor:default;
+}
+.tag:hover { background:var(--cyan-glow); border-color:var(--cyan); }
+.about-text { font-family:var(--mono); font-size:.76rem; color:var(--grey-l); line-height:1.95; margin-bottom:1.2rem; padding-left:1rem; border-left:1px solid var(--red-dim); }
+.about-text.cyan-accent { border-left-color:var(--cyan-dim); }
+.about-cmd { font-family:var(--mono); font-size:.62rem; color:var(--red); letter-spacing:3px; margin-bottom:1rem; }
+.hex-badge {
+  display:inline-flex; align-items:center; gap:8px;
+  font-family:var(--mono); font-size:.62rem;
+  padding:5px 14px; background:rgba(224,0,26,.07);
+  border:1px solid rgba(224,0,26,.3); color:var(--red); letter-spacing:2px; margin-top:1.5rem;
+}
+.hex-badge::before { content:'◆'; font-size:.45rem; }
 
-/* FOOTER */
-footer{background:rgba(3,5,8,0.95);border-top:1px solid rgba(224,0,26,0.2);padding:2rem 6rem;z-index:2;position:relative;}
-.footer-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-bottom:1.5rem;}
-.footer-col-title{font-family:var(--display);font-size:0.7rem;color:var(--red);letter-spacing:2px;margin-bottom:1rem;}
-.footer-links{list-style:none;}
-.footer-links li{margin-bottom:6px;}
-.footer-links a{font-family:var(--mono);font-size:0.7rem;color:var(--grey);text-decoration:none;transition:color 0.2s;}
-.footer-links a:hover{color:var(--cyan);}
-.footer-bottom{font-family:var(--mono);font-size:0.6rem;color:var(--grey);text-align:center;padding-top:1rem;border-top:1px solid rgba(255,255,255,0.05);}
+/* ════════════════════════════════════════
+   TIMELINE
+════════════════════════════════════════ */
+.tl { position:relative; padding-left:2.5rem; }
+.tl::before { content:''; position:absolute; left:8px; top:0; bottom:0; width:1px; background:linear-gradient(180deg,var(--red),rgba(224,0,26,.05)); }
+.tl-item {
+  position:relative; padding:1.2rem 1.5rem; margin-bottom:1rem;
+  background:rgba(6,10,15,0.92); border:1px solid rgba(224,0,26,.16);
+  transition:all .3s;
+}
+.tl-item:hover { border-color:var(--red); box-shadow:5px 0 20px var(--red-glow); transform:translateX(5px); }
+.tl-item.sp { border-color:rgba(0,240,216,.3); }
+.tl-item.sp:hover { border-color:var(--cyan); box-shadow:5px 0 20px var(--cyan-glow); }
+.tl-dot { position:absolute; left:-2.1rem; top:1.45rem; width:12px; height:12px; background:var(--red); border:2px solid var(--bg); box-shadow:0 0 10px var(--red-glow); }
+.tl-item.sp .tl-dot { background:var(--cyan); box-shadow:0 0 10px var(--cyan-glow); }
+.tl-yr { font-family:var(--mono); font-size:.57rem; color:var(--red); letter-spacing:3px; margin-bottom:.3rem; }
+.tl-item.sp .tl-yr { color:var(--cyan); }
+.tl-school { font-family:var(--disp); font-size:.84rem; color:var(--white); font-weight:700; }
+.tl-det { font-family:var(--mono); font-size:.68rem; color:var(--grey-l); margin-top:.3rem; }
 
-/* MODALS */
-#cv-modal,.modal-overlay{display:none;position:fixed;inset:0;z-index:5000;background:rgba(0,0,0,0.9);backdrop-filter:blur(8px);align-items:center;justify-content:center;}
-#cv-modal.open,.modal-overlay.open{display:flex;}
-.cv-modal-inner,.modal-box{max-width:700px;width:90%;max-height:90vh;overflow-y:auto;background:var(--bg2);border:1px solid var(--red);padding:2rem;position:relative;}
-.cv-close,.modal-close{position:absolute;top:1rem;right:1rem;font-family:var(--mono);font-size:0.75rem;color:var(--red);cursor:pointer;background:none;border:1px solid var(--red-dim);padding:3px 10px;}
-.cv-close:hover,.modal-close:hover{background:var(--red);color:#fff;}
-.cv-embed{width:100%;height:70vh;border:none;}
-.modal-box h2{font-family:var(--display);font-size:1rem;color:var(--red);margin-bottom:1rem;letter-spacing:2px;}
-.modal-box p{font-family:var(--mono);font-size:0.75rem;color:#8a9ab5;line-height:1.8;}
+/* ════════════════════════════════════════
+   CERT TABLE
+════════════════════════════════════════ */
+.cert-tbl { width:100%; border-collapse:collapse; font-family:var(--mono); font-size:.74rem; }
+.cert-tbl th { background:rgba(224,0,26,.1); color:var(--red); text-align:left; padding:10px 16px; letter-spacing:2px; font-size:.6rem; text-transform:uppercase; border-bottom:1px solid var(--red-dim); }
+.cert-tbl td { padding:10px 16px; border-bottom:1px solid rgba(255,255,255,.04); color:var(--grey-l); }
+.cert-tbl tr:hover td { background:rgba(224,0,26,.04); color:var(--white); }
+.bdone { font-size:.56rem; padding:2px 8px; border:1px solid #00ff88; color:#00ff88; }
+.bwip  { font-size:.56rem; padding:2px 8px; border:1px solid #f0a500; color:#f0a500; }
 
-/* LANG */
-[data-lang]{display:none;}
-[data-lang="fr"]{display:block;}
-span[data-lang]{display:none;}
-span[data-lang="fr"]{display:inline;}
+/* ════════════════════════════════════════
+   SKILLS
+════════════════════════════════════════ */
+.skills-g { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:1.5rem; }
+.sk-grp {
+  background:rgba(6,10,15,.95); border:1px solid rgba(224,0,26,.2);
+  padding:1.5rem; position:relative; transition:all .3s;
+}
+.sk-grp:hover { border-color:var(--red); box-shadow:0 0 22px rgba(224,0,26,.07); }
+.sk-grp::after { content:''; position:absolute; bottom:0;left:0; width:0; height:1px; background:var(--red); transition:width .4s; }
+.sk-grp:hover::after { width:100%; }
+.sk-title { font-family:var(--disp); font-size:.68rem; color:var(--red); letter-spacing:2px; margin-bottom:1rem; font-weight:900; text-transform:uppercase; }
+.sk-item { font-family:var(--mono); font-size:.68rem; color:var(--grey-l); padding:4px 0; border-bottom:1px solid rgba(255,255,255,.04); display:flex; align-items:center; gap:8px; }
+.sk-item::before { content:''; width:5px; height:5px; background:var(--cyan); flex-shrink:0; }
 
-/* RESPONSIVE */
-@media(max-width:900px){section{padding:90px 2rem 40px;}.hero-inner{grid-template-columns:1fr;}.ap-grid{grid-template-columns:1fr;}.contact-grid{grid-template-columns:1fr;}.footer-grid{grid-template-columns:1fr;}.section-divider{margin:0 2rem;}.nav-links a{font-size:0.6rem;padding:3px 6px;}}
+/* ════════════════════════════════════════
+   PROJECT CARDS
+════════════════════════════════════════ */
+.proj-g { display:grid; grid-template-columns:repeat(auto-fit, minmax(300px,1fr)); gap:2rem; }
+.proj-card {
+  background:rgba(6,10,15,.97); border:1px solid rgba(0,240,216,.15);
+  padding:2rem; position:relative; overflow:hidden; transition:all .3s;
+}
+.proj-card::before { content:''; position:absolute; top:0;left:0;right:0; height:2px; background:linear-gradient(90deg,transparent,var(--cyan),transparent); opacity:0; transition:opacity .3s; }
+.proj-card:hover { border-color:var(--cyan); box-shadow:0 0 35px rgba(0,240,216,.08); transform:translateY(-5px); }
+.proj-card:hover::before { opacity:1; }
+.proj-tag { font-family:var(--mono); font-size:.54rem; color:var(--cyan); letter-spacing:3px; text-transform:uppercase; border:1px solid rgba(0,240,216,.25); display:inline-block; padding:2px 10px; margin-bottom:.8rem; }
+.proj-title { font-family:var(--disp); font-size:.95rem; color:var(--white); font-weight:700; margin-bottom:.35rem; line-height:1.3; }
+.proj-sub { font-family:var(--mono); font-size:.68rem; color:var(--red); margin-bottom:.9rem; }
+.proj-desc { font-size:.83rem; color:var(--grey-l); line-height:1.7; margin-bottom:1.1rem; }
+.proj-techs { display:flex; flex-wrap:wrap; gap:5px; margin-bottom:1.1rem; }
+.tech { font-family:var(--mono); font-size:.54rem; padding:2px 7px; border:1px solid rgba(0,240,216,.2); color:var(--cyan); }
+.proj-links { display:flex; gap:8px; }
+.plink { font-family:var(--mono); font-size:.6rem; letter-spacing:2px; text-transform:uppercase; padding:6px 12px; text-decoration:none; transition:all .2s; }
+.plink.gh { border:1px solid #333; color:var(--grey-l); } .plink.gh:hover { border-color:#8b949e; color:#fff; }
+.plink.lv { border:1px solid var(--cyan); color:var(--cyan); } .plink.lv:hover { background:var(--cyan-glow); }
+
+/* ════════════════════════════════════════
+   STAGES
+════════════════════════════════════════ */
+.stage-intro {
+  background:rgba(6,10,15,.92); border:1px solid rgba(224,0,26,.22);
+  padding:2rem; margin-bottom:2.5rem; max-width:840px; position:relative;
+}
+.stage-intro::before { content:''; position:absolute; left:0;top:0;bottom:0; width:2px; background:linear-gradient(180deg,var(--red),var(--mag),var(--cyan)); }
+.stage-i-title { font-family:var(--disp); font-size:1.1rem; color:var(--white); font-weight:700; margin-bottom:.3rem; }
+.stage-i-sub { font-family:var(--mono); font-size:.68rem; color:var(--cyan); margin-bottom:.9rem; letter-spacing:1px; }
+.stage-i-desc { font-size:.86rem; color:var(--grey-l); line-height:1.7; margin-bottom:1.5rem; }
+.stage-btn {
+  font-family:var(--mono); font-size:.64rem; letter-spacing:2px; text-transform:uppercase;
+  padding:10px 20px; background:transparent; border:1px solid var(--red);
+  color:var(--red); cursor:pointer; transition:all .2s; display:inline-flex; align-items:center; gap:8px;
+}
+.stage-btn:hover { background:var(--red); color:#fff; }
+.mission-g { display:grid; grid-template-columns:repeat(auto-fit, minmax(250px,1fr)); gap:1.2rem; }
+.mission-card {
+  background:rgba(6,10,15,.88); border:1px solid rgba(224,0,26,.2);
+  padding:1.3rem; transition:all .3s; position:relative;
+}
+.mission-card:hover { border-color:var(--red); box-shadow:0 0 15px var(--red-glow); transform:translateY(-3px); }
+.mission-card::after { content:''; position:absolute; bottom:0;left:0; width:0; height:1px; background:var(--cyan); transition:width .4s; }
+.mission-card:hover::after { width:100%; }
+.m-tag { font-family:var(--mono); font-size:.54rem; color:var(--red); letter-spacing:2px; text-transform:uppercase; margin-bottom:.45rem; }
+.m-title { font-family:var(--disp); font-size:.82rem; color:var(--white); margin-bottom:.55rem; font-weight:700; line-height:1.3; }
+.m-ul { list-style:none; }
+.m-ul li { font-family:var(--mono); font-size:.66rem; color:var(--grey-l); padding:2px 0; border-bottom:1px solid rgba(255,255,255,.03); }
+.m-ul li::before { content:'▸ '; color:var(--cyan); }
+
+/* ════════════════════════════════════════
+   E5 TABLE
+════════════════════════════════════════ */
+.synth-wrap { overflow-x:auto; }
+.synth-tbl { width:100%; border-collapse:collapse; font-size:.68rem; font-family:var(--mono); }
+.synth-tbl th {
+  background:rgba(224,0,26,.1); color:var(--red); text-align:center;
+  padding:9px 12px; letter-spacing:1px; font-size:.56rem; text-transform:uppercase;
+  border:1px solid rgba(224,0,26,.25); white-space:nowrap;
+}
+.synth-tbl th.th-l { text-align:left; min-width:260px; }
+.synth-tbl td { padding:8px 12px; border:1px solid rgba(255,255,255,.05); color:var(--grey-l); text-align:center; vertical-align:middle; }
+.synth-tbl td.td-l { text-align:left; color:var(--white); font-size:.7rem; }
+.synth-tbl tr:hover td { background:rgba(0,240,216,.025); }
+.row-sep td { background:rgba(224,0,26,.08)!important; color:var(--red)!important; font-family:var(--disp); font-size:.58rem; letter-spacing:2px; text-transform:uppercase; text-align:left!important; border-color:rgba(224,0,26,.25)!important; padding:7px 12px!important; }
+.cy  { color:#22ff88; font-size:1rem; font-weight:bold; }
+.cn  { color:rgba(255,255,255,.1); }
+
+/* ════════════════════════════════════════
+   VEILLE
+════════════════════════════════════════ */
+.vterm {
+  background:rgba(4,8,14,.98); border:1px solid rgba(0,240,216,.22);
+  position:relative; margin-bottom:2.5rem; max-width:800px; margin-left:auto; margin-right:auto;
+}
+.vterm::before { content:''; position:absolute; top:0;left:0;right:0; height:1px; background:linear-gradient(90deg,transparent,var(--cyan),transparent); }
+.vterm-bar { display:flex; align-items:center; gap:8px; padding:10px 16px; border-bottom:1px solid rgba(0,240,216,.14); background:rgba(0,240,216,.03); }
+.dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
+.dot.r{background:var(--red);box-shadow:0 0 5px var(--red);}
+.dot.y{background:#febc2e;} .dot.g{background:#28c840;}
+.vterm-ttl { font-family:var(--mono); font-size:.6rem; color:var(--grey); letter-spacing:2px; margin-left:6px; flex:1; }
+.vterm-body { padding:1.5rem 2rem; }
+.vcmd { font-family:var(--mono); font-size:.78rem; margin-bottom:.5rem; }
+.vcmd span { color:var(--cyan); }
+.vout { font-family:var(--mono); font-size:.74rem; color:var(--grey-l); line-height:1.8; }
+.v-status { font-family:var(--mono); font-size:.7rem; color:#f0a500; margin-top:1rem; padding:8px 12px; border:1px solid rgba(240,165,0,.3); background:rgba(240,165,0,.05); }
+.notes-g { display:grid; grid-template-columns:repeat(auto-fit, minmax(270px,1fr)); gap:1.5rem; margin-bottom:2.5rem; }
+.note-card { background:rgba(6,10,15,.92); border:1px solid rgba(224,0,26,.16); padding:1.5rem; transition:all .3s; }
+.note-card:hover { border-color:var(--red); box-shadow:0 0 16px rgba(224,0,26,.08); }
+.note-tag { font-family:var(--mono); font-size:.54rem; color:var(--red); letter-spacing:2px; text-transform:uppercase; margin-bottom:.5rem; }
+.note-title { font-family:var(--disp); font-size:.8rem; color:var(--white); margin-bottom:.75rem; line-height:1.4; font-weight:700; }
+.note-body { font-size:.8rem; color:var(--grey-l); line-height:1.65; }
+.rss-head { font-family:var(--mono); font-size:.62rem; color:var(--red); letter-spacing:4px; text-transform:uppercase; margin:2.5rem 0 1rem; }
+.rss-g { display:grid; grid-template-columns:repeat(auto-fill, minmax(150px,1fr)); gap:8px; margin-bottom:1.2rem; }
+.rss-a { font-family:var(--mono); font-size:.66rem; padding:9px 12px; border:1px solid rgba(224,0,26,.2); color:var(--grey-l); text-decoration:none; transition:all .2s; display:block; }
+.rss-a:hover { border-color:var(--red); color:var(--red); }
+.rss-lbl { display:block; font-size:.54rem; color:var(--red); letter-spacing:2px; margin-bottom:3px; }
+
+/* ════════════════════════════════════════
+   CONTACT
+════════════════════════════════════════ */
+.contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:3.5rem; align-items:start; }
+.ci-item {
+  display:flex; align-items:center; gap:16px; padding:1.2rem 1.5rem;
+  background:rgba(6,10,15,.92); border:1px solid rgba(224,0,26,.2);
+  transition:all .3s; text-decoration:none; color:inherit; margin-bottom:1.2rem;
+}
+.ci-item:hover { border-color:var(--red); transform:translateX(8px); box-shadow:0 0 20px var(--red-glow); }
+.ci-icon { width:36px; height:36px; background:rgba(224,0,26,.08); border:1px solid var(--red-dim); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.ci-icon svg { width:18px; height:18px; fill:var(--red); }
+.ci-lbl { font-family:var(--mono); font-size:.56rem; color:var(--grey); letter-spacing:2px; text-transform:uppercase; }
+.ci-val { font-family:var(--mono); font-size:.78rem; color:var(--cyan); }
+.form-box { background:rgba(6,10,15,.97); border:1px solid rgba(0,240,216,.2); padding:2rem; position:relative; }
+.form-box::before { content:''; position:absolute; top:0;left:0;right:0; height:1px; background:linear-gradient(90deg,transparent,var(--cyan),transparent); }
+.flbl { font-family:var(--mono); font-size:.58rem; color:var(--red); letter-spacing:2px; display:block; margin-bottom:6px; text-transform:uppercase; }
+.finp, .ftxt {
+  width:100%; background:rgba(3,5,8,.85); border:1px solid rgba(0,240,216,.2);
+  color:var(--white); font-family:var(--mono); font-size:.78rem;
+  padding:10px 14px; margin-bottom:1.2rem; outline:none; transition:all .2s; resize:none;
+}
+.finp::placeholder, .ftxt::placeholder { color:var(--grey); opacity:.5; }
+.finp:focus, .ftxt:focus { border-color:var(--cyan); box-shadow:0 0 12px var(--cyan-glow); }
+.ftxt { height:120px; }
+.fsbmt {
+  width:100%; font-family:var(--mono); font-size:.7rem; letter-spacing:3px; text-transform:uppercase;
+  padding:12px; background:var(--red); border:none; color:#fff; cursor:pointer; transition:all .25s;
+}
+.fsbmt:hover { background:transparent; color:var(--red); border:1px solid var(--red); box-shadow:0 0 25px var(--red-glow); }
+#form-ok { display:none; font-family:var(--mono); font-size:.7rem; color:#22ff88; padding:10px; text-align:center; border:1px solid #22ff88; margin-top:.8rem; }
+
+/* ════════════════════════════════════════
+   FOOTER
+════════════════════════════════════════ */
+footer {
+  position:relative; z-index:2; padding:2rem 5.5rem;
+  border-top:1px solid rgba(224,0,26,.15);
+}
+.footer-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:2rem; margin-bottom:2rem; }
+.fc-title { font-family:var(--mono); font-size:.58rem; color:var(--red); letter-spacing:3px; text-transform:uppercase; margin-bottom:.8rem; }
+.footer-links { list-style:none; }
+.footer-links li a { font-family:var(--mono); font-size:.68rem; color:var(--grey-l); text-decoration:none; display:block; padding:2px 0; transition:color .2s; cursor:pointer; }
+.footer-links li a:hover { color:var(--red); }
+.footer-btm { font-family:var(--mono); font-size:.62rem; color:var(--grey); border-top:1px solid rgba(255,255,255,.05); padding-top:1.5rem; text-align:center; }
+.footer-btm span { color:var(--red); }
+
+/* BACK TO TOP */
+#back-btn {
+  position:fixed; bottom:2rem; right:2rem; z-index:500;
+  width:42px; height:42px; background:rgba(224,0,26,.92);
+  border:1px solid var(--red); color:#fff; font-family:var(--mono);
+  font-size:1rem; cursor:pointer; display:none; align-items:center; justify-content:center;
+  transition:all .2s;
+}
+#back-btn:hover { box-shadow:0 0 20px var(--red-glow); }
+#back-btn.vis { display:flex; }
+
+/* ════════════════════════════════════════
+   MODALS
+════════════════════════════════════════ */
+.m-ov { display:none; position:fixed; inset:0; z-index:4000; background:rgba(0,0,0,.88); backdrop-filter:blur(8px); align-items:center; justify-content:center; }
+.m-ov.open { display:flex; }
+.m-box { background:var(--bg2); border:1px solid var(--red); max-width:900px; width:94%; max-height:90vh; overflow-y:auto; position:relative; animation:mOpen .3s ease; }
+@keyframes mOpen { from{opacity:0;transform:scale(.96) translateY(12px)} to{opacity:1;transform:none} }
+.m-bar { display:flex; align-items:center; gap:8px; padding:10px 16px; background:rgba(224,0,26,.07); border-bottom:1px solid var(--red-dim); }
+.m-ttl { font-family:var(--mono); font-size:.6rem; color:var(--red); letter-spacing:3px; margin-left:8px; }
+.m-close { margin-left:auto; font-family:var(--mono); font-size:.66rem; color:var(--red); cursor:pointer; background:none; border:1px solid var(--red-dim); padding:2px 10px; transition:all .2s; }
+.m-close:hover { background:var(--red); color:#fff; }
+.m-body { padding:2rem; }
+.m-body h3 { font-family:var(--disp); font-size:.82rem; color:var(--cyan); letter-spacing:2px; margin-bottom:1rem; padding-bottom:.5rem; border-bottom:1px solid rgba(0,240,216,.2); }
+.m-ul { list-style:none; margin-top:.8rem; }
+.m-ul li { font-family:var(--mono); font-size:.72rem; color:var(--grey-l); padding:5px 0; border-bottom:1px solid rgba(255,255,255,.04); }
+.m-ul li::before { content:'▸ '; color:var(--red); }
+.m-intro { font-family:var(--mono); font-size:.74rem; color:var(--grey-l); line-height:1.8; margin-bottom:1.2rem; }
+
+/* ════════════════════════════════════════
+   RESPONSIVE
+════════════════════════════════════════ */
+@media(max-width:960px){
+  section { padding:90px 2.5rem 55px; }
+  hr.div { margin:0 2.5rem; }
+  .hero-wrap { grid-template-columns:1fr; gap:2.5rem; }
+  .hero-avatar { width:220px; height:260px; margin:0 auto; }
+  .about-grid, .contact-grid { grid-template-columns:1fr; }
+  .statusbar { display:none; }
+  .footer-grid { grid-template-columns:1fr; }
+  footer { padding:2rem 2.5rem; }
+  .hero-bg-word { font-size:clamp(5rem,20vw,10rem); }
+}
+@media(max-width:600px){
+  nav { padding:0 .8rem; }
+  .nav-links { display:none; }
+  section { padding:80px 1.2rem 45px; }
+  .hero-stats { gap:1.5rem; }
+}
 </style>
 </head>
 <body>
 
-<!-- BOOT -->
-<div id="boot-screen">
-  <div class="boot-logo">RJ_SYS v2.6.0</div>
-  <div class="boot-bar-wrap"><div class="boot-bar-inner"></div></div>
-  <div class="boot-line dim" style="animation-delay:0.1s">[ 0.001 ] Kernel: Linux 6.12.0-arch1 x86_64</div>
-  <div class="boot-line dim" style="animation-delay:0.4s">[ 0.004 ] Initializing network stack ... OK</div>
-  <div class="boot-line cyan" style="animation-delay:0.7s">[ 0.012 ] Mounting /dev/sda1 on / ... OK</div>
-  <div class="boot-line dim" style="animation-delay:1.0s">[ 0.023 ] Loading firewall rules (pfSense) ... OK</div>
-  <div class="boot-line green" style="animation-delay:1.3s">[ 0.031 ] Active Directory joined: ENERSYS.LOCAL</div>
-  <div class="boot-line dim" style="animation-delay:1.6s">[ 0.045 ] PRTG agent started ... OK</div>
-  <div class="boot-line red" style="animation-delay:1.9s">[ WARN  ] Unauthorized access detected — countermeasures deployed</div>
-  <div class="boot-line cyan" style="animation-delay:2.2s">[ 0.071 ] Metasploit framework loaded</div>
-  <div class="boot-line green" style="animation-delay:2.5s">[ OK    ] Portfolio system ready. Welcome, operator.</div>
-  <div class="boot-line" style="animation-delay:2.8s;color:#aaa;">▊ Click anywhere to skip...</div>
+<div id="bg-grid"></div>
+<div id="bg-scan"></div>
+<div id="bg-vignette"></div>
+<div id="bg-corner-tl"></div>
+<div id="bg-corner-br"></div>
+
+<canvas id="trail" width="1680" height="887"></canvas>
+
+<div id="boot">
+  <div class="b-logo">ROBINA IJAZ</div>
+  <div class="b-sub">// PORTFOLIO BTS SIO SISR · CYBERSECURITY TRACK · 2024–2026</div>
+  <div class="b-bar"><div class="b-fill"></div></div>
+  <div class="b-line ok">  [  OK  ] Kernel module loaded — offensive_sec.ko · pentest.ko · sisr.ko</div>
+  <div class="b-line">  [  ..  ] Mounting filesystem: portfolio_robina_v5 → /home/robina/public</div>
+  <div class="b-line ok">  [  OK  ] Language engine initialised — FR / EN-C1 / JA-N5 · 3 locales ready</div>
+  <div class="b-line ok">  [  OK  ] CTF record restored — FSociety · Root-Me PRO inter-édu · 🏆 3ème nationale</div>
+  <div class="b-line err">  [  !!  ] Security clearance required — BTS SIO SISR candidate inbound</div>
+  <div class="b-line">  [  ..  ] Loading cert registry — CompTIA Security+ · ANSSI · Cisco · IBM · LPI</div>
+  <div class="b-line ok">  [  OK  ] Infrastructure stack online — AD · pfSense · Zabbix · GLPI · VMware</div>
+  <div class="b-line ok">  [  OK  ] Thales SAFE dossier flagged — Lambersart · Sept 2026 · alternance</div>
+  <div class="b-line inf">  [  &gt;&gt;  ] Launching interface… <span style="animation:blnk 1s infinite">▮</span> CLICK TO SKIP</div>
 </div>
 
-<!-- NAV -->
 <nav>
-  <div class="nav-prompt"><span class="pu">robina</span>@arras-node ~$</div>
-  <div class="nav-links">
-    <a href="#accueil" class="nav-active">~/accueil</a>
-    <a href="#stage">~/<span data-lang="fr">a-propos</span><span data-lang="en">about</span><span data-lang="ja">について</span></a>
-    <a href="#stage">~/<span data-lang="fr">formation</span><span data-lang="en">training</span><span data-lang="ja">研修</span></a>
-    <a href="#ap">~/missions-ap</a>
-    <a href="#competences">~/<span data-lang="fr">compétences</span><span data-lang="en">skills</span><span data-lang="ja">スキル</span></a>
-    <a href="#competences">~/certifications</a>
-    <a href="#veille">~/<span data-lang="fr">veille</span><span data-lang="en">watch</span><span data-lang="ja">調査</span></a>
-    <a href="#contact">~/contact</a>
-  </div>
+  <div class="nav-id"><span class="u">robina</span><span class="s">@</span><span class="h">portfolio</span><span class="s">:~$</span></div>
+  <ul class="nav-links">
+    <li><a href="#accueil" class="nl-fr act" style="display: block;">~/accueil</a><a href="#accueil" class="nl-en act" style="display:none">~/home</a><a href="#accueil" class="nl-ja act" style="display:none">~/ホーム</a></li>
+    <li><a href="#apropos" class="nl-fr" style="display: block;">~/a-propos</a><a href="#apropos" class="nl-en" style="display:none">~/about</a><a href="#apropos" class="nl-ja" style="display:none">~/自己紹介</a></li>
+    <li><a href="#formation" class="nl-fr" style="display: block;">~/formation</a><a href="#formation" class="nl-en" style="display:none">~/education</a><a href="#formation" class="nl-ja" style="display:none">~/学歴</a></li>
+    <li><a href="#certifications" class="nl-fr" style="display: block;">~/certifications</a><a href="#certifications" class="nl-en" style="display:none">~/certs</a><a href="#certifications" class="nl-ja" style="display:none">~/資格</a></li>
+    <li><a href="#competences" class="nl-fr" style="display: block;">~/compétences</a><a href="#competences" class="nl-en" style="display:none">~/skills</a><a href="#competences" class="nl-ja" style="display:none">~/スキル</a></li>
+    <li><a href="#projets" class="nl-fr" style="display: block;">~/projets</a><a href="#projets" class="nl-en" style="display:none">~/projects</a><a href="#projets" class="nl-ja" style="display:none">~/プロジェクト</a></li>
+    <li><a href="#stages" class="nl-fr" style="display: block;">~/stages</a><a href="#stages" class="nl-en" style="display:none">~/internships</a><a href="#stages" class="nl-ja" style="display:none">~/実習</a></li>
+    <li><a href="#tableau" class="nl-fr" style="display: block;">~/tableau-E5</a><a href="#tableau" class="nl-en" style="display:none">~/E5-table</a><a href="#tableau" class="nl-ja" style="display:none">~/E5</a></li>
+    <li><a href="#veille" class="nl-fr" style="display: block;">~/veille</a><a href="#veille" class="nl-en" style="display:none">~/tech-watch</a><a href="#veille" class="nl-ja" style="display:none">~/技術調査</a></li>
+    <li><a href="#contact" class="nl-fr" style="display: block;">~/contact</a><a href="#contact" class="nl-en" style="display:none">~/contact</a><a href="#contact" class="nl-ja" style="display:none">~/連絡先</a></li>
+  </ul>
   <div class="nav-right">
-    <div class="nav-status">
-      <div id="nav-clock">00:00:00</div>
-      <div class="sa">SYSTEM ACTIVE</div>
-      <div class="ss">SESSION_ID: R134Z_2025</div>
-    </div>
-    <div class="lang-switcher">
-      <button class="lang-btn active" onclick="setLang('fr')">FR</button>
-      <button class="lang-btn" onclick="setLang('en')">EN</button>
-      <button class="lang-btn" onclick="setLang('ja')">日本語</button>
-    </div>
+    <button class="lb act" onclick="setLang('fr')">FR</button>
+    <button class="lb" onclick="setLang('en')">EN</button>
+    <button class="lb" onclick="setLang('ja')">日</button>
   </div>
 </nav>
 
-<!-- STATUS BAR -->
-<div class="nav-statusbar">
-  <span><span class="sb-key">[SYS]</span><span class="sb-val">STATUS: ONLINE</span></span>
-  <span><span class="sb-key">[LOC]</span><span class="sb-val">ARRAS, 62 – FRANCE</span></span>
-  <span><span class="sb-key">[NET]</span><span class="sb-val">BTS SIO SISR – 2024-2026</span></span>
+<div class="statusbar">
+  <span><span class="sb-k">STATUS</span><span class="sb-v blink">▮ ONLINE</span></span>
+  <span><span class="sb-k">ROLE</span><span class="sb-v">BTS SIO SISR · SISR TRACK · CYBER OFFENSIVE</span></span>
+  <span><span class="sb-k">CTF</span><span class="sb-v">🏆 3ÈME NATIONALE — ROOT-ME PRO INTER-ÉDU · FSociety</span></span>
+  <span><span class="sb-k">CERTS</span><span class="sb-v">CompTIA Sec+ · ANSSI · Cisco×4 · IBM · LPI · EBIOS</span></span>
+  <span><span class="sb-k">TARGET</span><span class="sb-v">THALES LAMBERSART · ALTERNANCE SEPT. 2026</span></span>
+  <span><span class="sb-k">LANG</span><span class="sb-v">FR / EN-C1 / ES-B1 / JA-N5</span></span>
 </div>
 
-<!-- HERO -->
 <section id="accueil">
-  <div class="hero-inner">
+  <div class="hero-bg-word">ROBINA</div>
+
+  <div class="hero-wrap">
     <div>
-      <div class="hero-badge">BTS SIO SISR — <span>Lycée André Malraux — Béthune</span></div>
-      <h1 class="hero-name" data-text="Robina Ijaz">Robina Ijaz</h1>
-      <div class="hero-tagline">
-        <span data-lang="fr">Technologie &amp; créativité au service de mes projets</span>
-        <span data-lang="en">Technology &amp; creativity in service of my projects</span>
-        <span data-lang="ja">技術と創造性をプロジェクトのために</span>
+      <div class="hero-eyebrow">
+        <span data-lang="fr" style="display: inline;">BTS SIO SISR — Lycée André Malraux · Béthune</span>
+        <span data-lang="en" style="display:none">BTS SIO SISR — Lycée André Malraux · Béthune</span>
+        <span data-lang="ja" style="display:none">BTS SIO SISR — リセ・アンドレ・マルロー · ベテューヌ</span>
+        <span style="color:var(--red);font-size:.55rem;letter-spacing:2px">// 2024–2026</span>
       </div>
-      <div class="hero-subtitle">
-        <span data-lang="fr">Expertise en PowerShell, Active Directory/GPO, Serveur Linux, Cybersécurité, Réseau, IA. J'architecte des infrastructures robustes et sécurisées — de l'Active Directory au serveur Arch Linux auto-hébergé.</span>
-        <span data-lang="en">Expertise in PowerShell, Active Directory/GPO, Linux Servers, Cybersecurity, Networking, AI. I architect robust and secure infrastructures — from Active Directory to self-hosted Arch Linux servers.</span>
-        <span data-lang="ja">PowerShell、AD/GPO、Linuxサーバー、サイバーセキュリティの専門知識。堅牢でセキュアなインフラを設計します。</span>
+
+      <h1 class="hero-name" data-text="ROBINA IJAZ">ROBINA IJAZ</h1>
+
+      <div class="hero-role">
+        <span data-lang="fr" style="display: inline;">Cybersécurité Offensive · Infrastructure Systèmes &amp; Réseaux</span>
+        <span data-lang="en" style="display:none">Offensive Security · Systems &amp; Network Infrastructure</span>
+        <span data-lang="ja" style="display:none">攻撃的サイバーセキュリティ · システム &amp; ネットワーク基盤</span>
       </div>
-      <div class="social-links">
-        <a href="https://www.linkedin.com/in/robina-ijaz" target="_blank" class="social-btn btn-linkedin">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>LinkedIn
+
+      <p class="hero-desc">
+        <span data-lang="fr" style="display: inline;">Étudiante en BTS SIO SISR passionnée de cybersécurité offensive. CTF nationale 3ème place Root-Me PRO avec FSociety. Candidate alternance pentest/sec offensive chez Thales Lambersart, sept. 2026.</span>
+        <span data-lang="en" style="display:none">BTS SIO SISR student passionate about offensive security. 3rd nationally at Root-Me PRO CTF with team FSociety. Seeking pentest/offensive sec apprenticeship at Thales Lambersart, Sept. 2026.</span>
+        <span data-lang="ja" style="display:none">攻撃的セキュリティに情熱を持つBTS SIO SISR学生。FSocietyチームでRoot-Me PRO CTF全国3位。2026年9月Thales Lambersartでのペンテスト/攻撃的セキュリティの見習いを希望。</span>
+      </p>
+
+      <div class="hero-btns">
+        <button class="hbtn hbtn-red" onclick="openM('cv')">
+          <svg class="ico" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><path d="M14 2v6h6" style="fill:none;stroke:currentColor;stroke-width:2"></path></svg>
+          <span data-lang="fr" style="display: inline;">Voir mon CV</span><span data-lang="en" style="display:none">View my CV</span><span data-lang="ja" style="display:none">CVを見る</span>
+        </button>
+        <a href="https://www.linkedin.com/in/robina-ijaz" target="_blank" class="hbtn hbtn-ghost">
+          <svg class="ico" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path></svg>
+          LinkedIn
         </a>
-        <a href="https://github.com/RengokuChan" target="_blank" class="social-btn btn-github">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>GitHub
+        <a href="https://github.com/RengokuChan" target="_blank" class="hbtn hbtn-ghost">
+          <svg class="ico" viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"></path></svg>
+          GitHub
         </a>
-        <a href="https://www.root-me.org/Robibi0809?lang=fr" target="_blank" class="social-btn btn-rootme">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>Root-Me
+        <a href="https://www.root-me.org/Robibi0809?lang=fr" target="_blank" class="hbtn hbtn-rootme">
+          ◉ Root-Me
         </a>
       </div>
-      <button class="cv-btn" onclick="openCV()">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/></svg>
-        <span data-lang="fr">Voir mon CV</span><span data-lang="en">View my CV</span><span data-lang="ja">CVを見る</span>
-      </button>
+    </div>
+
+    <div class="hero-avatar">
+      <div class="av-frame">
+        <img src="data:image/jpeg;base64,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" alt="Robina Ijaz" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
+        <div class="av-scan"></div>
+        <div class="av-c tl"></div><div class="av-c tr"></div>
+        <div class="av-c bl"></div><div class="av-c br"></div>
+        <div class="av-label">
+          ID: ROBINA_IJAZ.exe<br>
+          NETRUNNER // SISR · CLEARANCE LVL-3<br>
+          TARGET: THALES_LAMBERSART_2026
+        </div>
+      </div>
+      <div class="av-deco">OFFENSIVE SEC · 2026</div>
+    </div>
+  </div>
+</section>
+<hr class="div">
+
+<section id="apropos">
+  <div class="s-num">// 01</div>
+  <h2 class="s-title"><span data-lang="fr" style="display: inline;">À Propos</span><span data-lang="en" style="display:none">About</span><span data-lang="ja" style="display:none">自己紹介</span></h2>
+  <div class="about-grid">
+    <div>
+      <div class="term-box">
+        <div class="term-prompt">$ whoami --verbose --full-profile</div>
+        <div class="st-row"><span class="st-k">NOM</span><span class="st-v">Robina Ijaz</span></div>
+        <div class="st-row"><span class="st-k">LOCALISATION</span><span class="st-v">Bruay-la-Buissière, Pas-de-Calais (62)</span></div>
+        <div class="st-row"><span class="st-k">FORMATION</span><span class="st-v">BTS SIO SISR — Lycée André Malraux, Béthune</span></div>
+        <div class="st-row"><span class="st-k">OBJECTIF</span><span class="st-v">L3 Info → Master Cybersécurité offensive</span></div>
+        <div class="st-row"><span class="st-k">CTF_RANK</span><span class="st-v">🏆 3ème nationale — Root-Me PRO inter-édu</span></div>
+        <div class="st-row"><span class="st-k">TEAM</span><span class="st-v">FSociety</span></div>
+        <div class="st-row"><span class="st-k">LANGUES</span><span class="st-v">FR natif · EN C1 · ES B1 · JA N5</span></div>
+        <div class="st-row"><span class="st-k">INTÉRÊTS</span><span class="st-v">Pentesting · Japon · Illustration numérique</span></div>
+        <div class="tags">
+          <span class="tag">Pentesting</span><span class="tag">Linux</span><span class="tag">Active Directory</span>
+          <span class="tag">Réseau</span><span class="tag">CTF</span><span class="tag">OSINT</span>
+          <span class="tag">Illustration</span><span class="tag">Japon 🇯🇵</span>
+        </div>
+      </div>
     </div>
     <div>
-      <div class="hero-avatar">
-        <img src="pp portfolio.png" alt="Robina Ijaz">
-        <div class="avatar-corner tl"></div><div class="avatar-corner tr"></div>
-        <div class="avatar-corner bl"></div><div class="avatar-corner br"></div>
+      <div class="about-cmd">$ cat about.md</div>
+      <p class="about-text">
+        <span data-lang="fr" style="display: inline;">Étudiante en BTS SIO SISR, je me suis orientée vers l'informatique après une année en licence d'anglais — un choix courageux qui m'a conduit à découvrir ma vraie passion : la cybersécurité.</span>
+        <span data-lang="en" style="display:none">BTS SIO SISR student, I turned to IT after a year studying English literature — a bold choice that led me to discover my true passion: cybersecurity.</span>
+        <span data-lang="ja" style="display:none">英語文学を学んだ後に情報技術の道を選び、サイバーセキュリティへの情熱を見出しました。</span>
+      </p>
+      <p class="about-text">
+        <span data-lang="fr" style="display: inline;">En 2 ans, j'ai obtenu plusieurs certifications, participé à des CTF nationaux avec l'équipe FSociety (3ème place Root-Me PRO inter-édu), réalisé deux stages chez EnerSys à Arras, et développé des projets personnels autour de la cyber-veille et de l'IA.</span>
+        <span data-lang="en" style="display:none">In 2 years, I've earned multiple certifications, competed in national CTFs with team FSociety (3rd place Root-Me PRO inter-edu), completed two internships at EnerSys in Arras, and built personal projects around cyber-monitoring and AI.</span>
+        <span data-lang="ja" style="display:none">2年間で複数の資格取得、FSocietyチームで全国CTF3位、EnerSysでのインターン2回、サイバー監視とAIに関するプロジェクトを開発。</span>
+      </p>
+      <p class="about-text cyan-accent">
+        <span data-lang="fr" style="display: inline;">Mon objectif : intégrer une Licence 3 informatique à l'Ensemble Baudimont d'Arras en septembre 2026, puis un Master spécialisé en cybersécurité. À terme, travailler dans la sécurité offensive — et peut-être au Japon.</span>
+        <span data-lang="en" style="display:none">My goal: join L3 Computer Science at Ensemble Baudimont in Arras in September 2026, then a Master's in cybersecurity. Ultimately, work in offensive security — possibly in Japan.</span>
+        <span data-lang="ja" style="display:none">目標：2026年9月にEnsemble BaudimontでL3進学、その後サイバーセキュリティ修士号。最終的には攻撃的セキュリティの分野で、日本で活躍したい。</span>
+      </p>
+      <div class="hex-badge">
+        <span data-lang="fr" style="display: inline;">Connexion Thales — Elles Bougent · #GOM2018 · Thales Lille</span>
+        <span data-lang="en" style="display:none">Thales link — Elles Bougent · #GOM2018 · Thales Lille</span>
+        <span data-lang="ja" style="display:none">Thalesとの縁 — Elles Bougent · #GOM2018 · Thalesリール</span>
       </div>
     </div>
   </div>
 </section>
-<hr class="section-divider">
+<hr class="div">
 
-<!-- STAGE -->
-<section id="stage">
-  <div class="section-label">// 01</div>
-  <h2 class="section-title"><span data-lang="fr">Réalisations — Stage Enersys</span><span data-lang="en">Achievements — Enersys Internship</span><span data-lang="ja">実績 — エネルシス実習</span></h2>
-  <div class="terminal-card" style="max-width:600px;">
-    <div class="terminal-header"><div class="t-dot r"></div><div class="t-dot y"></div><div class="t-dot g"></div><div class="t-title-bar">ENERSYS — ARRAS</div></div>
-    <div class="t-prompt"><span>robina@enersys</span>:~$ cat missions.log</div>
-    <div class="t-line green">[STAGE 1] mai 2025 – juin 2025 → COMPLETED</div>
-    <div class="t-line green">[STAGE 2] janv. 2026 – fév. 2026 → IN PROGRESS</div>
-    <div class="t-line">Cisco Meraki · VMware vSphere · Veeam · PRTG</div>
-  </div>
-  <div class="stage-grid">
-    <div class="mission-card"><div class="mission-tag">Déploiement</div><div class="mission-title"><span data-lang="fr">MDT — Déploiement postes</span><span data-lang="en">MDT — Workstation Deployment</span><span data-lang="ja">MDT展開</span></div><ul class="mission-details"><li><span data-lang="fr">Préparation et config. PC (Heydo!)</span><span data-lang="en">PC prep and config (Heydo!)</span><span data-lang="ja">PCの準備と設定</span></li><li><span data-lang="fr">Transfert sécurisé des données</span><span data-lang="en">Secure data transfer</span><span data-lang="ja">安全なデータ転送</span></li><li><span data-lang="fr">Renouvellement de parc</span><span data-lang="en">IT fleet renewal</span><span data-lang="ja">ITフリート更新</span></li></ul></div>
-    <div class="mission-card"><div class="mission-tag">Support</div><div class="mission-title"><span data-lang="fr">Support N1/N2 — TeamViewer</span><span data-lang="en">Support L1/L2 — TeamViewer</span><span data-lang="ja">サポートL1/L2</span></div><ul class="mission-details"><li><span data-lang="fr">Assistance utilisateurs à distance</span><span data-lang="en">Remote user assistance</span><span data-lang="ja">リモートサポート</span></li><li><span data-lang="fr">Diagnostic et résolution d'incidents</span><span data-lang="en">Incident diagnosis</span><span data-lang="ja">インシデント解決</span></li><li><span data-lang="fr">Procédures IT industrielles</span><span data-lang="en">Industrial IT procedures</span><span data-lang="ja">産業ITプロセス</span></li></ul></div>
-    <div class="mission-card"><div class="mission-tag">Réseau</div><div class="mission-title">Cisco Meraki</div><ul class="mission-details"><li><span data-lang="fr">Administration cloud Meraki</span><span data-lang="en">Meraki cloud admin</span><span data-lang="ja">Merakiクラウド管理</span></li><li><span data-lang="fr">Supervision réseau PRTG</span><span data-lang="en">PRTG network monitoring</span><span data-lang="ja">PRTGネットワーク監視</span></li><li><span data-lang="fr">Documentation architecture</span><span data-lang="en">Network architecture docs</span><span data-lang="ja">ネットワーク設計書</span></li></ul></div>
-    <div class="mission-card"><div class="mission-tag">Virtualisation</div><div class="mission-title">VMware vSphere &amp; Veeam</div><ul class="mission-details"><li><span data-lang="fr">Découverte hyperviseur vSphere</span><span data-lang="en">vSphere hypervisor</span><span data-lang="ja">vSphere入門</span></li><li><span data-lang="fr">Sauvegardes Veeam</span><span data-lang="en">Veeam backups</span><span data-lang="ja">Veeamバックアップ</span></li><li><span data-lang="fr">Snapshots et restauration VM</span><span data-lang="en">VM snapshots &amp; restore</span><span data-lang="ja">VMスナップショット</span></li></ul></div>
+<section id="formation">
+  <div class="s-num">// 02</div>
+  <h2 class="s-title"><span data-lang="fr" style="display: inline;">Formation</span><span data-lang="en" style="display:none">Education</span><span data-lang="ja" style="display:none">学歴</span></h2>
+  <div class="tl">
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-yr">2018</div>
+      <div class="tl-school">Thalès — #GOM2018</div>
+      <div class="tl-det"><span data-lang="fr" style="display: inline;">Girls on the Move · Découverte des métiers STEM · Thales Lille</span><span data-lang="en" style="display:none">Girls on the Move · STEM careers discovery · Thales Lille</span><span data-lang="ja" style="display:none">Girls on the Move · STEMキャリア · Thalesリール</span></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-yr">2020 — 2023</div>
+      <div class="tl-school">Lycée Sadi Carnot</div>
+      <div class="tl-det"><span data-lang="fr" style="display: inline;">Baccalauréat Général · Mention Européenne</span><span data-lang="en" style="display:none">Baccalauréat Général · European Mention</span><span data-lang="ja" style="display:none">バカロレア一般 · ヨーロッパ区分</span></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-yr">2023 — 2024</div>
+      <div class="tl-school">Université d'Artois</div>
+      <div class="tl-det"><span data-lang="fr" style="display: inline;">Licence LLCER Anglais · Niveau C1</span><span data-lang="en" style="display:none">English Literature Degree · C1 Level</span><span data-lang="ja" style="display:none">英語文学 · C1レベル</span></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-yr">2024 — 2026</div>
+      <div class="tl-school">Lycée André Malraux — Béthune</div>
+      <div class="tl-det"><span data-lang="fr" style="display: inline;">BTS SIO option SISR · Lycée André Malraux · Alternance recherchée sept. 2026</span><span data-lang="en" style="display:none">BTS SIO SISR · Lycée André Malraux · Seeking apprenticeship Sept. 2026</span><span data-lang="ja" style="display:none">BTS SIO SISR · リセ・アンドレ・マルロー · 2026年9月アルタナンス希望</span></div>
+    </div>
+    <div class="tl-item sp">
+      <div class="tl-dot"></div>
+      <div class="tl-yr">2024 — Root-Me PRO inter-édu</div>
+      <div class="tl-school">🏆 3ème place nationale — Équipe FSociety</div>
+      <div class="tl-det"><span data-lang="fr" style="display: inline;">Challenges système, reverse engineering, cybersécurité · Format une journée</span><span data-lang="en" style="display:none">System, reverse engineering, cybersecurity challenges · One-day format</span><span data-lang="ja" style="display:none">システム、リバースエンジニアリング、サイバーセキュリティ · 1日形式</span></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-yr">Sept. 2026 →</div>
+      <div class="tl-school">Ensemble Baudimont — Arras</div>
+      <div class="tl-det"><span data-lang="fr" style="display: inline;">Licence 3 Informatique · Spécialisation Cybersécurité en Master</span><span data-lang="en" style="display:none">L3 Computer Science · Cybersecurity specialization in Master's</span><span data-lang="ja" style="display:none">情報工学L3 · マスターでサイバーセキュリティ専攻</span></div>
+    </div>
   </div>
 </section>
-<hr class="section-divider">
+<hr class="div">
 
-<!-- AP -->
-<section id="ap">
-  <div class="section-label">// 02</div>
-  <h2 class="section-title"><span data-lang="fr">Missions AP — Contexte GSB</span><span data-lang="en">AP Projects — GSB Context</span><span data-lang="ja">APプロジェクト</span></h2>
-  <div class="ap-grid">
-    <div class="ap-card"><div class="ap-number">01</div><div class="ap-tag">AP1 — Administration</div><div class="ap-title"><span data-lang="fr">Active Directory, VLANs 802.1q &amp; GPO</span><span data-lang="en">Active Directory, VLANs &amp; GPO</span><span data-lang="ja">ADドメイン、VLAN &amp; GPO</span></div><div class="ap-desc"><span data-lang="fr">Déploiement domaine Windows Server, VLANs 802.1q sur HP2520, GPO pour gestion centralisée.</span><span data-lang="en">Windows Server domain, VLANs on HP2520, GPO for centralized management.</span><span data-lang="ja">Windows Serverドメイン、HP2520 VLAN、GPO集中管理。</span></div><div class="ap-tech"><span class="tech-badge">Windows Server</span><span class="tech-badge">AD DS</span><span class="tech-badge">802.1q</span><span class="tech-badge">HP2520</span><span class="tech-badge">GPO</span></div></div>
-    <div class="ap-card"><div class="ap-number">02</div><div class="ap-tag">AP2 — Sécurité</div><div class="ap-title"><span data-lang="fr">Architecture DMZ double pfSense</span><span data-lang="en">DMZ — dual pfSense firewall</span><span data-lang="ja">二重pfSense DMZ</span></div><div class="ap-desc"><span data-lang="fr">DMZ avec double pare-feu pfSense, serveur Debian/Apache, HTTPS Let's Encrypt, filtrage des flux.</span><span data-lang="en">DMZ with double pfSense, Debian/Apache, HTTPS via Let's Encrypt, traffic filtering.</span><span data-lang="ja">二重pfSense DMZ、Debian/Apache、Let's Encrypt HTTPS。</span></div><div class="ap-tech"><span class="tech-badge">pfSense</span><span class="tech-badge">DMZ</span><span class="tech-badge">Debian</span><span class="tech-badge">Apache2</span><span class="tech-badge">HTTPS</span></div></div>
-    <div class="ap-card"><div class="ap-number">03</div><div class="ap-tag">AP3 — Automatisation</div><div class="ap-title"><span data-lang="fr">PowerShell &amp; Cluster Haute Disponibilité</span><span data-lang="en">PowerShell &amp; HA Cluster</span><span data-lang="ja">PowerShell &amp; HAクラスター</span></div><div class="ap-desc"><span data-lang="fr">Automatisation création utilisateurs AD via PowerShell (CSV). Cluster HA sous Debian 12 avec basculement automatique.</span><span data-lang="en">AD user creation automation via PowerShell (CSV). HA Cluster on Debian 12 with failover.</span><span data-lang="ja">PowerShellによるADユーザー自動作成。Debian 12 HAクラスター。</span></div><div class="ap-tech"><span class="tech-badge">PowerShell</span><span class="tech-badge">AD</span><span class="tech-badge">Debian 12</span><span class="tech-badge">Pacemaker</span></div></div>
-    <div class="ap-card"><div class="ap-number">04</div><div class="ap-tag">AP4 — Supervision</div><div class="ap-title"><span data-lang="fr">Zabbix &amp; GLPI (ITSM)</span><span data-lang="en">Zabbix &amp; GLPI (ITSM)</span><span data-lang="ja">Zabbix &amp; GLPI</span></div><div class="ap-desc"><span data-lang="fr">Déploiement Zabbix pour supervision hôtes/services. GLPI pour tickets d'incidents. Auth AD centralisée.</span><span data-lang="en">Zabbix for host monitoring. GLPI for incident tickets. Centralized AD auth.</span><span data-lang="ja">Zabbixによる監視、GLPIインシデント管理、AD集中認証。</span></div><div class="ap-tech"><span class="tech-badge">Zabbix</span><span class="tech-badge">GLPI</span><span class="tech-badge">SNMP</span><span class="tech-badge">AD Auth</span></div></div>
-  </div>
-</section>
-<hr class="section-divider">
-
-<!-- COMPETENCES -->
-<section id="competences">
-  <div class="section-label">// 03</div>
-  <h2 class="section-title"><span data-lang="fr">Compétences &amp; Certifications</span><span data-lang="en">Skills &amp; Certifications</span><span data-lang="ja">スキル &amp; 資格</span></h2>
-  <div class="skills-grid">
-    <div class="skill-group"><div class="skill-group-title"><span data-lang="fr">Administration Système</span><span data-lang="en">System Admin</span><span data-lang="ja">システム管理</span></div><div class="skill-item">Windows Server / AD</div><div class="skill-item">Linux (Arch, Debian, Kali, Ubuntu)</div><div class="skill-item">Active Directory / GPO</div><div class="skill-item">VMware vSphere / VirtualBox</div><div class="skill-item">MDT / Déploiement postes</div><div class="skill-item">Veeam Backup</div></div>
-    <div class="skill-group"><div class="skill-group-title"><span data-lang="fr">Réseaux</span><span data-lang="en">Networking</span><span data-lang="ja">ネットワーク</span></div><div class="skill-item">Cisco / Meraki</div><div class="skill-item">VLANs 802.1q</div><div class="skill-item">pfSense / Routage</div><div class="skill-item">Wireshark</div><div class="skill-item">DNS / DHCP / NAT</div><div class="skill-item">SNMP / Supervision</div></div>
-    <div class="skill-group"><div class="skill-group-title">Scripting</div><div class="skill-item">PowerShell</div><div class="skill-item">Bash</div><div class="skill-item">Python</div><div class="skill-item">Automatisation AD</div><div class="skill-item">YAML / JSON / CSV</div></div>
-    <div class="skill-group"><div class="skill-group-title"><span data-lang="fr">Cybersécurité</span><span data-lang="en">Cybersecurity</span><span data-lang="ja">サイバーセキュリティ</span></div><div class="skill-item">Nmap / Nessus</div><div class="skill-item">Metasploit</div><div class="skill-item">Burp Suite</div><div class="skill-item">EBIOS Risk Manager</div><div class="skill-item">Privilege Escalation</div><div class="skill-item">SOC / Kibana</div></div>
-    <div class="skill-group"><div class="skill-group-title"><span data-lang="fr">Supervision</span><span data-lang="en">Monitoring</span><span data-lang="ja">監視</span></div><div class="skill-item">PRTG Network Monitor</div><div class="skill-item">Zabbix</div><div class="skill-item">GLPI (ITSM)</div><div class="skill-item">Kibana / ELK</div></div>
-    <div class="skill-group"><div class="skill-group-title"><span data-lang="fr">Langues</span><span data-lang="en">Languages</span><span data-lang="ja">言語</span></div><div class="skill-item">Français — Natif</div><div class="skill-item">Anglais — C1</div><div class="skill-item">Espagnol — B1</div><div class="skill-item">日本語 — N5</div></div>
-  </div>
-  <div class="section-label" style="margin-top:2rem;">// CERTIFICATIONS</div>
-  <table class="cert-table">
-    <thead><tr><th>Certification</th><th>Organisme</th><th><span data-lang="fr">Année</span><span data-lang="en">Year</span><span data-lang="ja">年</span></th><th><span data-lang="fr">Statut</span><span data-lang="en">Status</span><span data-lang="ja">状態</span></th></tr></thead>
+<section id="certifications">
+  <div class="s-num">// 03</div>
+  <h2 class="s-title"><span data-lang="fr" style="display: inline;">Certifications</span><span data-lang="en" style="display:none">Certifications</span><span data-lang="ja" style="display:none">資格</span></h2>
+  <table class="cert-tbl">
+    <thead><tr>
+      <th>Certification</th>
+      <th>Organisme</th>
+      <th><span data-lang="fr" style="display: inline;">Année</span><span data-lang="en" style="display:none">Year</span><span data-lang="ja" style="display:none">年</span></th>
+      <th><span data-lang="fr" style="display: inline;">Statut</span><span data-lang="en" style="display:none">Status</span><span data-lang="ja" style="display:none">状態</span></th>
+    </tr></thead>
     <tbody>
-      <tr><td>CCNA ITN</td><td>Cisco Networking Academy</td><td>2024</td><td><span class="badge-done">OBTENU</span></td></tr>
-      <tr><td>CCNA SRWE</td><td>Cisco Networking Academy</td><td>2024</td><td><span class="badge-done">OBTENU</span></td></tr>
-      <tr><td>Network Security Cert.</td><td>Cisco Networking Academy</td><td>2024</td><td><span class="badge-done">OBTENU</span></td></tr>
-      <tr><td>Ethical Hacking Cert.</td><td>Cisco Networking Academy</td><td>2024</td><td><span class="badge-done">OBTENU</span></td></tr>
-      <tr><td>MOOC SecNumAcadémie</td><td>ANSSI</td><td>2024</td><td><span class="badge-done">OBTENU</span></td></tr>
-      <tr><td>MOOC EBIOS Risk Manager</td><td>Club EBIOS</td><td>2025</td><td><span class="badge-done">OBTENU</span></td></tr>
-      <tr><td>Cloud Computing Fundamental</td><td>IBM</td><td>2025</td><td><span class="badge-done">OBTENU</span></td></tr>
-      <tr><td>Linux Essentials</td><td>LPI</td><td>2024</td><td><span class="badge-done">OBTENU</span></td></tr>
-      <tr><td>CompTIA Security+</td><td>CompTIA</td><td>2026</td><td><span class="badge-inprogress">EN COURS</span></td></tr>
+      <tr><td>CCNA ITN</td><td>Cisco Networking Academy</td><td>2024</td><td><span class="bdone">OBTENU</span></td></tr>
+      <tr><td>CCNA SRWE</td><td>Cisco Networking Academy</td><td>2024</td><td><span class="bdone">OBTENU</span></td></tr>
+      <tr><td>Network Security Cert.</td><td>Cisco Networking Academy</td><td>2024</td><td><span class="bdone">OBTENU</span></td></tr>
+      <tr><td>Ethical Hacking Cert.</td><td>Cisco Networking Academy</td><td>2024</td><td><span class="bdone">OBTENU</span></td></tr>
+      <tr><td>MOOC SecNumAcadémie</td><td>ANSSI</td><td>2024</td><td><span class="bdone">OBTENU</span></td></tr>
+      <tr><td>MOOC EBIOS Risk Manager</td><td>Club EBIOS</td><td>2025</td><td><span class="bdone">OBTENU</span></td></tr>
+      <tr><td>Cloud Computing Fundamental</td><td>IBM</td><td>2025</td><td><span class="bdone">OBTENU</span></td></tr>
+      <tr><td>Linux Essentials</td><td>LPI</td><td>2024</td><td><span class="bdone">OBTENU</span></td></tr>
+      <tr><td>CompTIA Security+</td><td>CompTIA</td><td>2026</td><td><span class="bwip">EN COURS</span></td></tr>
     </tbody>
   </table>
 </section>
-<hr class="section-divider">
+<hr class="div">
 
-<!-- VEILLE -->
-<section id="veille">
-  <div class="section-label">// 04</div>
-  <h2 class="section-title"><span data-lang="fr">Veille Technologique</span><span data-lang="en">Technology Watch</span><span data-lang="ja">技術動向調査</span></h2>
-  <div class="section-label" style="margin-bottom:1rem;"><span data-lang="fr">THÉMATIQUES</span><span data-lang="en">TOPICS</span><span data-lang="ja">テーマ</span></div>
-  <div class="veille-themes">
-    <div class="theme-pill">🔴 Ransomwares &amp; APT</div><div class="theme-pill">🛡️ Zero Trust</div><div class="theme-pill">🤖 IA cyberdéfense</div><div class="theme-pill">📡 Wi-Fi 7</div><div class="theme-pill">🔐 Post-quantum crypto</div><div class="theme-pill">☁️ Cloud Security</div><div class="theme-pill">🐧 Linux exploits</div><div class="theme-pill">📋 NIS2 / DORA</div>
-  </div>
-  <div class="section-label" style="margin-bottom:1rem;">FLUX RSS</div>
-  <div class="rss-grid">
-    <a href="https://www.cert.ssi.gouv.fr/" target="_blank" class="rss-item">CERT-FR</a>
-    <a href="https://thehackernews.com/" target="_blank" class="rss-item">The Hacker News</a>
-    <a href="https://www.lemondeinformatique.fr/" target="_blank" class="rss-item">Monde Informatique</a>
-    <a href="https://www.bleepingcomputer.com/" target="_blank" class="rss-item">BleepingComputer</a>
-    <a href="https://krebsonsecurity.com/" target="_blank" class="rss-item">Krebs on Security</a>
-    <a href="https://www.root-me.org/" target="_blank" class="rss-item">Root-Me</a>
-    <a href="https://www.anssi.gouv.fr/" target="_blank" class="rss-item">ANSSI</a>
-    <a href="https://attack.mitre.org/" target="_blank" class="rss-item">MITRE ATT&amp;CK</a>
-  </div>
-  <div class="section-label" style="margin-bottom:1rem;margin-top:2rem;"><span data-lang="fr">NOTES DE SYNTHÈSE</span><span data-lang="en">NOTES</span><span data-lang="ja">技術メモ</span></div>
-  <div class="blog-cards">
-    <div class="blog-card"><div class="blog-date">2025-11</div><div class="blog-title"><span data-lang="fr">Segmentation réseau : VLANs vs micro-segmentation</span><span data-lang="en">Network segmentation: VLANs vs micro-segmentation</span><span data-lang="ja">ネットワーク分割：VLANとマイクロセグメンテーション</span></div><div class="blog-excerpt"><span data-lang="fr">Les VLANs 802.1q restent la référence en PME, mais la micro-segmentation s'impose pour un Zero Trust réel en cloud hybride.</span><span data-lang="en">VLANs remain the SME standard, but micro-segmentation is essential for real Zero Trust in hybrid cloud.</span><span data-lang="ja">VLANは中小企業の標準。ハイブリッドクラウドのゼロトラストにはマイクロセグメンテーションが必要。</span></div></div>
-    <div class="blog-card"><div class="blog-date">2026-01</div><div class="blog-title"><span data-lang="fr">Wi-Fi 7 — Révolution ou évolution ?</span><span data-lang="en">Wi-Fi 7 — Revolution or evolution?</span><span data-lang="ja">Wi-Fi 7 — 革命か進化か？</span></div><div class="blog-excerpt"><span data-lang="fr">MLO permet 46 Gbps. Nouvelles implications pour les SI d'entreprise et nouveaux vecteurs d'attaque potentiels.</span><span data-lang="en">MLO enables 46 Gbps. New enterprise implications and potential attack vectors.</span><span data-lang="ja">MLOにより46 Gbps実現。企業インフラへの影響と新たな攻撃ベクター。</span></div></div>
-    <div class="blog-card"><div class="blog-date">2026-02</div><div class="blog-title"><span data-lang="fr">IA en cyberdéfense — SIEM nouvelle génération</span><span data-lang="en">AI in cyberdefense — Next-gen SIEM</span><span data-lang="ja">サイバー防衛のAI — 次世代SIEM</span></div><div class="blog-excerpt"><span data-lang="fr">SIEM nouvelle génération avec ML pour détection comportementale (UEBA), réduction des faux positifs.</span><span data-lang="en">Next-gen SIEM with ML for behavioral detection (UEBA), reducing false positives.</span><span data-lang="ja">次世代SIEMのUEBA ML統合で誤検知削減。</span></div></div>
+<section id="competences">
+  <div class="s-num">// 04</div>
+  <h2 class="s-title"><span data-lang="fr" style="display: inline;">Compétences</span><span data-lang="en" style="display:none">Skills</span><span data-lang="ja" style="display:none">スキル</span></h2>
+  <div class="skills-g">
+    <div class="sk-grp">
+      <div class="sk-title"><span data-lang="fr" style="display: inline;">Admin Système</span><span data-lang="en" style="display:none">System Admin</span><span data-lang="ja" style="display:none">システム管理</span></div>
+      <div class="sk-item">Windows Server / Active Directory</div>
+      <div class="sk-item">Linux — Arch, Debian, Kali, Ubuntu</div>
+      <div class="sk-item">GPO · LAPS · MDT</div>
+      <div class="sk-item">VMware Workstation / VirtualBox</div>
+      <div class="sk-item">VMware vSphere</div>
+      <div class="sk-item">Veeam Backup &amp; Replication</div>
+    </div>
+    <div class="sk-grp">
+      <div class="sk-title"><span data-lang="fr" style="display: inline;">Réseaux</span><span data-lang="en" style="display:none">Networking</span><span data-lang="ja" style="display:none">ネットワーク</span></div>
+      <div class="sk-item">Cisco / Cisco Meraki</div>
+      <div class="sk-item">VLANs 802.1q · Trunk</div>
+      <div class="sk-item">pfSense · Routage · NAT</div>
+      <div class="sk-item">Wireshark · SNMP</div>
+      <div class="sk-item">DNS / DHCP</div>
+      <div class="sk-item">PRTG Network Monitor</div>
+    </div>
+    <div class="sk-grp">
+      <div class="sk-title">Scripting</div>
+      <div class="sk-item">Bash</div>
+      <div class="sk-item">PowerShell</div>
+      <div class="sk-item">Python</div>
+      <div class="sk-item"><span data-lang="fr" style="display: inline;">Automatisation AD</span><span data-lang="en" style="display:none">AD Automation</span><span data-lang="ja" style="display:none">AD自動化</span></div>
+    </div>
+    <div class="sk-grp">
+      <div class="sk-title"><span data-lang="fr" style="display: inline;">Cybersécurité</span><span data-lang="en" style="display:none">Cybersecurity</span><span data-lang="ja" style="display:none">サイバーセキュリティ</span></div>
+      <div class="sk-item">Privilege Escalation</div>
+      <div class="sk-item">EBIOS Risk Manager</div>
+      <div class="sk-item">Metasploit / Nmap</div>
+      <div class="sk-item">Burp Suite</div>
+      <div class="sk-item">SOC · Kibana</div>
+      <div class="sk-item">RGPD · CIA Triad</div>
+    </div>
+    <div class="sk-grp">
+      <div class="sk-title"><span data-lang="fr" style="display: inline;">Supervision / ITSM</span><span data-lang="en" style="display:none">Monitoring / ITSM</span><span data-lang="ja" style="display:none">監視 / ITSM</span></div>
+      <div class="sk-item">Zabbix</div>
+      <div class="sk-item">GLPI (ITSM)</div>
+      <div class="sk-item">LDAP / LDAPS</div>
+      <div class="sk-item">PRTG Network Monitor</div>
+      <div class="sk-item">ManageEngine</div>
+    </div>
+    <div class="sk-grp">
+      <div class="sk-title"><span data-lang="fr" style="display: inline;">Langues</span><span data-lang="en" style="display:none">Languages</span><span data-lang="ja" style="display:none">言語</span></div>
+      <div class="sk-item">Français — Natif</div>
+      <div class="sk-item">Anglais — C1</div>
+      <div class="sk-item">Espagnol — B1</div>
+      <div class="sk-item">日本語 — N5</div>
+    </div>
   </div>
 </section>
-<hr class="section-divider">
+<hr class="div">
 
-<!-- PARCOURS -->
-<section id="parcours">
-  <div class="section-label">// 05</div>
-  <h2 class="section-title"><span data-lang="fr">Parcours &amp; Synthèse E5</span><span data-lang="en">Journey &amp; E5 Summary</span><span data-lang="ja">経歴 &amp; E5</span></h2>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;margin-bottom:3rem;">
-    <div>
-      <div class="section-label" style="margin-bottom:1rem;"><span data-lang="fr">CHRONOLOGIE</span><span data-lang="en">TIMELINE</span><span data-lang="ja">タイムライン</span></div>
-      <div class="timeline">
-        <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2018</div><div class="tl-school">Thalès — #GOM2018</div><div class="tl-details"><span data-lang="fr">Girls on the Move · STEM</span><span data-lang="en">Girls on the Move · STEM</span><span data-lang="ja">Girls on the Move · STEM</span></div></div>
-        <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2020 — 2023</div><div class="tl-school">Lycée Sadi Carnot</div><div class="tl-details"><span data-lang="fr">Baccalauréat Général · Mention Européenne</span><span data-lang="en">Baccalauréat · European Mention</span><span data-lang="ja">バカロレア · ヨーロッパ区分</span></div></div>
-        <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2023 — 2024</div><div class="tl-school">Université d'Artois</div><div class="tl-details"><span data-lang="fr">Licence LLCER Anglais · C1</span><span data-lang="en">English Literature Degree · C1</span><span data-lang="ja">英語文学 · C1</span></div></div>
-        <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2024 — 2026</div><div class="tl-school">Lycée André Malraux</div><div class="tl-details"><span data-lang="fr">BTS SIO SISR · Alternance sept. 2026</span><span data-lang="en">BTS SIO SISR · Apprenticeship Sept. 2026</span><span data-lang="ja">BTS SIO SISR · 2026年9月</span></div></div>
-        <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2024 — Root-Me PRO</div><div class="tl-school">3ème place nationale</div><div class="tl-details"><span data-lang="fr">Équipe FSociety · CTF</span><span data-lang="en">Team FSociety · CTF</span><span data-lang="ja">FSociety · CTF</span></div></div>
-        <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2025 — 2026</div><div class="tl-school">Enersys — Arras</div><div class="tl-details"><span data-lang="fr">2 stages informatique</span><span data-lang="en">2 IT internships</span><span data-lang="ja">IT実習2回</span></div></div>
+<section id="projets">
+  <div class="s-num">// 05</div>
+  <h2 class="s-title"><span data-lang="fr" style="display: inline;">Projets</span><span data-lang="en" style="display:none">Projects</span><span data-lang="ja" style="display:none">プロジェクト</span></h2>
+  <div class="proj-g">
+    <div class="proj-card">
+      <div class="proj-tag">Cybersécurité</div>
+      <div class="proj-title">🍯 Honeypot</div>
+      <div class="proj-sub"><span data-lang="fr" style="display: inline;">Piège réseau &amp; analyse d'attaques</span><span data-lang="en" style="display:none">Network trap &amp; attack analysis</span><span data-lang="ja" style="display:none">ネットワークトラップ &amp; 攻撃分析</span></div>
+      <p class="proj-desc"><span data-lang="fr" style="display: inline;">Déploiement d'un pot de miel pour capturer et analyser des tentatives d'intrusion réelles. Capture de trafic malveillant, analyse des logs et documentation des vecteurs d'attaque observés.</span><span data-lang="en" style="display:none">Deployed a honeypot to capture and analyze real intrusion attempts. Malicious traffic capture, log analysis and documentation of observed attack vectors.</span><span data-lang="ja" style="display:none">実際の侵入試みを捕捉・分析するためのハニーポットを展開。悪意あるトラフィックのキャプチャ、ログ分析、観察された攻撃ベクターの文書化。</span></p>
+      <div class="proj-techs"><span class="tech">Linux</span><span class="tech">Wireshark</span><span class="tech">Logs</span><span class="tech">Analyse réseau</span></div>
+      <div class="proj-links"><a href="https://github.com/RengokuChan" target="_blank" class="plink gh">GitHub ↗</a></div>
+    </div>
+    <div class="proj-card">
+      <div class="proj-tag">IA &amp; Dev</div>
+      <div class="proj-title">🤖 Hikari</div>
+      <div class="proj-sub"><span data-lang="fr" style="display: inline;">IA éducative interactive</span><span data-lang="en" style="display:none">Interactive educational AI</span><span data-lang="ja" style="display:none">インタラクティブ教育AI</span></div>
+      <p class="proj-desc"><span data-lang="fr" style="display: inline;">Conception et développement d'une IA à vocation pédagogique. Interface conversationnelle intuitive permettant à des utilisateurs non techniques d'interagir avec un modèle d'apprentissage automatique.</span><span data-lang="en" style="display:none">Design and development of an AI for educational purposes. Intuitive conversational interface allowing non-technical users to interact with a machine learning model.</span><span data-lang="ja" style="display:none">教育目的のAIを設計・開発。非技術ユーザーが機械学習モデルと対話できる直感的な会話インターフェース。</span></p>
+      <div class="proj-techs"><span class="tech">Python</span><span class="tech">API IA</span><span class="tech">Interface web</span></div>
+      <div class="proj-links"><a href="https://github.com/RengokuChan" target="_blank" class="plink gh">GitHub ↗</a></div>
+    </div>
+    <div class="proj-card">
+      <div class="proj-tag">Automatisation</div>
+      <div class="proj-title">🤖 Bot Discord Veille Cyber</div>
+      <div class="proj-sub"><span data-lang="fr" style="display: inline;">Agrégateur de menaces automatisé</span><span data-lang="en" style="display:none">Automated threat aggregator</span><span data-lang="ja" style="display:none">自動化された脅威アグリゲーター</span></div>
+      <p class="proj-desc"><span data-lang="fr" style="display: inline;">Bot Discord automatisé de veille cybersécurité. Collecte et redistribue en temps réel les alertes CVE, bulletins CERT-FR et flux ANSSI via des webhooks Discord personnalisés. Moteur Python + service systemd + PostgreSQL.</span><span data-lang="en" style="display:none">Automated Discord cybersecurity monitoring bot. Collects and redistributes CVE alerts, CERT-FR bulletins and ANSSI feeds in real-time via custom Discord webhooks. Python engine + systemd service + PostgreSQL.</span><span data-lang="ja" style="display:none">自動化されたDiscordサイバーセキュリティ監視ボット。CVEアラートをリアルタイムで配信。Pythonエンジン + systemdサービス + PostgreSQL。</span></p>
+      <div class="proj-techs"><span class="tech">Python</span><span class="tech">Discord API</span><span class="tech">PostgreSQL</span><span class="tech">systemd</span><span class="tech">CVE</span></div>
+      <div class="proj-links"><a href="https://github.com/RengokuChan" target="_blank" class="plink gh">GitHub ↗</a></div>
+    </div>
+    <div class="proj-card">
+      <div class="proj-tag">Web &amp; Design</div>
+      <div class="proj-title">🌐 Portfolio Cyberpunk</div>
+      <div class="proj-sub"><span data-lang="fr" style="display: inline;">Ce site — HTML/CSS/JS trilingue</span><span data-lang="en" style="display:none">This site — trilingual HTML/CSS/JS</span><span data-lang="ja" style="display:none">このサイト — トリリンガルHTML/CSS/JS</span></div>
+      <p class="proj-desc"><span data-lang="fr" style="display: inline;">Portfolio personnel trilingue (FR/EN/JA) au design cyberpunk. Navigation terminal, animations glitch, boot screen, tableau de synthèse E5 interactif. Hébergé sur GitHub Pages.</span><span data-lang="en" style="display:none">Trilingual (FR/EN/JA) personal portfolio with cyberpunk design. Terminal navigation, glitch animations, boot screen, interactive E5 table. Hosted on GitHub Pages.</span><span data-lang="ja" style="display:none">サイバーパンクデザイン of the trilingual individual portfolio. Terminal navigation, glitch animation, hosted on GitHub Pages.</span></p>
+      <div class="proj-techs"><span class="tech">HTML5</span><span class="tech">CSS3</span><span class="tech">JavaScript</span><span class="tech">GitHub Pages</span></div>
+      <div class="proj-links">
+        <a href="https://github.com/RengokuChan" target="_blank" class="plink gh">GitHub ↗</a>
+        <a href="#accueil" class="plink lv"><span data-lang="fr" style="display: inline;">En ligne ↗</span><span data-lang="en" style="display:none">Live ↗</span><span data-lang="ja" style="display:none">公開 ↗</span></a>
       </div>
     </div>
-    <div>
-      <div class="section-label" style="margin-bottom:1rem;"><span data-lang="fr">PROJETS</span><span data-lang="en">PROJECTS</span><span data-lang="ja">プロジェクト</span></div>
-      <div class="mission-card" style="margin-bottom:1rem;"><div class="mission-tag">Project</div><div class="mission-title">🍯 Honeypot</div><ul class="mission-details"><li><span data-lang="fr">Déploiement pot de miel, capture d'attaques</span><span data-lang="en">Honeypot deployment, attack capture</span><span data-lang="ja">ハニーポット展開</span></li><li><span data-lang="fr">Analyse des logs malveillants</span><span data-lang="en">Malicious log analysis</span><span data-lang="ja">ログ解析</span></li></ul></div>
-      <div class="mission-card"><div class="mission-tag">Project</div><div class="mission-title">🤖 Hikari (IA éducative)</div><ul class="mission-details"><li><span data-lang="fr">IA à vocation éducative</span><span data-lang="en">Educational AI project</span><span data-lang="ja">教育AI開発</span></li><li><span data-lang="fr">Interface pédagogique interactive</span><span data-lang="en">Interactive educational UI</span><span data-lang="ja">インタラクティブ教育UI</span></li></ul></div>
+  </div>
+</section>
+<hr class="div">
+
+<section id="stages">
+  <div class="s-num">// 06</div>
+  <h2 class="s-title"><span data-lang="fr" style="display: inline;">Stages — EnerSys SARL</span><span data-lang="en" style="display:none">Internships — EnerSys SARL</span><span data-lang="ja" style="display:none">実習 — EnerSys SARL</span></h2>
+
+  <div class="stage-intro">
+    <div class="stage-i-title">EnerSys SARL — Arras (62)</div>
+    <div class="stage-i-sub">2 stages · 26 mai–28 juin 2025 · janv.–fév. 2026</div>
+    <p class="stage-i-desc">
+      <span data-lang="fr" style="display: inline;">Durant mes stages chez EnerSys à Arras, j'ai intégré l'équipe IT pour participer à la gestion de l'infrastructure informatique. Environnement industriel exigeant — Windows Server, Cisco Meraki, VMware vSphere, MDT, Veeam, ManageEngine.</span>
+      <span data-lang="en" style="display:none">During my internships at EnerSys in Arras, I joined the IT team to manage IT infrastructure. Demanding industrial environment — Windows Server, Cisco Meraki, VMware vSphere, MDT, Veeam, ManageEngine.</span>
+      <span data-lang="ja" style="display:none">EnerSys（アラス）でのインターンでは、ITチームに参加しインフラ管理に携わりました。Windows Server、Cisco Meraki、VMware、MDT、Veeam環境。</span>
+    </p>
+    <button class="stage-btn" onclick="openM('stage')">
+      ▸ <span data-lang="fr" style="display: inline;">Voir le détail des missions</span><span data-lang="en" style="display:none">View mission details</span><span data-lang="ja" style="display:none">ミッション詳細を見る</span>
+    </button>
+  </div>
+
+  <div class="mission-g">
+    <div class="mission-card">
+      <div class="m-tag"><span data-lang="fr" style="display: inline;">Déploiement</span><span data-lang="en" style="display:none">Deployment</span><span data-lang="ja" style="display:none">展開</span></div>
+      <div class="m-title"><span data-lang="fr" style="display: inline;">Vague de renouvellement PC (MDT)</span><span data-lang="en" style="display:none">PC Renewal Wave (MDT)</span><span data-lang="ja" style="display:none">PC更新（MDT）</span></div>
+      <ul class="m-ul">
+        <li><span data-lang="fr" style="display: inline;">Déploiement via serveur MDT — Dell Precision</span><span data-lang="en" style="display:none">Deployment via MDT server — Dell Precision</span><span data-lang="ja" style="display:none">MDTサーバー経由展開 — Dell Precision</span></li>
+        <li><span data-lang="fr" style="display: inline;">Préparation PC via Heydo!</span><span data-lang="en" style="display:none">PC prep via Heydo!</span><span data-lang="ja" style="display:none">Heydo!でPC準備</span></li>
+        <li><span data-lang="fr" style="display: inline;">Transfert données par mappage réseau</span><span data-lang="en" style="display:none">Data transfer via network mapping</span><span data-lang="ja" style="display:none">ネットワークマッピングでデータ転送</span></li>
+      </ul>
+    </div>
+    <div class="mission-card">
+      <div class="m-tag">Support</div>
+      <div class="m-title"><span data-lang="fr" style="display: inline;">Support N1/N2 &amp; RDP</span><span data-lang="en" style="display:none">L1/L2 Support &amp; RDP</span><span data-lang="ja" style="display:none">サポートL1/L2 &amp; RDP</span></div>
+      <ul class="m-ul">
+        <li><span data-lang="fr" style="display: inline;">Assistance via TeamViewer · ManageEngine</span><span data-lang="en" style="display:none">Assistance via TeamViewer · ManageEngine</span><span data-lang="ja" style="display:none">TeamViewer · ManageEngineサポート</span></li>
+        <li><span data-lang="fr" style="display: inline;">Gestion accès serveurs via RDP</span><span data-lang="en" style="display:none">Server access via RDP</span><span data-lang="ja" style="display:none">RDP経由サーバーアクセス管理</span></li>
+        <li><span data-lang="fr" style="display: inline;">Sécurisation avec LAPS</span><span data-lang="en" style="display:none">Security with LAPS</span><span data-lang="ja" style="display:none">LAPSによるセキュリティ</span></li>
+      </ul>
+    </div>
+    <div class="mission-card">
+      <div class="m-tag"><span data-lang="fr" style="display: inline;">Réseau</span><span data-lang="en" style="display:none">Network</span><span data-lang="ja" style="display:none">ネットワーク</span></div>
+      <div class="m-title">Cisco Meraki</div>
+      <ul class="m-ul">
+        <li><span data-lang="fr" style="display: inline;">Administration cloud Cisco Meraki</span><span data-lang="en" style="display:none">Cisco Meraki cloud management</span><span data-lang="ja" style="display:none">Cisco Merakiクラウド管理</span></li>
+        <li><span data-lang="fr" style="display: inline;">Vérification branchements switch</span><span data-lang="en" style="display:none">Switch connections check</span><span data-lang="ja" style="display:none">スイッチ接続確認</span></li>
+        <li><span data-lang="fr" style="display: inline;">Ajout de prises physiques</span><span data-lang="en" style="display:none">Physical port additions</span><span data-lang="ja" style="display:none">物理ポート追加</span></li>
+      </ul>
+    </div>
+    <div class="mission-card">
+      <div class="m-tag"><span data-lang="fr" style="display: inline;">Virtualisation</span><span data-lang="en" style="display:none">Virtualisation</span><span data-lang="ja" style="display:none">仮想化</span></div>
+      <div class="m-title">VMware vSphere &amp; Veeam</div>
+      <ul class="m-ul">
+        <li><span data-lang="fr" style="display: inline;">Découverte VMware vSphere — snapshots</span><span data-lang="en" style="display:none">VMware vSphere discovery — snapshots</span><span data-lang="ja" style="display:none">VMware vSphere — スナップショット</span></li>
+        <li><span data-lang="fr" style="display: inline;">Sauvegardes &amp; restaurations Veeam</span><span data-lang="en" style="display:none">Veeam backups &amp; restores</span><span data-lang="ja" style="display:none">Veeamバックアップと復元</span></li>
+      </ul>
+    </div>
+    <div class="mission-card">
+      <div class="m-tag"><span data-lang="fr" style="display: inline;">Événement</span><span data-lang="en" style="display:none">Event</span><span data-lang="ja" style="display:none">イベント</span></div>
+      <div class="m-title"><span data-lang="fr" style="display: inline;">CEO Town Hall — Vidéoconférence mondiale</span><span data-lang="en" style="display:none">CEO Town Hall — Global video conference</span><span data-lang="ja" style="display:none">CEO Town Hall — グローバルビデオ会議</span></div>
+      <ul class="m-ul">
+        <li><span data-lang="fr" style="display: inline;">Suivi déploiement système vidéo mondial</span><span data-lang="en" style="display:none">Global video system deployment tracking</span><span data-lang="ja" style="display:none">グローバルビデオシステム展開追跡</span></li>
+        <li><span data-lang="fr" style="display: inline;">Coordination technique en live</span><span data-lang="en" style="display:none">Live technical coordination</span><span data-lang="ja" style="display:none">ライブ技術調整</span></li>
+      </ul>
+    </div>
+    <div class="mission-card">
+      <div class="m-tag">Administration</div>
+      <div class="m-title"><span data-lang="fr" style="display: inline;">Active Directory &amp; New Hires</span><span data-lang="en" style="display:none">Active Directory &amp; New Hires</span><span data-lang="ja" style="display:none">AD &amp; 新入社員</span></div>
+      <ul class="m-ul">
+        <li><span data-lang="fr" style="display: inline;">Création comptes AD pour nouveaux arrivants</span><span data-lang="en" style="display:none">AD account creation for new hires</span><span data-lang="ja" style="display:none">新入社員のADアカウント作成</span></li>
+        <li><span data-lang="fr" style="display: inline;">Affectation de GPO</span><span data-lang="en" style="display:none">GPO assignment</span><span data-lang="ja" style="display:none">GPO割り当て</span></li>
+        <li><span data-lang="fr" style="display: inline;">Rédaction documentations utilisateurs</span><span data-lang="en" style="display:none">User documentation writing</span><span data-lang="ja" style="display:none">ユーザー文書作成</span></li>
+      </ul>
     </div>
   </div>
-  <div class="section-label" style="margin-bottom:1rem;"><span data-lang="fr">TABLEAU E5</span><span data-lang="en">E5 TABLE</span><span data-lang="ja">E5テーブル</span></div>
-  <div style="overflow-x:auto;">
-    <table class="synth-table">
-      <thead><tr><th><span data-lang="fr">Réalisation</span><span data-lang="en">Achievement</span><span data-lang="ja">実績</span></th><th><span data-lang="fr">Contexte</span><span data-lang="en">Context</span><span data-lang="ja">コンテキスト</span></th><th>Compétences B1</th><th>Technologies</th></tr></thead>
+</section>
+<hr class="div">
+
+<section id="tableau">
+  <div class="s-num">// 07</div>
+  <h2 class="s-title"><span data-lang="fr" style="display: inline;">Tableau de Synthèse E5</span><span data-lang="en" style="display:none">E5 Synthesis Table</span><span data-lang="ja" style="display:none">E5テーブル</span></h2>
+  <div class="synth-wrap">
+    <table class="synth-tbl">
+      <thead><tr>
+        <th class="th-l"><span data-lang="fr" style="display: inline;">Réalisation professionnelle</span><span data-lang="en" style="display:none">Achievement</span><span data-lang="ja" style="display:none">実績</span></th>
+        <th>B1<br><span style="font-size:.45rem;color:var(--grey-l);font-weight:normal">Patrimoine</span></th>
+        <th>B2<br><span style="font-size:.45rem;color:var(--grey-l);font-weight:normal">Incidents</span></th>
+        <th>B3<br><span style="font-size:.45rem;color:var(--grey-l);font-weight:normal">Présence</span></th>
+        <th>B4<br><span style="font-size:.45rem;color:var(--grey-l);font-weight:normal">Projet</span></th>
+        <th>B5<br><span style="font-size:.45rem;color:var(--grey-l);font-weight:normal">Service</span></th>
+        <th>B6<br><span style="font-size:.45rem;color:var(--grey-l);font-weight:normal">Dev. Pro</span></th>
+      </tr></thead>
       <tbody>
-        <tr><td>Déploiement MDT</td><td>Enersys</td><td><span class="comp-tag">B1.1</span><span class="comp-tag">B1.2</span></td><td>MDT, Windows Server</td></tr>
-        <tr><td>Supervision PRTG</td><td>Enersys</td><td><span class="comp-tag">B1.4</span><span class="comp-tag">B1.5</span></td><td>PRTG, Cisco Meraki</td></tr>
-        <tr><td>AD + VLANs + GPO</td><td>GSB AP1</td><td><span class="comp-tag">B1.1</span><span class="comp-tag">B1.2</span><span class="comp-tag">B1.3</span></td><td>Windows Server, AD DS, HP2520</td></tr>
-        <tr><td>DMZ pfSense</td><td>GSB AP2</td><td><span class="comp-tag">B1.2</span><span class="comp-tag">B1.3</span></td><td>pfSense, Debian, Apache, HTTPS</td></tr>
-        <tr><td>PowerShell + Cluster HA</td><td>GSB AP3</td><td><span class="comp-tag">B1.1</span><span class="comp-tag">B1.6</span></td><td>PowerShell, Debian 12, Pacemaker</td></tr>
-        <tr><td>Zabbix + GLPI</td><td>GSB AP4</td><td><span class="comp-tag">B1.4</span><span class="comp-tag">B1.5</span></td><td>Zabbix, GLPI, AD Auth</td></tr>
+        <tr class="row-sep"><td colspan="7">// MILIEU PROFESSIONNEL — 1ÈRE ANNÉE (ENERSYS)</td></tr>
+        <tr><td class="td-l">Renouvellement laptops Dell Precision (MDT, backup mappage réseau)</td><td class="cy">✓</td><td class="cy">✓</td><td class="cn">—</td><td class="cy">✓</td><td class="cy">✓</td><td class="cn">—</td></tr>
+        <tr><td class="td-l">Support N1/N2 (ManageEngine, TeamViewer, RDP, LAPS)</td><td class="cy">✓</td><td class="cy">✓</td><td class="cn">—</td><td class="cy">✓</td><td class="cy">✓</td><td class="cy">✓</td></tr>
+        <tr><td class="td-l">Cisco Meraki — vérification branchements + ajout prises physiques</td><td class="cy">✓</td><td class="cy">✓</td><td class="cn">—</td><td class="cy">✓</td><td class="cy">✓</td><td class="cn">—</td></tr>
+        <tr><td class="td-l">Ajout branche PRTG avec sensors adéquats</td><td class="cy">✓</td><td class="cn">—</td><td class="cy">✓</td><td class="cn">—</td><td class="cn">—</td><td class="cn">—</td></tr>
+        <tr><td class="td-l">Admin sys — Veeam, Shadow Copy, vSphere</td><td class="cy">✓</td><td class="cn">—</td><td class="cn">—</td><td class="cn">—</td><td class="cn">—</td><td class="cn">—</td></tr>
+        <tr class="row-sep"><td colspan="7">// MILIEU PROFESSIONNEL — 2ÈME ANNÉE (ENERSYS)</td></tr>
+        <tr><td class="td-l">Renouvellement laptops Dell (MDT, backup mappage réseau)</td><td class="cy">✓</td><td class="cy">✓</td><td class="cn">—</td><td class="cy">✓</td><td class="cy">✓</td><td class="cn">—</td></tr>
+        <tr><td class="td-l">Support N1/N2 (ManageEngine, TeamViewer, RDP, LAPS)</td><td class="cy">✓</td><td class="cy">✓</td><td class="cn">—</td><td class="cy">✓</td><td class="cy">✓</td><td class="cy">✓</td></tr>
+        <tr><td class="td-l">Cisco Meraki — branchements + ajout prises</td><td class="cy">✓</td><td class="cy">✓</td><td class="cn">—</td><td class="cy">✓</td><td class="cy">✓</td><td class="cn">—</td></tr>
+        <tr><td class="td-l">Gestion Backup VEEAM</td><td class="cn">—</td><td class="cy">✓</td><td class="cn">—</td><td class="cn">—</td><td class="cn">—</td><td class="cn">—</td></tr>
+        <tr><td class="td-l">Accueil New Hire (PC, AD, GPO, documentation)</td><td class="cy">✓</td><td class="cy">✓</td><td class="cn">—</td><td class="cy">✓</td><td class="cy">✓</td><td class="cy">✓</td></tr>
+        <tr><td class="td-l">Documentation technique salles de réunion</td><td class="cn">—</td><td class="cn">—</td><td class="cn">—</td><td class="cn">—</td><td class="cy">✓</td><td class="cy">✓</td></tr>
+        <tr><td class="td-l">Suivi mise en place vidéoconférence CEO Town Hall</td><td class="cy">✓</td><td class="cy">✓</td><td class="cy">✓</td><td class="cy">✓</td><td class="cy">✓</td><td class="cy">✓</td></tr>
+        <tr><td class="td-l">Migration Trellix → BitLocker (Intune)</td><td class="cy">✓</td><td class="cy">✓</td><td class="cn">—</td><td class="cy">✓</td><td class="cn">—</td><td class="cn">—</td></tr>
+        <tr class="row-sep"><td colspan="7">// RÉALISATIONS EN COURS DE FORMATION (GSB)</td></tr>
+        <tr><td class="td-l">Mission 1 — Active Directory, VLANs 802.1q, GPO sur HP2520</td><td class="cy">✓</td><td class="cy">✓</td><td class="cn">—</td><td class="cy">✓</td><td class="cy">✓</td><td class="cn">—</td></tr>
+        <tr><td class="td-l">Mission 2 — DMZ pfSense, Debian Apache, PHP, MySQL, HTTPS</td><td class="cy">✓</td><td class="cy">✓</td><td class="cn">—</td><td class="cy">✓</td><td class="cy">✓</td><td class="cn">—</td></tr>
+        <tr><td class="td-l">Mission 3 — PowerShell AD, Cluster HA Debian 12</td><td class="cy">✓</td><td class="cy">✓</td><td class="cn">—</td><td class="cy">✓</td><td class="cy">✓</td><td class="cn">—</td></tr>
+        <tr><td class="td-l">Mission 4 — Zabbix, GLPI, SNMP, auth AD <span style="color:var(--cyan);font-size:.56rem">EN COURS</span></td><td class="cy">✓</td><td class="cy">✓</td><td class="cn">—</td><td class="cy">✓</td><td class="cy">✓</td><td class="cn">—</td></tr>
+        <tr><td class="td-l">Portfolio E5 — HTML/CSS/JS, trilingue FR/EN/JA</td><td class="cn">—</td><td class="cn">—</td><td class="cy">✓</td><td class="cn">—</td><td class="cn">—</td><td class="cy">✓</td></tr>
       </tbody>
     </table>
   </div>
 </section>
-<hr class="section-divider">
+<hr class="div">
 
-<!-- CONTACT -->
-<section id="contact">
-  <div class="section-label">// 06</div>
-  <h2 class="section-title">Contact</h2>
-  <div class="contact-grid">
-    <div class="terminal-card">
-      <div class="terminal-header"><div class="t-dot r"></div><div class="t-dot y"></div><div class="t-dot g"></div><div class="t-title-bar">CONTACT.SH</div></div>
-      <div class="t-prompt"><span>robina@portfolio</span>:~$ cat contact.json</div><br>
-      <div class="c-item"><div><span class="c-label">Email</span><a href="mailto:robinaijaz62700@gmail.com" class="c-value">robinaijaz62700@gmail.com</a></div></div>
-      <div class="c-item"><div><span class="c-label">LinkedIn</span><a href="https://www.linkedin.com/in/robina-ijaz" target="_blank" class="c-value">linkedin.com/in/robina-ijaz</a></div></div>
-      <div class="c-item"><div><span class="c-label">GitHub</span><a href="https://github.com/RengokuChan" target="_blank" class="c-value">github.com/RengokuChan</a></div></div>
-      <div class="c-item"><div><span class="c-label">Root-Me</span><a href="https://www.root-me.org/Robibi0809?lang=fr" target="_blank" class="c-value">root-me.org/Robibi0809</a></div></div><br>
-      <div class="t-line green">[STATUS] <span data-lang="fr">Cherche alternance SISR — Sept. 2026</span><span data-lang="en">Seeking SISR apprenticeship — Sept. 2026</span><span data-lang="ja">SISR アルタナンス募集中 — 2026年9月</span></div>
+<section id="veille">
+  <div class="s-num">// 08</div>
+  <h2 class="s-title"><span data-lang="fr" style="display: inline;">Veille Technologique</span><span data-lang="en" style="display:none">Technology Watch</span><span data-lang="ja" style="display:none">技術動向調査</span></h2>
+
+  <style>
+    .article-veille {
+      background: linear-gradient(135deg, rgba(10,14,21,0.95) 0%, rgba(6,10,15,0.98) 100%);
+      border: 1px solid rgba(224,0,26,0.25);
+      border-left: 3px solid var(--red);
+      padding: 2.5rem 3rem;
+      max-width: 900px;
+      margin-bottom: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .article-veille::before {
+      content: '';
+      position: absolute; top: 0; right: 0;
+      width: 200px; height: 200px;
+      background: radial-gradient(circle, rgba(224,0,26,0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .article-meta {
+      display: flex; align-items: center; gap: 1.5rem;
+      font-family: var(--mono); font-size: 0.6rem;
+      color: var(--grey); letter-spacing: 3px;
+      text-transform: uppercase; margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .article-meta .tag-cat {
+      background: rgba(224,0,26,0.15);
+      border: 1px solid rgba(224,0,26,0.35);
+      color: var(--red); padding: 3px 10px; font-size: 0.55rem; letter-spacing: 3px;
+    }
+    .article-meta .tag-date { color: var(--cyan); }
+    .article-h1 {
+      font-family: var(--disp); font-size: clamp(1.1rem, 2vw, 1.5rem);
+      font-weight: 900; color: var(--white);
+      line-height: 1.3; margin-bottom: 0.6rem;
+    }
+    .article-intro {
+      font-family: var(--mono); font-size: 0.72rem;
+      color: var(--cyan); border-left: 2px solid var(--cyan-dim);
+      padding-left: 1rem; margin-bottom: 2rem;
+      line-height: 1.8; font-style: italic;
+    }
+    .article-body {
+      font-family: var(--body); font-size: 0.95rem;
+      color: rgba(238,240,248,0.82); line-height: 1.85;
+    }
+    .article-body h3 {
+      font-family: var(--mono); font-size: 0.65rem;
+      color: var(--red); letter-spacing: 4px; text-transform: uppercase;
+      margin: 2rem 0 0.8rem; display: flex; align-items: center; gap: 0.6rem;
+    }
+    .article-body h3::after {
+      content: ''; flex: 1; height: 1px;
+      background: linear-gradient(90deg, rgba(224,0,26,0.3), transparent);
+    }
+    .article-body p { margin-bottom: 1rem; }
+    .article-body strong { color: var(--white); font-weight: 700; }
+    .article-body code {
+      font-family: var(--mono); font-size: 0.75rem;
+      background: rgba(224,0,26,0.08); border: 1px solid rgba(224,0,26,0.2);
+      padding: 1px 6px; color: var(--cyan);
+    }
+    .article-tags {
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+      margin-top: 2rem; padding-top: 1.5rem;
+      border-top: 1px solid rgba(224,0,26,0.12);
+    }
+    .article-tags span {
+      font-family: var(--mono); font-size: 0.55rem;
+      letter-spacing: 2px; padding: 3px 10px;
+      border: 1px solid rgba(0,240,216,0.2);
+      color: var(--cyan); background: rgba(0,240,216,0.04);
+    }
+    .article-cve-pill {
+      display: inline-block;
+      font-family: var(--mono); font-size: 0.6rem;
+      background: rgba(224,0,26,0.12); border: 1px solid rgba(224,0,26,0.3);
+      color: var(--red); padding: 2px 8px; margin: 2px;
+    }
+    .article-impact {
+      background: rgba(197,0,255,0.05); border-left: 2px solid var(--mag);
+      padding: 0.8rem 1.2rem; margin: 1.2rem 0;
+      font-family: var(--mono); font-size: 0.7rem; color: rgba(238,240,248,0.7);
+    }
+    .article-impact strong { color: var(--mag); }
+  </style>
+
+  <div class="article-veille">
+    <div class="article-meta">
+      <span class="tag-cat">Veille · Analyse annuelle</span>
+      <span class="tag-date">// 2024–2026</span>
+      <span>BTS SIO SISR · Cybersécurité Offensive</span>
     </div>
-    <div class="contact-form">
-      <div class="form-group"><label class="form-label"><span data-lang="fr">Nom</span><span data-lang="en">Name</span><span data-lang="ja">お名前</span></label><input type="text" class="form-input" id="f-name"></div>
-      <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" id="f-email"></div>
-      <div class="form-group"><label class="form-label">Message</label><textarea class="form-textarea" id="f-msg"></textarea></div>
-      <button class="submit-btn" onclick="sendMsg()"><span data-lang="fr">▸ Envoyer</span><span data-lang="en">▸ Send</span><span data-lang="ja">▸ 送信</span></button>
-      <div id="form-feedback" style="font-family:var(--mono);font-size:0.75rem;color:#00ff88;display:none;margin-top:0.5rem;">✓ <span data-lang="fr">Message envoyé (simulation)</span><span data-lang="en">Message sent (simulation)</span><span data-lang="ja">送信済み（シミュレーション）</span></div>
+
+    <h2 class="article-h1">
+      <span data-lang="fr" style="display: inline;">La cybersécurité en 2024–2025 : vulnérabilités systèmes, montée en puissance de l'IA offensive et évolution des menaces réseau</span>
+      <span data-lang="en" style="display:none">Cybersecurity in 2024–2025: System vulnerabilities, the rise of offensive AI and evolving network threats</span>
+      <span data-lang="ja" style="display:none">2024–2025年のサイバーセキュリティ：システム脆弱性、攻撃的AIの台頭、ネットワーク脅威の進化</span>
+    </h2>
+
+    <p class="article-intro">
+      <span data-lang="fr" style="display: inline;">Au cours de cette année de BTS SIO SISR, j'ai conduit une veille technologique continue sur la cybersécurité offensive et défensive, en m'appuyant sur des sources institutionnelles (CERT-FR, ANSSI, NVD NIST) et spécialisées (The Hacker News, BleepingComputer, Krebs on Security). Cet article en présente la synthèse analytique.</span>
+      <span data-lang="en" style="display:none">Throughout this BTS SIO SISR year, I conducted continuous technology watch on offensive and defensive cybersecurity, drawing on institutional sources (CERT-FR, ANSSI, NVD NIST) and specialist outlets (The Hacker News, BleepingComputer, Krebs on Security). This article presents the analytical synthesis.</span>
+      <span data-lang="ja" style="display:none">BTS SIO SISR在学中、CERT-FR、ANSSI、NVD NISTなどの機関ソースと専門メディアを基に、攻撃・防御サイバーセキュリティの継続的な技術調査を行った。本稿はその分析的まとめである。</span>
+    </p>
+
+    <div class="article-body">
+
+      <h3><span data-lang="fr" style="display: inline;">01 — Privilèges système & escalade de droits</span><span data-lang="en" style="display:none">01 — System privileges & privilege escalation</span><span data-lang="ja" style="display:none">01 — システム権限とエスカレーション</span></h3>
+
+      <p>
+        <span data-lang="fr" style="display: inline;">La gestion des privilèges sur les systèmes Linux reste l'un des vecteurs d'attaque les plus exploités. La faille <strong>CVE-2021-3156 « Baron Samedit »</strong> dans <code>sudo</code>, restée active en production sur des systèmes non mis à jour, illustre ce phénomène : un utilisateur local peut, par un débordement de tampon (<em>heap overflow</em>), obtenir les droits root sans aucun mot de passe. Cette vulnérabilité, corrigée en version 1.9.5p2, a mis en évidence l'importance critique du patch management et du principe de moindre privilège. Dans mes travaux pratiques GSB (Mission 3), j'ai directement manipulé les politiques de groupe Active Directory et les scripts PowerShell pour enforcer ce principe dans un environnement Windows Server hybride.</span>
+        <span data-lang="en" style="display:none">Linux privilege management remains one of the most exploited attack vectors. The <strong>CVE-2021-3156 "Baron Samedit"</strong> flaw in <code>sudo</code>, still active on unpatched systems, illustrates this: a local user can, via heap overflow, gain root rights without any password. This vulnerability, fixed in version 1.9.5p2, highlighted the critical importance of patch management and the principle of least privilege. In my GSB lab work (Mission 3), I directly manipulated Active Directory group policies and PowerShell scripts to enforce this principle in a hybrid Windows Server environment.</span>
+        <span data-lang="ja" style="display:none">Linuxシステムでの権限管理は最も悪用される攻撃ベクターの一つである。<code>sudo</code>の<strong>CVE-2021-3156 "Baron Samedit"</strong>脆弱性は、未パッチシステムでローカルユーザーがパスワードなしにroot権限を取得可能にする。バージョン1.9.5p2で修正されたこの脆弱性は、パッチ管理と最小権限の原則の重要性を示した。</span>
+      </p>
+
+      <div class="article-impact">
+        <strong><span data-lang="fr" style="display: inline;">Impact terrain observé</span><span data-lang="en" style="display:none">Observed field impact</span><span data-lang="ja" style="display:none">現場で観察された影響</span></strong><br>
+        <span data-lang="fr" style="display: inline;">Lors de mon stage EnerSys (2025–2026), j'ai constaté que plusieurs postes Linux maintenus en production tournaient sur des versions de <code>sudo</code> antérieures aux correctifs. La mise à jour systématique faisait partie des recommandations que j'ai formulées dans mes documentations techniques.</span>
+        <span data-lang="en" style="display:none">During my EnerSys internship (2025–2026), I observed that several Linux production workstations ran pre-patch versions of <code>sudo</code>. Systematic updates were among the recommendations I included in my technical documentation.</span>
+        <span data-lang="ja" style="display:none">EnerSysでのインターン中（2025–2026）、本番環境のLinux端末でパッチ未適用の<code>sudo</code>が動作していた。技術文書の推奨事項としてシステム更新を盛り込んだ。</span>
+      </div>
+
+      <h3><span data-lang="fr" style="display: inline;">02 — Segmentation réseau : VLANs, Zero Trust & menaces internes</span><span data-lang="en" style="display:none">02 — Network segmentation: VLANs, Zero Trust & insider threats</span><span data-lang="ja" style="display:none">02 — ネットワーク分割：VLAN、ゼロトラスト、内部脅威</span></h3>
+
+      <p>
+        <span data-lang="fr" style="display: inline;">La segmentation réseau a profondément évolué ces deux dernières années. Le modèle <strong>VLAN 802.1q</strong> demeure la référence en PME et en environnement industriel — ce que j'ai pu vérifier directement chez EnerSys avec la configuration Cisco Meraki — mais l'émergence du cloud hybride rend ce modèle insuffisant pour un <strong>Zero Trust</strong> réel. Les attaques de type <em>VLAN hopping</em>, qui exploitent les mauvaises configurations des ports trunk (mode <code>DTP auto</code> laissé actif), permettent à un attaquant positionné en interne de traverser les segments réseau sans autorisation. Ces techniques sont documentées dans le framework <strong>MITRE ATT&CK</strong> (T1599). La micro-segmentation, implémentée via des solutions NGFWs ou des SDN, constitue la réponse architecturale adaptée aux environnements hybrides.</span>
+        <span data-lang="en" style="display:none">Network segmentation has evolved significantly over the past two years. The <strong>VLAN 802.1q</strong> model remains the SME and industrial standard — verified directly at EnerSys with Cisco Meraki — but hybrid cloud growth makes this model insufficient for true <strong>Zero Trust</strong>. VLAN hopping attacks, exploiting trunk port misconfigurations (active <code>DTP auto</code> mode), allow internally-positioned attackers to traverse network segments without authorization. These techniques are documented in the <strong>MITRE ATT&CK</strong> framework (T1599). Micro-segmentation via NGFWs or SDN is the appropriate architectural response for hybrid environments.</span>
+        <span data-lang="ja" style="display:none"><strong>VLAN 802.1q</strong>はSMEおよび産業環境の標準であるが、ハイブリッドクラウドでは真の<strong>ゼロトラスト</strong>として不十分である。VLAN hopping攻撃はトランクポートの誤設定を悪用し、内部攻撃者が認可なしにセグメントを越えることを可能にする。NGFWやSDNによるマイクロセグメンテーションが適切な対策である。</span>
+      </p>
+
+      <h3><span data-lang="fr" style="display: inline;">03 — IA en cyberdéfense : SIEM nouvelle génération & détection comportementale</span><span data-lang="en" style="display:none">03 — AI in cyberdefense: next-gen SIEM & behavioral detection</span><span data-lang="ja" style="display:none">03 — サイバー防衛のAI：次世代SIEM & 行動検知</span></h3>
+
+      <p>
+        <span data-lang="fr" style="display: inline;">L'intégration de l'intelligence artificielle dans les outils de détection représente la transformation la plus significative de cette période. Les SIEM de nouvelle génération intègrent désormais des modules <strong>UEBA</strong> (<em>User and Entity Behavior Analytics</em>) basés sur le machine learning, permettant de détecter des anomalies comportementales que les règles statiques ne peuvent pas identifier : un compte administrateur se connectant à 3h du matin depuis une IP étrangère, ou un transfert de données anormalement volumineux vers un stockage cloud externe. Ces systèmes réduisent drastiquement les faux positifs — jusqu'à 60% selon les benchmarks Gartner 2024 — et permettent la corrélation en temps réel de milliers d'événements pour identifier des APT (<em>Advanced Persistent Threats</em>) dont la furtivité repose précisément sur l'étalement de l'attaque dans le temps.</span>
+        <span data-lang="en" style="display:none">AI integration in detection tools represents the most significant transformation of this period. Next-gen SIEMs now include machine learning-based <strong>UEBA</strong> (<em>User and Entity Behavior Analytics</em>) modules, detecting behavioral anomalies that static rules cannot identify: an admin account connecting at 3am from a foreign IP, or abnormally large data transfers to external cloud storage. These systems drastically reduce false positives — up to 60% according to 2024 Gartner benchmarks — and enable real-time correlation of thousands of events to identify APTs whose stealth relies on spreading the attack over time.</span>
+        <span data-lang="ja" style="display:none">AIの検知ツールへの統合はこの期間で最も重要な変革である。次世代SIEMにはMLベースの<strong>UEBA</strong>モジュールが搭載され、静的ルールでは検出不能な行動異常を検知できる。誤検知を最大60%（Gartner 2024比）削減し、時間をかけて潜伏するAPTをリアルタイムで相関検出する。</span>
+      </p>
+
+      <div class="article-impact">
+        <strong><span data-lang="fr" style="display: inline;">Lien avec mon bot de veille</span><span data-lang="en" style="display:none">Link to my monitoring bot</span><span data-lang="ja" style="display:none">監視ボットとの関連</span></strong><br>
+        <span data-lang="fr" style="display: inline;">Mon bot Discord de veille cybersécurité (Python + PostgreSQL + systemd) est une mise en pratique directe de ce principe de corrélation automatisée : il aggrège les flux CVE, CERT-FR et ANSSI pour redistribuer les alertes critiques en temps réel, reproduisant à petite échelle la logique d'un SIEM allégé.</span>
+        <span data-lang="en" style="display:none">My Discord cybersecurity monitoring bot (Python + PostgreSQL + systemd) directly implements this automated correlation principle: it aggregates CVE, CERT-FR and ANSSI feeds to redistribute critical alerts in real-time, reproducing at a smaller scale the logic of a lightweight SIEM.</span>
+        <span data-lang="ja" style="display:none">私のDiscordサイバーセキュリティ監視ボット（Python + PostgreSQL + systemd）はこの自動相関原則を直接実装している：CVE、CERT-FR、ANSSIフィードを集約してリアルタイムで重要アラートを再配信し、軽量SIEMのロジックを小規模で再現する。</span>
+      </div>
+
+      <h3><span data-lang="fr" style="display: inline;">04 — Chiffrement et gestion des endpoints : le cas BitLocker / Intune</span><span data-lang="en" style="display:none">04 — Encryption & endpoint management: the BitLocker / Intune case</span><span data-lang="ja" style="display:none">04 — 暗号化とエンドポイント管理：BitLocker / Intuneの事例</span></h3>
+
+      <p>
+        <span data-lang="fr" style="display: inline;">La migration des solutions de chiffrement full-disk vers des outils natifs Microsoft — illustrée par la migration <strong>Trellix → BitLocker</strong> que j'ai conduite chez EnerSys — reflète une tendance de fond : la consolidation des stacks de sécurité autour des écosystements existants (Microsoft 365 / Intune). BitLocker, géré via <strong>Microsoft Intune</strong>, offre une surface d'administration centralisée avec des politiques de rotation de clés automatisées, mais présente des limites sur les environnements non-Microsoft. La dépendance au TPM et l'absence de visibilité sur les clés de récupération mal gérées constituent des risques réels que j'ai documentés dans mes procédures techniques.</span>
+        <span data-lang="en" style="display:none">The migration from full-disk encryption solutions to native Microsoft tools — illustrated by the <strong>Trellix → BitLocker</strong> migration I conducted at EnerSys — reflects a fundamental trend: consolidating security stacks around existing ecosystems (Microsoft 365 / Intune). BitLocker, managed via <strong>Microsoft Intune</strong>, offers centralized administration with automated key rotation policies, but has limitations in non-Microsoft environments. TPM dependency and poor recovery key management visibility represent real risks I documented in my technical procedures.</span>
+        <span data-lang="ja" style="display:none">フルディスク暗号化ソリューションのMicrosoftネイティブツールへの移行——EnerSysで実施した<strong>Trellix → BitLocker</strong>移行が典型例——は、セキュリティスタックをMicrosoft 365 / Intuneに集約するトレンドを反映している。TPM依存性と回復キー管理の可視性欠如は技術文書に記録した実際のリスクである。</span>
+      </p>
+
+      <h3><span data-lang="fr" style="display: inline;">05 — Perspectives 2025–2026 : CTF, pentest & menaces émergentes</span><span data-lang="en" style="display:none">05 — Outlook 2025–2026: CTF, pentest & emerging threats</span><span data-lang="ja" style="display:none">05 — 展望2025–2026：CTF、ペンテスト、新興脅威</span></h3>
+
+      <p>
+        <span data-lang="fr" style="display: inline;">Ma participation au CTF <strong>Root-Me PRO Inter-Éducation</strong> avec l'équipe FSociety (3ème rang national) a constitué un laboratoire vivant de veille offensive. Les challenges abordés — exploitation de binaires, injection SQL avancée, reverse engineering, pivoting réseau — correspondent exactement aux techniques que les acteurs malveillants industrialisent en 2025. L'émergence des <strong>LLM offensifs</strong> (grands modèles de langage utilisés pour automatiser la rédaction de phishing ciblé, la génération de variantes de malwares ou le fuzzing de code) constitue la menace émergente la plus préoccupante pour les prochaines années, documentée dans les derniers rapports ENISA et Mandiant.</span>
+        <span data-lang="en" style="display:none">My participation in the <strong>Root-Me PRO Inter-Education</strong> CTF with team FSociety (3rd nationally) served as a live offensive intelligence laboratory. The challenges tackled — binary exploitation, advanced SQL injection, reverse engineering, network pivoting — match exactly what malicious actors are industrializing in 2025. The emergence of <strong>offensive LLMs</strong> (large language models used to automate targeted phishing, malware variant generation, or code fuzzing) constitutes the most concerning emerging threat for coming years, documented in the latest ENISA and Mandiant reports.</span>
+        <span data-lang="ja" style="display:none">FSocietyチームでの<strong>Root-Me PRO Inter-Education</strong> CTF（全国3位）は、攻撃型インテリジェンスの実践ラボとなった。バイナリ攻撃、高度SQLインジェクション、リバースエンジニアリング、ネットワークピボットは、2025年に悪意あるアクターが産業化している技術と一致する。<strong>攻撃的LLM</strong>の台頭（標的型フィッシング自動化、マルウェア変種生成、コードファジング）が今後最も懸念される新興脅威であり、最新のENISAおよびMandiantレポートに記録されている。</span>
+      </p>
+
+    </div>
+
+    <div class="article-tags">
+      <span>CVE-2021-3156</span>
+      <span>Sudo · Linux</span>
+      <span>VLAN 802.1q</span>
+      <span>Zero Trust</span>
+      <span>UEBA · SIEM</span>
+      <span>APT</span>
+      <span>BitLocker · Intune</span>
+      <span>CTF · Root-Me</span>
+      <span>CERT-FR · ANSSI</span>
+      <span>LLM Offensif</span>
+    </div>
+  </div>
+
+  <div class="rss-head">🇫🇷 <span data-lang="fr" style="display: inline;">Sources françaises</span><span data-lang="en" style="display:none">French sources</span><span data-lang="ja" style="display:none">フランス語ソース</span></div>
+  <div class="rss-g">
+    <a href="https://www.cert.ssi.gouv.fr/" target="_blank" class="rss-a"><span class="rss-lbl">OFFICIEL</span>🛡️ CERT-FR</a>
+    <a href="https://www.anssi.gouv.fr/" target="_blank" class="rss-a"><span class="rss-lbl">OFFICIEL</span>🏛️ ANSSI</a>
+    <a href="https://www.lemondeinformatique.fr/" target="_blank" class="rss-a"><span class="rss-lbl">PRESSE</span>📰 Le Monde Info</a>
+    <a href="https://www.zataz.com/" target="_blank" class="rss-a"><span class="rss-lbl">CYBER</span>🔴 ZATAZ</a>
+    <a href="https://www.lemagit.fr/" target="_blank" class="rss-a"><span class="rss-lbl">TECH</span>📡 LeMagIT</a>
+  </div>
+  <div class="rss-head">🇬🇧 <span data-lang="fr" style="display: inline;">Sources anglaises</span><span data-lang="en" style="display:none">English sources</span><span data-lang="ja" style="display:none">英語ソース</span></div>
+  <div class="rss-g">
+    <a href="https://thehackernews.com/" target="_blank" class="rss-a"><span class="rss-lbl">NEWS</span>💻 The Hacker News</a>
+    <a href="https://www.bleepingcomputer.com/" target="_blank" class="rss-a"><span class="rss-lbl">NEWS</span>🖥️ BleepingComputer</a>
+    <a href="https://krebsonsecurity.com/" target="_blank" class="rss-a"><span class="rss-lbl">BLOG</span>🔍 Krebs on Security</a>
+    <a href="https://attack.mitre.org/" target="_blank" class="rss-a"><span class="rss-lbl">FRAMEWORK</span>⚔️ MITRE ATT&amp;CK</a>
+    <a href="https://www.root-me.org/" target="_blank" class="rss-a"><span class="rss-lbl">CTF</span>🏆 Root-Me</a>
+    <a href="https://nvd.nist.gov/" target="_blank" class="rss-a"><span class="rss-lbl">CVE</span>📋 NVD NIST</a>
+  </div>
+  <div class="rss-head">🇯🇵 <span data-lang="fr" style="display: inline;">Sources japonaises</span><span data-lang="en" style="display:none">Japanese sources</span><span data-lang="ja" style="display:none">日本語ソース</span></div>
+  <div class="rss-g">
+    <a href="https://www.ipa.go.jp/security/" target="_blank" class="rss-a"><span class="rss-lbl">OFFICIEL</span>🏛️ IPA セキュリティ</a>
+    <a href="https://www.jpcert.or.jp/" target="_blank" class="rss-a"><span class="rss-lbl">CERT</span>🛡️ JPCERT/CC</a>
+    <a href="https://forest.watch.impress.co.jp/" target="_blank" class="rss-a"><span class="rss-lbl">TECH</span>🌲 窓の杜</a>
+  </div>
+</section>
+<hr class="div">
+
+<section id="contact">
+  <div class="s-num">// 09</div>
+  <h2 class="s-title">Contact</h2>
+  <div class="contact-grid">
+    <div>
+      <a href="mailto:robina.ijaz@example.com" class="ci-item">
+        <div class="ci-icon"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"></path></svg></div>
+        <div><div class="ci-lbl">EMAIL</div><div class="ci-val">robina.ijaz@example.com</div></div>
+      </a>
+      <a href="https://www.linkedin.com/in/robina-ijaz" target="_blank" class="ci-item">
+        <div class="ci-icon"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path></svg></div>
+        <div><div class="ci-lbl">LINKEDIN</div><div class="ci-val">linkedin.com/in/robina-ijaz</div></div>
+      </a>
+      <a href="https://github.com/RengokuChan" target="_blank" class="ci-item">
+        <div class="ci-icon"><svg viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"></path></svg></div>
+        <div><div class="ci-lbl">GITHUB</div><div class="ci-val">github.com/RengokuChan</div></div>
+      </a>
+      <a href="https://www.root-me.org/Robibi0809?lang=fr" target="_blank" class="ci-item">
+        <div class="ci-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" style="fill:none;stroke:var(--red);stroke-width:2;stroke-linecap:round"></path></svg></div>
+        <div><div class="ci-lbl">ROOT-ME</div><div class="ci-val">root-me.org · Robibi0809</div></div>
+      </a>
+    </div>
+    <div class="form-box">
+      <label class="flbl"><span data-lang="fr" style="display: inline;">Votre nom</span><span data-lang="en" style="display:none">Your name</span><span data-lang="ja" style="display:none">お名前</span></label>
+      <input class="finp" id="fn" type="text">
+      <label class="flbl">Email</label>
+      <input class="finp" id="fe" type="email">
+      <label class="flbl">Message</label>
+      <textarea class="ftxt" id="fm"></textarea>
+      <button class="fsbmt" onclick="sendMsg()">
+        ▸ <span data-lang="fr" style="display: inline;">Envoyer le message</span><span data-lang="en" style="display:none">Send message</span><span data-lang="ja" style="display:none">送信する</span>
+      </button>
+      <div id="form-ok">✓ <span data-lang="fr" style="display: inline;">Message envoyé — je vous réponds rapidement.</span><span data-lang="en" style="display:none">Message sent — I'll reply shortly.</span><span data-lang="ja" style="display:none">送信完了 — できるだけ早く返信します。</span></div>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-grid">
     <div>
-      <div class="footer-col-title"><span data-lang="fr">PLAN DU SITE</span><span data-lang="en">SITE MAP</span><span data-lang="ja">サイトマップ</span></div>
+      <div class="fc-title"><span data-lang="fr" style="display: inline;">PLAN DU SITE</span><span data-lang="en" style="display:none">SITE MAP</span><span data-lang="ja" style="display:none">サイトマップ</span></div>
       <ul class="footer-links">
-        <li><a href="#accueil"><span data-lang="fr">Accueil</span><span data-lang="en">Home</span><span data-lang="ja">ホーム</span></a></li>
-        <li><a href="#stage"><span data-lang="fr">Stage Enersys</span><span data-lang="en">Internship</span><span data-lang="ja">実習</span></a></li>
-        <li><a href="#ap">Missions AP — GSB</a></li>
-        <li><a href="#competences"><span data-lang="fr">Compétences</span><span data-lang="en">Skills</span><span data-lang="ja">スキル</span></a></li>
-        <li><a href="#veille">Veille / Watch</a></li>
+        <li><a href="#accueil"><span data-lang="fr" style="display: inline;">Accueil</span><span data-lang="en" style="display:none">Home</span><span data-lang="ja" style="display:none">ホーム</span></a></li>
+        <li><a href="#apropos"><span data-lang="fr" style="display: inline;">À propos</span><span data-lang="en" style="display:none">About</span><span data-lang="ja" style="display:none">自己紹介</span></a></li>
+        <li><a href="#certifications"><span data-lang="fr" style="display: inline;">Certifications</span><span data-lang="en" style="display:none">Certifications</span><span data-lang="ja" style="display:none">資格</span></a></li>
+        <li><a href="#projets"><span data-lang="fr" style="display: inline;">Projets</span><span data-lang="en" style="display:none">Projects</span><span data-lang="ja" style="display:none">プロジェクト</span></a></li>
+        <li><a href="#stages"><span data-lang="fr" style="display: inline;">Stages</span><span data-lang="en" style="display:none">Internships</span><span data-lang="ja" style="display:none">実習</span></a></li>
+        <li><a href="#veille"><span data-lang="fr" style="display: inline;">Veille</span><span data-lang="en" style="display:none">Watch</span><span data-lang="ja" style="display:none">技術調査</span></a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </div>
     <div>
-      <div class="footer-col-title">LÉGAL</div>
+      <div class="fc-title">LÉGAL</div>
       <ul class="footer-links">
-        <li><a href="#" onclick="openModal('cgu');return false;">CGU</a></li>
-        <li><a href="#" onclick="openModal('mentions');return false;"><span data-lang="fr">Mentions légales</span><span data-lang="en">Legal Notice</span><span data-lang="ja">法的通知</span></a></li>
-        <li><a href="#" onclick="openModal('privacy');return false;"><span data-lang="fr">Confidentialité</span><span data-lang="en">Privacy</span><span data-lang="ja">プライバシー</span></a></li>
+        <li><a onclick="openM('cgu')">CGU</a></li>
+        <li><a onclick="openM('mentions')"><span data-lang="fr" style="display: inline;">Mentions légales</span><span data-lang="en" style="display:none">Legal Notice</span><span data-lang="ja" style="display:none">法的通知</span></a></li>
+        <li><a onclick="openM('privacy')"><span data-lang="fr" style="display: inline;">Confidentialité</span><span data-lang="en" style="display:none">Privacy</span><span data-lang="ja" style="display:none">プライバシー</span></a></li>
       </ul>
     </div>
     <div>
-      <div class="footer-col-title">ROBINA IJAZ</div>
-      <p style="font-family:var(--mono);font-size:0.7rem;color:var(--grey);line-height:1.8;">BTS SIO SISR<br>Lycée André Malraux<br>Béthune, 62400<br>Hauts-de-France, France</p>
+      <div class="fc-title">ROBINA IJAZ</div>
+      <p style="font-family:var(--mono);font-size:.68rem;color:var(--grey-l);line-height:1.9">
+        BTS SIO SISR<br>
+        Lycée André Malraux · Béthune<br>
+        Bruay-la-Buissière · 62400<br>
+        Hauts-de-France, France
+      </p>
     </div>
   </div>
-  <div class="footer-bottom">© 2026 Robina Ijaz — BTS SIO SISR — <span style="color:var(--red);">Built with ❤️ &amp; ☕</span></div>
+  <div class="footer-btm">© 2026 Robina Ijaz — BTS SIO SISR — <span>Built with ❤️ &amp; ☕</span></div>
 </footer>
 
-<!-- CV MODAL -->
-<div id="cv-modal">
-  <div class="cv-modal-inner">
-    <button class="cv-close" onclick="closeCV()">✕ CLOSE</button>
-    <div style="font-family:var(--mono);font-size:0.7rem;color:var(--red);margin-bottom:1rem;">CV — ROBINA IJAZ</div>
-    <iframe class="cv-embed" src="CV_technique_Robina_Ijaz.pdf"></iframe>
-    <p style="font-family:var(--mono);font-size:0.65rem;color:var(--grey);margin-top:0.5rem;text-align:center;"><span data-lang="fr">Remplacez src="CV_technique_Robina_Ijaz.pdf" par le chemin vers votre PDF.</span><span data-lang="en">Replace src="CV_technique_Robina_Ijaz.pdf" with your PDF path.</span><span data-lang="ja">src="CV_technique_Robina_Ijaz.pdf"をPDFのパスに変更してください。</span></p>
+<button id="back-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<div class="m-ov" id="m-cv">
+  <div class="m-box">
+    <div class="m-bar"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+      <div class="m-ttl">CV — ROBINA IJAZ</div>
+      <button class="m-close" onclick="closeM('cv')">✕ FERMER</button></div>
+    <div class="m-body">
+      <iframe src="CV_technique_Robina_Ijaz.pdf" style="width:100%;height:70vh;border:none;display:block;"></iframe>
+    </div>
   </div>
 </div>
 
-<!-- LEGAL MODALS -->
-<div class="modal-overlay" id="modal-cgu"><div class="modal-box"><button class="modal-close" onclick="closeModal('cgu')">✕</button><h2>CGU</h2><p><span data-lang="fr">Portfolio personnel académique — BTS SIO SISR. Usage libre. Reproduction interdite sans autorisation.</span><span data-lang="en">Personal academic portfolio — BTS SIO SISR. Free use. Reproduction prohibited without authorisation.</span><span data-lang="ja">個人ポートフォリオ。事前許可なしの複製は禁止。</span></p></div></div>
-<div class="modal-overlay" id="modal-mentions"><div class="modal-box"><button class="modal-close" onclick="closeModal('mentions')">✕</button><h2><span data-lang="fr">MENTIONS LÉGALES</span><span data-lang="en">LEGAL NOTICE</span><span data-lang="ja">法的通知</span></h2><p><strong style="color:var(--red);">Responsable :</strong><br><span style="color:#8a9ab5;">Robina Ijaz — robinaijaz62700@gmail.com</span><br><br><strong style="color:var(--red);">Hébergement :</strong><br><span style="color:#8a9ab5;">GitHub Pages / serveur personnel</span></p></div></div>
-<div class="modal-overlay" id="modal-privacy"><div class="modal-box"><button class="modal-close" onclick="closeModal('privacy')">✕</button><h2><span data-lang="fr">CONFIDENTIALITÉ</span><span data-lang="en">PRIVACY</span><span data-lang="ja">プライバシー</span></h2><p><span data-lang="fr">Aucune donnée collectée. Formulaire de démonstration. Pas de cookies de traçage. Conforme RGPD.</span><span data-lang="en">No data collected. Demo form only. No tracking cookies. GDPR compliant.</span><span data-lang="ja">データ収集なし。フォームはデモ用。GDPRに準拠。</span></p></div></div>
+<div class="m-ov" id="m-stage">
+  <div class="m-box">
+    <div class="m-bar"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+      <div class="m-ttl">ENERSYS_STAGES.LOG — MISSIONS COMPLÈTES</div>
+      <button class="m-close" onclick="closeM('stage')">✕ FERMER</button></div>
+    <div class="m-body">
+      <h3>PRÉSENTATION — ENERSYS SARL ARRAS</h3>
+      <p class="m-intro"><span data-lang="fr" style="display: inline;">Durant mes stages chez EnerSys à Arras (26 mai–28 juin 2025 &amp; janv.–fév. 2026), j'ai intégré l'équipe IT pour participer à la gestion de l'infrastructure informatique dans un environnement industriel exigeant.</span></p>
+      <h3>MISSIONS RÉALISÉES</h3>
+      <ul class="m-ul">
+        <li>Vague de renouvellement de PC (MDT)</li>
+        <li>Préparation PC Heydo!</li>
+        <li>Support N1/N2 (TeamViewer, ManageEngine)</li>
+        <li>Migration Trellix → BitLocker</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="m-ov" id="m-cgu"><div class="m-box"><div class="m-bar"><div class="m-ttl">CGU</div><button class="m-close" onclick="closeM('cgu')">✕</button></div><div class="m-body"><p>Portfolio personnel académique — BTS SIO SISR.</p></div></div></div>
+<div class="m-ov" id="m-mentions"><div class="m-box"><div class="m-bar"><div class="m-ttl">MENTIONS LÉGALES</div><button class="m-close" onclick="closeM('mentions')">✕</button></div><div class="m-body"><p>Responsable : Robina Ijaz. Hébergement : GitHub Pages.</p></div></div></div>
+<div class="m-ov" id="m-privacy"><div class="m-box"><div class="m-bar"><div class="m-ttl">CONFIDENTIALITÉ</div><button class="m-close" onclick="closeM('privacy')">✕</button></div><div class="m-body"><p>Aucune donnée collectée. Conforme RGPD.</p></div></div></div>
 
 <script>
-// BOOT — auto-dismiss + click to skip
+/* ── BOOT ── */
 (function(){
-  var boot = document.getElementById('boot-screen');
+  var b=document.getElementById('boot');
+  if(!b) return;
+  var dismissed=false;
   function dismiss(){
-    boot.classList.add('fade-out');
-    setTimeout(function(){ boot.style.display='none'; }, 650);
+    if(dismissed) return;
+    dismissed=true;
+    b.classList.add('out');
+    setTimeout(function(){ 
+      b.style.display='none'; 
+      b.style.visibility='hidden'; 
+    }, 600);
   }
-  setTimeout(dismiss, 3500);
-  boot.addEventListener('click', dismiss);
+  setTimeout(dismiss, 3600);
+  b.addEventListener('click', dismiss);
+  setTimeout(function(){ if(!dismissed){ dismiss(); } }, 5000);
 })();
 
-// CLOCK
-function tick(){
-  var n=new Date(), el=document.getElementById('nav-clock');
-  if(el) el.textContent=[n.getHours(),n.getMinutes(),n.getSeconds()].map(function(v){return String(v).padStart(2,'0');}).join(':');
-}
-tick(); setInterval(tick,1000);
-
-// LANG
+/* ── LANG ── */
 var lang='fr';
 function setLang(l){
   lang=l;
   document.querySelectorAll('[data-lang]').forEach(function(el){
-    var match=el.getAttribute('data-lang')===l;
-    var tag=el.tagName.toLowerCase();
-    el.style.display = match ? (tag==='span'?'inline':'block') : 'none';
+    var show = el.getAttribute('data-lang')===l;
+    var tag  = el.tagName.toLowerCase();
+    el.style.display = show ? ((tag==='span'||tag==='a') ? 'inline' : 'block') : 'none';
   });
-  document.querySelectorAll('.lang-btn').forEach(function(b){
-    b.classList.toggle('active', b.textContent.trim()===l.toUpperCase()||(l==='ja'&&b.textContent.includes('日')));
+  ['fr','en','ja'].forEach(function(lng){
+    document.querySelectorAll('.nl-'+lng).forEach(function(a){
+      a.style.display = (lng===l) ? 'block' : 'none';
+    });
+  });
+  document.querySelectorAll('.lb').forEach(function(btn){
+    var t=btn.textContent.trim();
+    var match=(l==='fr'&&t==='FR')||(l==='en'&&t==='EN')||(l==='ja'&&t==='日');
+    btn.classList.toggle('act', match);
   });
   document.documentElement.lang=l;
 }
 setLang('fr');
 
-// CV
-function openCV(){ document.getElementById('cv-modal').classList.add('open'); }
-function closeCV(){ document.getElementById('cv-modal').classList.remove('open'); }
-document.getElementById('cv-modal').addEventListener('click',function(e){ if(e.target===this) closeCV(); });
-
-// MODALS
-function openModal(id){ document.getElementById('modal-'+id).classList.add('open'); }
-function closeModal(id){ document.getElementById('modal-'+id).classList.remove('open'); }
-document.querySelectorAll('.modal-overlay').forEach(function(m){
-  m.addEventListener('click',function(e){ if(e.target===this) this.classList.remove('open'); });
+/* ── ACTIVE NAV ── */
+var backBtn=document.getElementById('back-btn');
+window.addEventListener('scroll', function(){
+  var cur='';
+  document.querySelectorAll('section[id]').forEach(function(s){
+    if(window.scrollY >= s.offsetTop-80) cur=s.id;
+  });
+  document.querySelectorAll('.nav-links a').forEach(function(a){
+    a.classList.toggle('act', a.getAttribute('href')==='#'+cur);
+  });
+  if(backBtn) backBtn.classList.toggle('vis', window.scrollY>500);
 });
 
-// FORM
+/* ── MODALS ── */
+function openM(id){ var el=document.getElementById('m-'+id); if(el) el.classList.add('open'); }
+function closeM(id){ var el=document.getElementById('m-'+id); if(el) el.classList.remove('open'); }
+document.querySelectorAll('.m-ov').forEach(function(ov){
+  ov.addEventListener('click', function(e){ if(e.target===this) this.classList.remove('open'); });
+});
+
+/* ── CONTACT FORM ── */
 function sendMsg(){
-  var name=document.getElementById('f-name').value;
-  var email=document.getElementById('f-email').value;
-  var msg=document.getElementById('f-msg').value;
-  if(name&&email&&msg){
-    var fb=document.getElementById('form-feedback');
-    fb.style.display='block';
-    setTimeout(function(){ fb.style.display='none'; },4000);
+  var n=document.getElementById('fn').value;
+  var e=document.getElementById('fe').value;
+  var m=document.getElementById('fm').value;
+  if(n&&e&&m){
+    var ok=document.getElementById('form-ok');
+    ok.style.display='block';
+    setTimeout(function(){ ok.style.display='none'; }, 5000);
   }
 }
 
-// ACTIVE NAV
-window.addEventListener('scroll',function(){
-  var cur='';
-  document.querySelectorAll('section[id]').forEach(function(s){
-    if(window.scrollY>=s.offsetTop-80) cur=s.id;
-  });
-  document.querySelectorAll('.nav-links a').forEach(function(a){
-    a.style.background = a.getAttribute('href')==='#'+cur ? 'var(--red)' : '';
-  });
-});
+/* ── GLITCH ── */
+var hn=document.querySelector('h1.hero-name');
+if(hn){
+  setInterval(function(){
+    if(Math.random()>.96){
+      hn.style.transform='skew('+(Math.random()-.5)*1.4+'deg)';
+      setTimeout(function(){ hn.style.transform=''; }, 65);
+    }
+  }, 250);
+}
 
-// GLITCH
-var hn=document.querySelector('.hero-name');
-if(hn){ setInterval(function(){ if(Math.random()>0.97){ hn.style.transform='skew('+(Math.random()-0.5)*2+'deg)'; setTimeout(function(){ hn.style.transform=''; },80); } },200); }
-
-// CURSOR TRAIL
-var cv=document.createElement('canvas');
-cv.style.cssText='position:fixed;top:0;left:0;pointer-events:none;z-index:9998;opacity:0.35';
-document.body.appendChild(cv);
-var cx=cv.getContext('2d');
-function rs(){ cv.width=window.innerWidth; cv.height=window.innerHeight; }
-rs(); window.addEventListener('resize',rs);
-var dots=[];
-window.addEventListener('mousemove',function(e){ dots.push({x:e.clientX,y:e.clientY,l:18}); if(dots.length>30) dots.shift(); });
-(function loop(){
-  cx.clearRect(0,0,cv.width,cv.height);
-  for(var i=dots.length-1;i>=0;i--){
-    var d=dots[i];
-    cx.beginPath(); cx.arc(d.x,d.y,2,0,Math.PI*2);
-    cx.fillStyle='rgba(0,255,229,'+(d.l/18*0.6)+')'; cx.fill();
-    d.l--; if(d.l<=0) dots.splice(i,1);
+/* ── CURSOR TRAIL ── */
+(function(){
+  var cv=document.getElementById('trail');
+  if(!cv) return;
+  var cx=cv.getContext('2d');
+  function resize(){ cv.width=window.innerWidth; cv.height=window.innerHeight; }
+  resize(); window.addEventListener('resize', resize);
+  var pts=[];
+  var colors=['224,0,26','0,240,216','197,0,255'];
+  window.addEventListener('mousemove', function(e){
+    pts.push({x:e.clientX, y:e.clientY, a:1, c:colors[Math.floor(Math.random()*colors.length)]});
+    if(pts.length>40) pts.shift();
+  });
+  function loop(){
+    cx.clearRect(0,0,cv.width,cv.height);
+    for(var i=0; i<pts.length; i++){
+      var p = pts[i];
+      p.a -= 0.02;
+      if(p.a <= 0) { pts.splice(i,1); i--; continue; }
+      cx.beginPath();
+      cx.arc(p.x, p.y, 2, 0, Math.PI*2);
+      cx.fillStyle = 'rgba(' + p.c + ',' + p.a + ')';
+      cx.fill();
+    }
+    requestAnimationFrame(loop);
   }
-  requestAnimationFrame(loop);
+  loop();
 })();
 </script>
 </body>
