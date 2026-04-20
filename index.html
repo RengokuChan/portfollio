@@ -127,7 +127,6 @@ body {
 .b-line:nth-child(11) { animation: bShow .08s 2.15s forwards; }
 @keyframes bShow { to { opacity: 1; } }
 
-/* ANIMATION DE SORTIE FIXÉE */
 @keyframes bootOut { 
   from { opacity: 1; transform: scale(1); }
   to { opacity: 0; transform: scale(1.05); visibility: hidden; }
@@ -279,13 +278,7 @@ svg.ico { width: 14px; height: 14px; fill: currentColor; flex-shrink: 0; }
   content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none;
   background: linear-gradient(180deg, rgba(0,240,216,.12) 0%, transparent 35%, transparent 65%, rgba(224,0,26,.15) 100%);
 }
-/* IMAGE DE PROFIL MISE À JOUR */
-.av-frame img { 
-  width: 100%; height: 100%; 
-  object-fit: cover; 
-  filter: saturate(.85) contrast(1.1) brightness(.9); 
-  display: block; 
-}
+.av-frame img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.75) contrast(1.2) brightness(.88); display: block; }
 .av-scan {
   position: absolute; left: 0; right: 0; height: 2px; z-index: 5;
   background: linear-gradient(90deg, transparent, var(--cyan), transparent);
@@ -688,7 +681,7 @@ footer {
 
     <div class="hero-avatar">
       <div class="av-frame">
-        <img src="pp portfolio.png" alt="Robina Ijaz">
+        <img src="pp_portfolio.png" alt="Robina Ijaz">
         <div class="av-scan"></div>
         <div class="av-c tl"></div><div class="av-c tr"></div>
         <div class="av-c bl"></div><div class="av-c br"></div>
@@ -736,7 +729,7 @@ footer {
       <p class="about-text">
         <span data-lang="fr" style="display: inline;">En 2 ans, j'ai obtenu plusieurs certifications, participé à des CTF nationaux avec l'équipe FSociety (3ème place Root-Me PRO inter-édu), réalisé deux stages chez EnerSys à Arras, et développé des projets personnels autour de la cyber-veille et de l'IA.</span>
         <span data-lang="en" style="display:none">In 2 years, I've earned multiple certifications, competed in national CTFs with team FSociety (3rd place Root-Me PRO inter-edu), completed two internships at EnerSys in Arras, and built personal projects around cyber-monitoring and AI.</span>
-        <span data-lang="ja" style="display:none">2年間で複数の資格取得、FSocietyチームで全国CTF3位、EnerSysでのインターン2回、サイバー監視とAIに関するプロジェクトを開発。</span>
+        <span data-lang="ja" style="display:none">2年間で複数の資格取得, FSocietyチームで全国CTF3位, EnerSysでのインターン2回, サイバー監視とAIに関するプロジェクトを開発。</span>
       </p>
       <p class="about-text cyan-accent">
         <span data-lang="fr" style="display: inline;">Mon objectif : intégrer une Licence 3 informatique à l'Ensemble Baudimont d'Arras en septembre 2026, puis un Master spécialisé en cybersécurité. À terme, travailler dans la sécurité offensive — et peut-être au Japon.</span>
@@ -785,7 +778,7 @@ footer {
       <div class="tl-dot"></div>
       <div class="tl-yr">2024 — Root-Me PRO inter-édu</div>
       <div class="tl-school">🏆 3ème place nationale — Équipe FSociety</div>
-      <div class="tl-det"><span data-lang="fr" style="display: inline;">Challenges système, reverse engineering, cybersécurité · Format une journée</span><span data-lang="en" style="display:none">System, reverse engineering, cybersecurity challenges · One-day format</span><span data-lang="ja" style="display:none">システム、リバースエンジニアリング、サイバーセキュリティ · 1日形式</span></div>
+      <div class="tl-det"><span data-lang="fr" style="display: inline;">Challenges système, reverse engineering, cybersécurité · Format une journée</span><span data-lang="en" style="display:none">System, reverse engineering, cybersecurity challenges · One-day format</span><span data-lang="ja" style="display:none">システム, リバースエンジニアリング, サイバーセキュリティ · 1日形式</span></div>
     </div>
     <div class="tl-item">
       <div class="tl-dot"></div>
@@ -932,7 +925,7 @@ footer {
     <p class="stage-i-desc">
       <span data-lang="fr" style="display: inline;">Durant mes stages chez EnerSys à Arras, j'ai intégré l'équipe IT pour participer à la gestion de l'infrastructure informatique. Environnement industriel exigeant — Windows Server, Cisco Meraki, VMware vSphere, MDT, Veeam, ManageEngine.</span>
       <span data-lang="en" style="display:none">During my internships at EnerSys in Arras, I joined the IT team to manage IT infrastructure. Demanding industrial environment — Windows Server, Cisco Meraki, VMware vSphere, MDT, Veeam, ManageEngine.</span>
-      <span data-lang="ja" style="display:none">EnerSys（アラス）でのインターンでは、ITチームに参加しインフラ管理に携わりました。Windows Server、Cisco Meraki、VMware、MDT、Veeam環境。</span>
+      <span data-lang="ja" style="display:none">EnerSys（アラス）でのインターンでは, ITチームに参加しインフラ管理に携わりました。Windows Server, Cisco Meraki, VMware, MDT, Veeam環境。</span>
     </p>
     <button class="stage-btn" onclick="openM('stage')">
       ▸ <span data-lang="fr" style="display: inline;">Voir le détail des missions</span><span data-lang="en" style="display:none">View mission details</span><span data-lang="ja" style="display:none">ミッション詳細を見る</span>
@@ -1139,13 +1132,13 @@ footer {
     <h2 class="article-h1">
       <span data-lang="fr" style="display: inline;">La cybersécurité en 2024–2025 : vulnérabilités systèmes, montée en puissance de l'IA offensive et évolution des menaces réseau</span>
       <span data-lang="en" style="display:none">Cybersecurity in 2024–2025: System vulnerabilities, the rise of offensive AI and evolving network threats</span>
-      <span data-lang="ja" style="display:none">2024–2025年のサイバーセキュリティ：システム脆弱性、攻撃的AIの台頭、ネットワーク脅威の進化</span>
+      <span data-lang="ja" style="display:none">2024–2025年のサイバーセキュリティ：システム脆弱性, 攻撃的AIの台頭, ネットワーク脅威の進化</span>
     </h2>
 
     <p class="article-intro">
       <span data-lang="fr" style="display: inline;">Au cours de cette année de BTS SIO SISR, j'ai conduit une veille technologique continue sur la cybersécurité offensive et défensive, en m'appuyant sur des sources institutionnelles (CERT-FR, ANSSI, NVD NIST) et spécialisées (The Hacker News, BleepingComputer, Krebs on Security). Cet article en présente la synthèse analytique.</span>
       <span data-lang="en" style="display:none">Throughout this BTS SIO SISR year, I conducted continuous technology watch on offensive and defensive cybersecurity, drawing on institutional sources (CERT-FR, ANSSI, NVD NIST) and specialist outlets (The Hacker News, BleepingComputer, Krebs on Security). This article presents the analytical synthesis.</span>
-      <span data-lang="ja" style="display:none">BTS SIO SISR在学中、CERT-FR、ANSSI、NVD NISTなどの機関ソースと専門メディアを基に、攻撃・防御サイバーセキュリティの継続的な技術調査を行った。本稿はその分析的まとめである。</span>
+      <span data-lang="ja" style="display:none">BTS SIO SISR在学中, CERT-FR, ANSSI, NVD NISTなどの機関ソースと専門メディアを基に, 攻撃・防御サイバーセキュリティの継続的な技術調査を行った。本稿はその分析的まとめである。</span>
     </p>
 
     <div class="article-body">
@@ -1155,22 +1148,22 @@ footer {
       <p>
         <span data-lang="fr" style="display: inline;">La gestion des privilèges sur les systèmes Linux reste l'un des vecteurs d'attaque les plus exploités. La faille <strong>CVE-2021-3156 « Baron Samedit »</strong> dans <code>sudo</code>, restée active en production sur des systèmes non mis à jour, illustre ce phénomène : un utilisateur local peut, par un débordement de tampon (<em>heap overflow</em>), obtenir les droits root sans aucun mot de passe. Cette vulnérabilité, corrigée en version 1.9.5p2, a mis en évidence l'importance critique du patch management et du principe de moindre privilège. Dans mes travaux pratiques GSB (Mission 3), j'ai directement manipulé les politiques de groupe Active Directory et les scripts PowerShell pour enforcer ce principe dans un environnement Windows Server hybride.</span>
         <span data-lang="en" style="display:none">Linux privilege management remains one of the most exploited attack vectors. The <strong>CVE-2021-3156 "Baron Samedit"</strong> flaw in <code>sudo</code>, still active on unpatched systems, illustrates this: a local user can, via heap overflow, gain root rights without any password. This vulnerability, fixed in version 1.9.5p2, highlighted the critical importance of patch management and the principle of least privilege. In my GSB lab work (Mission 3), I directly manipulated Active Directory group policies and PowerShell scripts to enforce this principle in a hybrid Windows Server environment.</span>
-        <span data-lang="ja" style="display:none">Linuxシステムでの権限管理は最も悪用される攻撃ベクターの一つである。<code>sudo</code>の<strong>CVE-2021-3156 "Baron Samedit"</strong>脆弱性は、未パッチシステムでローカルユーザーがパスワードなしにroot権限を取得可能にする。バージョン1.9.5p2で修正されたこの脆弱性は、パッチ管理と最小権限の原則の重要性を示した。</span>
+        <span data-lang="ja" style="display:none">Linuxシステムでの権限管理は最も悪用される攻撃ベクターの一つである。<code>sudo</code>の<strong>CVE-2021-3156 "Baron Samedit"</strong>脆弱性は, 未パッチシステムでローカルユーザーがパスワードなしにroot権限を取得可能にする。バージョン1.9.5p2で修正されたこの脆弱性は, パッチ管理と最小権限の原則の重要性を示した。</span>
       </p>
 
       <div class="article-impact">
         <strong><span data-lang="fr" style="display: inline;">Impact terrain observé</span><span data-lang="en" style="display:none">Observed field impact</span><span data-lang="ja" style="display:none">現場で観察された影響</span></strong><br>
         <span data-lang="fr" style="display: inline;">Lors de mon stage EnerSys (2025–2026), j'ai constaté que plusieurs postes Linux maintenus en production tournaient sur des versions de <code>sudo</code> antérieures aux correctifs. La mise à jour systématique faisait partie des recommandations que j'ai formulées dans mes documentations techniques.</span>
         <span data-lang="en" style="display:none">During my EnerSys internship (2025–2026), I observed that several Linux production workstations ran pre-patch versions of <code>sudo</code>. Systematic updates were among the recommendations I included in my technical documentation.</span>
-        <span data-lang="ja" style="display:none">EnerSysでのインターン中（2025–2026）、本番環境のLinux端末でパッチ未適用の<code>sudo</code>が動作していた。技術文書の推奨事項としてシステム更新を盛り込んだ。</span>
+        <span data-lang="ja" style="display:none">EnerSysでのインターン中（2025–2026）, 本番環境のLinux端末でパッチ未適用の<code>sudo</code>が動作していた。技術文書の推奨事項としてシステム更新を盛り込んだ。</span>
       </div>
 
-      <h3><span data-lang="fr" style="display: inline;">02 — Segmentation réseau : VLANs, Zero Trust & menaces internes</span><span data-lang="en" style="display:none">02 — Network segmentation: VLANs, Zero Trust & insider threats</span><span data-lang="ja" style="display:none">02 — ネットワーク分割：VLAN、ゼロトラスト、内部脅威</span></h3>
+      <h3><span data-lang="fr" style="display: inline;">02 — Segmentation réseau : VLANs, Zero Trust & menaces internes</span><span data-lang="en" style="display:none">02 — Network segmentation: VLANs, Zero Trust & insider threats</span><span data-lang="ja" style="display:none">02 — ネットワーク分割：VLAN, ゼロトラスト, 内部脅威</span></h3>
 
       <p>
         <span data-lang="fr" style="display: inline;">La segmentation réseau a profondément évolué ces deux dernières années. Le modèle <strong>VLAN 802.1q</strong> demeure la référence en PME et en environnement industriel — ce que j'ai pu vérifier directement chez EnerSys avec la configuration Cisco Meraki — mais l'émergence du cloud hybride rend ce modèle insuffisant pour un <strong>Zero Trust</strong> réel. Les attaques de type <em>VLAN hopping</em>, qui exploitent les mauvaises configurations des ports trunk (mode <code>DTP auto</code> laissé actif), permettent à un attaquant positionné en interne de traverser les segments réseau sans autorisation. Ces techniques sont documentées dans le framework <strong>MITRE ATT&CK</strong> (T1599). La micro-segmentation, implémentée via des solutions NGFWs ou des SDN, constitue la réponse architecturale adaptée aux environnements hybrides.</span>
         <span data-lang="en" style="display:none">Network segmentation has evolved significantly over the past two years. The <strong>VLAN 802.1q</strong> model remains the SME and industrial standard — verified directly at EnerSys with Cisco Meraki — but hybrid cloud growth makes this model insufficient for true <strong>Zero Trust</strong>. VLAN hopping attacks, exploiting trunk port misconfigurations (active <code>DTP auto</code> mode), allow internally-positioned attackers to traverse network segments without authorization. These techniques are documented in the <strong>MITRE ATT&CK</strong> framework (T1599). Micro-segmentation via NGFWs or SDN is the appropriate architectural response for hybrid environments.</span>
-        <span data-lang="ja" style="display:none"><strong>VLAN 802.1q</strong>はSMEおよび産業環境の標準であるが、ハイブリッドクラウドでは真の<strong>ゼロトラスト</strong>として不十分である。VLAN hopping攻撃はトランクポートの誤設定を悪用し、内部攻撃者が認可なしにセグメントを越えることを可能にする。NGFWやSDNによるマイクロセグメンテーションが適切な対策である。</span>
+        <span data-lang="ja" style="display:none"><strong>VLAN 802.1q</strong>はSMEおよび産業環境の標準であるが, ハイブリッドクラウドでは真の<strong>ゼロトラスト</strong>として不十分である。VLAN hopping攻撃はトランクポートの誤設定を悪用し, 内部攻撃者が認可なしにセグメントを越えることを可能にする。NGFWやSDNによるマイクロセグメンテーションが適切な対策である。</span>
       </p>
 
       <h3><span data-lang="fr" style="display: inline;">03 — IA en cyberdéfense : SIEM nouvelle génération & détection comportementale</span><span data-lang="en" style="display:none">03 — AI in cyberdefense: next-gen SIEM & behavioral detection</span><span data-lang="ja" style="display:none">03 — サイバー防衛のAI：次世代SIEM & 行動検知</span></h3>
@@ -1178,14 +1171,14 @@ footer {
       <p>
         <span data-lang="fr" style="display: inline;">L'intégration de l'intelligence artificielle dans les outils de détection représente la transformation la plus significative de cette période. Les SIEM de nouvelle génération intègrent désormais des modules <strong>UEBA</strong> (<em>User and Entity Behavior Analytics</em>) basés sur le machine learning, permettant de détecter des anomalies comportementales que les règles statiques ne peuvent pas identifier : un compte administrateur se connectant à 3h du matin depuis une IP étrangère, ou un transfert de données anormalement volumineux vers un stockage cloud externe. Ces systèmes réduisent drastiquement les faux positifs — jusqu'à 60% selon les benchmarks Gartner 2024 — et permettent la corrélation en temps réel de milliers d'événements pour identifier des APT (<em>Advanced Persistent Threats</em>) dont la furtivité repose précisément sur l'étalement de l'attaque dans le temps.</span>
         <span data-lang="en" style="display:none">AI integration in detection tools represents the most significant transformation of this period. Next-gen SIEMs now include machine learning-based <strong>UEBA</strong> (<em>User and Entity Behavior Analytics</em>) modules, detecting behavioral anomalies that static rules cannot identify: an admin account connecting at 3am from a foreign IP, or abnormally large data transfers to external cloud storage. These systems drastically reduce false positives — up to 60% according to 2024 Gartner benchmarks — and enable real-time correlation of thousands of events to identify APTs whose stealth relies on spreading the attack over time.</span>
-        <span data-lang="ja" style="display:none">AIの検知ツールへの統合はこの期間で最も重要な変革である。次世代SIEMにはMLベースの<strong>UEBA</strong>モジュールが搭載され、静的ルールでは検出不能な行動異常を検知できる。誤検知を最大60%（Gartner 2024比）削減し、時間をかけて潜伏するAPTをリアルタイムで相関検出する。</span>
+        <span data-lang="ja" style="display:none">AIの検知ツールへの統合はこの期間で最も重要な変革である。次世代SIEMにはMLベースの<strong>UEBA</strong>モジュールが搭載され, 静的ルールでは検出不能な行動異常を検知できる。誤検知を最大60%（Gartner 2024比）削減し, 時間をかけて潜伏するAPTをリアルタイムで相関検出する。</span>
       </p>
 
       <div class="article-impact">
         <strong><span data-lang="fr" style="display: inline;">Lien avec mon bot de veille</span><span data-lang="en" style="display:none">Link to my monitoring bot</span><span data-lang="ja" style="display:none">監視ボットとの関連</span></strong><br>
         <span data-lang="fr" style="display: inline;">Mon bot Discord de veille cybersécurité (Python + PostgreSQL + systemd) est une mise en pratique directe de ce principe de corrélation automatisée : il aggrège les flux CVE, CERT-FR et ANSSI pour redistribuer les alertes critiques en temps réel, reproduisant à petite échelle la logique d'un SIEM allégé.</span>
         <span data-lang="en" style="display:none">My Discord cybersecurity monitoring bot (Python + PostgreSQL + systemd) directly implements this automated correlation principle: it aggregates CVE, CERT-FR and ANSSI feeds to redistribute critical alerts in real-time, reproducing at a smaller scale the logic of a lightweight SIEM.</span>
-        <span data-lang="ja" style="display:none">私のDiscordサイバーセキュリティ監視ボット（Python + PostgreSQL + systemd）はこの自動相関原則を直接実装している：CVE、CERT-FR、ANSSIフィードを集約してリアルタイムで重要アラートを再配信し、軽量SIEMのロジックを小規模で再現する。</span>
+        <span data-lang="ja" style="display:none">私のDiscordサイバーセキュリティ監視ボット（Python + PostgreSQL + systemd）はこの自動相関原則を直接実装している：CVE, CERT-FR, ANSSIフィードを集約してリアルタイムで重要アラートを再配信し, 軽量SIEMのロジックを小規模で再現する。</span>
       </div>
 
       <h3><span data-lang="fr" style="display: inline;">04 — Chiffrement et gestion des endpoints : le cas BitLocker / Intune</span><span data-lang="en" style="display:none">04 — Encryption & endpoint management: the BitLocker / Intune case</span><span data-lang="ja" style="display:none">04 — 暗号化とエンドポイント管理：BitLocker / Intuneの事例</span></h3>
@@ -1193,15 +1186,15 @@ footer {
       <p>
         <span data-lang="fr" style="display: inline;">La migration des solutions de chiffrement full-disk vers des outils natifs Microsoft — illustrée par la migration <strong>Trellix → BitLocker</strong> que j'ai conduite chez EnerSys — reflète une tendance de fond : la consolidation des stacks de sécurité autour des écosystements existants (Microsoft 365 / Intune). BitLocker, géré via <strong>Microsoft Intune</strong>, offre une surface d'administration centralisée avec des politiques de rotation de clés automatisées, mais présente des limites sur les environnements non-Microsoft. La dépendance au TPM et l'absence de visibilité sur les clés de récupération mal gérées constituent des risques réels que j'ai documentés dans mes procédures techniques.</span>
         <span data-lang="en" style="display:none">The migration from full-disk encryption solutions to native Microsoft tools — illustrated by the <strong>Trellix → BitLocker</strong> migration I conducted at EnerSys — reflects a fundamental trend: consolidating security stacks around existing ecosystems (Microsoft 365 / Intune). BitLocker, managed via <strong>Microsoft Intune</strong>, offers centralized administration with automated key rotation policies, but has limitations in non-Microsoft environments. TPM dependency and poor recovery key management visibility represent real risks I documented in my technical procedures.</span>
-        <span data-lang="ja" style="display:none">フルディスク暗号化ソリューションのMicrosoftネイティブツールへの移行——EnerSysで実施した<strong>Trellix → BitLocker</strong>移行が典型例——は、セキュリティスタックをMicrosoft 365 / Intuneに集約するトレンドを反映している。TPM依存性と回復キー管理の可視性欠如は技術文書に記録した実際のリスクである。</span>
+        <span data-lang="ja" style="display:none">フルディスク暗号化ソリューションのMicrosoftネイティブツールへの移行——EnerSysで実施した<strong>Trellix → BitLocker</strong>移行が典型例——は, セキュリティスタックをMicrosoft 365 / Intuneに集約するトレンドを反映している。TPM依存性と回復キー管理の可視性欠如は技術文書に記録した実際のリスクである。</span>
       </p>
 
-      <h3><span data-lang="fr" style="display: inline;">05 — Perspectives 2025–2026 : CTF, pentest & menaces émergentes</span><span data-lang="en" style="display:none">05 — Outlook 2025–2026: CTF, pentest & emerging threats</span><span data-lang="ja" style="display:none">05 — 展望2025–2026：CTF、ペンテスト、新興脅威</span></h3>
+      <h3><span data-lang="fr" style="display: inline;">05 — Perspectives 2025–2026 : CTF, pentest & menaces émergentes</span><span data-lang="en" style="display:none">05 — Outlook 2025–2026: CTF, pentest & emerging threats</span><span data-lang="ja" style="display:none">05 — 展望2025–2026：CTF, ペンテスト, 新興脅威</span></h3>
 
       <p>
         <span data-lang="fr" style="display: inline;">Ma participation au CTF <strong>Root-Me PRO Inter-Éducation</strong> avec l'équipe FSociety (3ème rang national) a constitué un laboratoire vivant de veille offensive. Les challenges abordés — exploitation de binaires, injection SQL avancée, reverse engineering, pivoting réseau — correspondent exactement aux techniques que les acteurs malveillants industrialisent en 2025. L'émergence des <strong>LLM offensifs</strong> (grands modèles de langage utilisés pour automatiser la rédaction de phishing ciblé, la génération de variantes de malwares ou le fuzzing de code) constitue la menace émergente la plus préoccupante pour les prochaines années, documentée dans les derniers rapports ENISA et Mandiant.</span>
         <span data-lang="en" style="display:none">My participation in the <strong>Root-Me PRO Inter-Education</strong> CTF with team FSociety (3rd nationally) served as a live offensive intelligence laboratory. The challenges tackled — binary exploitation, advanced SQL injection, reverse engineering, network pivoting — match exactly what malicious actors are industrializing in 2025. The emergence of <strong>offensive LLMs</strong> (large language models used to automate targeted phishing, malware variant generation, or code fuzzing) constitutes the most concerning emerging threat for coming years, documented in the latest ENISA and Mandiant reports.</span>
-        <span data-lang="ja" style="display:none">FSocietyチームでの<strong>Root-Me PRO Inter-Education</strong> CTF（全国3位）は、攻撃型インテリジェンスの実践ラボとなった。バイナリ攻撃、高度SQLインジェクション、リバースエンジニアリング、ネットワークピボットは、2025年に悪意あるアクターが産業化している技術と一致する。<strong>攻撃的LLM</strong>の台頭（標的型フィッシング自動化、マルウェア変種生成、コードファジング）が今後最も懸念される新興脅威であり、最新のENISAおよびMandiantレポートに記録されている。</span>
+        <span data-lang="ja" style="display:none">FSocietyチームでの<strong>Root-Me PRO Inter-Education</strong> CTF（全国3位）は, 攻撃型インテリジェンスの実践ラボとなった。バイナリ攻撃, 高度SQLインジェクション, リバースエンジニアリング, ネットワークピボットは, 2025年に悪意あるアクターが産業化している技術と一致する。<strong>攻撃적LLM</strong>の台頭（標的型フィッシング自動化, マルウェア変種生成, コードファジング）が今後最も懸念される新興脅威であり, 最新のENISAおよびMandiantレポートに記録されている。</span>
       </p>
 
     </div>
@@ -1268,16 +1261,22 @@ footer {
         <div><div class="ci-lbl">ROOT-ME</div><div class="ci-val">root-me.org · Robibi0809</div></div>
       </a>
     </div>
+    
     <div class="form-box">
-      <label class="flbl"><span data-lang="fr" style="display: inline;">Votre nom</span><span data-lang="en" style="display:none">Your name</span><span data-lang="ja" style="display:none">お名前</span></label>
-      <input class="finp" id="fn" type="text">
-      <label class="flbl">Email</label>
-      <input class="finp" id="fe" type="email">
-      <label class="flbl">Message</label>
-      <textarea class="ftxt" id="fm"></textarea>
-      <button class="fsbmt" onclick="sendMsg()">
-        ▸ <span data-lang="fr" style="display: inline;">Envoyer le message</span><span data-lang="en" style="display:none">Send message</span><span data-lang="ja" style="display:none">送信する</span>
-      </button>
+      <form action="https://formspree.io/f/xnjlzovp" method="POST">
+        <label class="flbl"><span data-lang="fr" style="display: inline;">Votre nom</span><span data-lang="en" style="display:none">Your name</span><span data-lang="ja" style="display:none">お名前</span></label>
+        <input class="finp" id="fn" type="text" name="name" required>
+        
+        <label class="flbl">Email</label>
+        <input class="finp" id="fe" type="email" name="email" required>
+        
+        <label class="flbl">Message</label>
+        <textarea class="ftxt" id="fm" name="message" required></textarea>
+        
+        <button type="submit" class="fsbmt">
+          ▸ <span data-lang="fr" style="display: inline;">Envoyer le message</span><span data-lang="en" style="display:none">Send message</span><span data-lang="ja" style="display:none">送信する</span>
+        </button>
+      </form>
       <div id="form-ok">✓ <span data-lang="fr" style="display: inline;">Message envoyé — je vous réponds rapidement.</span><span data-lang="en" style="display:none">Message sent — I'll reply shortly.</span><span data-lang="ja" style="display:none">送信完了 — できるだけ早く返信します。</span></div>
     </div>
   </div>
@@ -1417,16 +1416,9 @@ document.querySelectorAll('.m-ov').forEach(function(ov){
   ov.addEventListener('click', function(e){ if(e.target===this) this.classList.remove('open'); });
 });
 
-/* ── CONTACT FORM ── */
+/* ── CONTACT FORM (Sert de fallback visuel si besoin, mais Formspree redirigera par défaut) ── */
 function sendMsg(){
-  var n=document.getElementById('fn').value;
-  var e=document.getElementById('fe').value;
-  var m=document.getElementById('fm').value;
-  if(n&&e&&m){
-    var ok=document.getElementById('form-ok');
-    ok.style.display='block';
-    setTimeout(function(){ ok.style.display='none'; }, 5000);
-  }
+  // Cette fonction peut être laissée vide car le bouton est désormais de type "submit"
 }
 
 /* ── GLITCH ── */
